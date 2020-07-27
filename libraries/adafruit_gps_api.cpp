@@ -38,16 +38,19 @@ bool Adafruit_GPS_API::fix() {
 
 String Adafruit_GPS_API::latitude() {
   readData();
+  if (!fix()) return "--";
   return String(receiver.latitude) + receiver.lat;
 }
 
 String Adafruit_GPS_API::longitude() {
   readData();
+  if (!fix()) return "--";
   return String(receiver.longitude) + receiver.lon;
 }
 
 float Adafruit_GPS_API::altitude() {
   readData();
+  if (!fix()) return 0;
   return receiver.altitude;
 }
 
