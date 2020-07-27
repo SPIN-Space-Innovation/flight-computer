@@ -28,7 +28,7 @@ class LSM9DS1_API: public IMU {
 
   private:
     LSM9DS1_API();
-    int last_read = 0;
+    unsigned long last_read = 0;
     void readSensorData();
     sensors_event_t acc, mag, gyro, temp;
 };

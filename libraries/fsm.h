@@ -40,8 +40,8 @@ class FSM {
     Altimeter* altimeter;
     Igniter* igniter;
 
-    int launch_time;
-    int ejection_start;
+    unsigned long launch_time;
+    unsigned long ejection_start;
     float max_agl = 0;
 
     void onSetup();

@@ -27,7 +27,7 @@ class BNO055_API: public IMU {
 
   private:
     BNO055_API();
-    int last_read = 0;
+    unsigned long last_read = 0;
     void readSensorData();
     imu::Vector<3> euler, acc, gyro, mag;
 };
