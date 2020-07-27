@@ -1,6 +1,6 @@
 #pragma once //(or use a guard symbol)
 
-class GPS {
+class GPSReceiver {
   public:
     virtual void setup();
     virtual bool fix();

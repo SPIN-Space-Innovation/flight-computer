@@ -1,7 +1,7 @@
 #include <Adafruit_GPS.h>
-#include "gps.h"
+#include "gps_receiver.h"
 
-class Adafruit_GPS_API: public GPS {
+class Adafruit_GPS_API: public GPSReceiver {
   public:
     static Adafruit_GPS_API& getInstance();
 
