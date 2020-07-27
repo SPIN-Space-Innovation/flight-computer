@@ -25,10 +25,11 @@ String event_to_str(EVENT event) {
   return names[(int)event];
 }
 
-FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, Igniter* igniter)
+FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter)
   : telemetry(telemetry)
   , imu_sensor(imu_sensor)
   , altimeter(altimeter)
+  , gps(gps)
   , igniter(igniter)
 {
   Transition flight_state_transitions[] = {
@@ -105,6 +106,10 @@ void FSM::onSetup() {
   telemetry->send("Setting up Altimeter..");
   altimeter->setup();
   telemetry->send("Altimeter setup complete.");
+
+  telemetry->send("Setting up GPS..");
+  gps->setup();
+  telemetry->send("GPS setup complete.");
 
   telemetry->send("Setting up Igniter..");
   igniter->setup();
@@ -186,7 +191,11 @@ void FSM::runCurrentState() {
       String(imu_sensor->accelerationZ()) + "," +
       String(imu_sensor->gyroX()) + "," +
       String(imu_sensor->gyroY()) + "," +
-      String(imu_sensor->gyroZ());
+      String(imu_sensor->gyroZ()) + "," +
+      String(gps->fix()) + "," +
+      String(gps->satellites()) + "," +
+      gps->latitude() + "," +
+      gps->longitude();
   }
   telemetry->send(message);
 

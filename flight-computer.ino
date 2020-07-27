@@ -2,11 +2,13 @@
 #include "lsm9ds1_api.h"
 #include "fsm.h"
 #include "mosfet_igniter.h"
+#include "adafruit_gps_api.h"
 
 LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
 BMP3XX_API altimeter = BMP3XX_API::getInstance();
 Telemetry telemetry = Telemetry::getInstance();
 MosfetIgniter igniter = MosfetIgniter::getInstance();
+Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
 FSM *fsm;
 
 #define SERIAL_DEBUG true
@@ -14,10 +16,10 @@ FSM *fsm;
 
 void setup() {
 #if SERIAL_DEBUG
-  Serial.begin(9600);
+  Serial.begin(115200);
 #endif
 
-  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &igniter);
+  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter);
 }
 
 void loop() {

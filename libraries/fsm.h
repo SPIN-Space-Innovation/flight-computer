@@ -2,6 +2,7 @@
 #include "telemetry.h"
 #include "imu.h"
 #include "altimeter.h"
+#include "gps_receiver.h"
 #include "igniter.h"
 
 enum class STATE {INVALID_STATE, SETUP, IDLE, CALIBRATION, READY, ASCENDING, APOGEE_TIMEOUT, DEPLOYING_CHUTE, RECOVERING, Count};
@@ -29,7 +30,7 @@ class FSM {
     void process_event(EVENT event);
     void runCurrentState();
 
-    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, Igniter* igniter);
+    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter);
 
   private:
     STATE state = STATE::SETUP;
@@ -38,6 +39,7 @@ class FSM {
     Telemetry* telemetry;
     IMU* imu_sensor;
     Altimeter* altimeter;
+    GPSReceiver* gps;
     Igniter* igniter;
 
     unsigned long launch_time;
