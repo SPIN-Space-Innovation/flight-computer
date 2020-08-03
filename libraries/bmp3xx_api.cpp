@@ -44,6 +44,11 @@ void BMP3XX_API::calibrate() {
   sensor.setPressureOversampling(BMP3_OVERSAMPLING_16X);
   sensor.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
 
+  // TODO: use something better than a constant here
+  while (sensor.readAltitude(SEALEVELPRESSURE_HPA) > 1700) {
+    delay(100);
+  }
+
   setGroundLevel();
 }
 
