@@ -11,7 +11,7 @@ MosfetIgniter igniter = MosfetIgniter::getInstance();
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
 FSM *fsm;
 
-#define SERIAL_DEBUG true
+#define SERIAL_DEBUG false
 #define LOOP_FREQUENCY 10 // Hz
 
 void setup() {
