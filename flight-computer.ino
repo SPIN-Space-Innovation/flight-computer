@@ -10,6 +10,9 @@ Telemetry telemetry = Telemetry::getInstance();
 MosfetIgniter igniter = MosfetIgniter::getInstance();
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
 FSM *fsm;
+// TODO: improve buzzer code
+const int buzzer = 17;
+bool sound = false;
 
 #define SERIAL_DEBUG false
 #define LOOP_FREQUENCY 10 // Hz
@@ -19,7 +22,10 @@ void setup() {
   Serial.begin(115200);
 #endif
 
+  pinMode(buzzer, OUTPUT);
+  tone(buzzer, 500);
   fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter);
+  noTone(buzzer);
 }
 
 void loop() {
@@ -40,6 +46,13 @@ void loop() {
   }
 #endif
 
+  if (sound) {
+    sound = false;
+    noTone(buzzer);
+  } else {
+    sound = true;
+    tone(buzzer, 500);
+  }
   fsm->runCurrentState();
 
   int delayTime = (1000/LOOP_FREQUENCY) - (millis() - timerStart);
