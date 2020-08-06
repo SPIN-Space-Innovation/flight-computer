@@ -15,6 +15,33 @@ Telemetry& Telemetry::getInstance() {
   return instance;
 }
 
+String Telemetry::marshall(TelemetryMessage message) {
+  String message_str =
+    String(message.met) + "," +
+    String(message.free_memory_kb) + "," +
+    String(message.battery_voltage_mv) + "," +
+    state_to_str(message.state);
+
+  if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
+    message_str += "," +
+      String(message.payload.agl) + "," +
+      String(message.payload.acceleration_x) + "," +
+      String(message.payload.acceleration_y) + "," +
+      String(message.payload.acceleration_z) + "," +
+      String(message.payload.gyroscope_x) + "," +
+      String(message.payload.gyroscope_y) + "," +
+      String(message.payload.gyroscope_z) + "," +
+      String(message.payload.gps_fix) + "," +
+      String(message.payload.gps_satellites);
+  }
+
+  return message_str;
+}
+
+void Telemetry::send(TelemetryMessage message) {
+  send(marshall(message));
+}
+
 void Telemetry::send(String data) {
   if (!init) {
     return;
