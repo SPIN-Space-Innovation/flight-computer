@@ -107,7 +107,7 @@ void FSM::onIDLE() {}
 void FSM::onCalibration() {
   telemetry->send("Altimeter: calibrating..");
   altimeter->calibrate();
-  telemetry->send("Altimeter: ground level set to " + String(altimeter->getGroundLevel()) + "m");
+  telemetry->send("Altimeter: ground level set to " + String((float)altimeter->getGroundLevelCM() / 100) + "m");
 
   telemetry->send("IMU: calibrating..");
   imu_sensor->calibrate();

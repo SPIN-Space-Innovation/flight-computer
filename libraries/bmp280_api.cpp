@@ -28,7 +28,7 @@ void BMP280_API::setGroundLevel() {
   ground_level = altitude_cm();
 }
 
-int32_t BMP280_API::getGroundLevel() {
+int32_t BMP280_API::getGroundLevelCM() {
   return ground_level;
 }
 

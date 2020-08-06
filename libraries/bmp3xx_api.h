@@ -11,7 +11,7 @@ class BMP3XX_API: public Altimeter {
     float pressure();
     int32_t aglCM();
 
-    int32_t getGroundLevel();
+    int32_t getGroundLevelCM();
 
     void setup();
     void calibrate();

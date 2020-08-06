@@ -16,7 +16,7 @@ class Altimeter {
 
     virtual float pressure(); // pascal
 
-    virtual int32_t getGroundLevel();
+    virtual int32_t getGroundLevelCM();
 
     virtual void setup();
     virtual void calibrate();
