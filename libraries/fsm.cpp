@@ -153,33 +153,33 @@ void FSM::onRecovering() {
   // TODO: celebrate
 }
 
-String internalBoardStatus() {
+uint16_t get_battery_voltage_mv() {
   float measuredvbat = analogRead(VBATPIN);
   measuredvbat *= 2;
   measuredvbat *= 3.3;
-  measuredvbat /= 1024;
-
-  return
-    String(millis()) + "," +
-    String(freeMemory()/1000) + "," +
-    String(measuredvbat);
+  return measuredvbat;
 }
 
 void FSM::runCurrentState() {
-  String message = "RAW:" + internalBoardStatus() + "," + state_to_str(state);
+  TelemetryMessage message;
+  TelemetryMessagePayload payload;
+
+  message.met = millis();
+  message.free_memory_kb = freeMemory()/1000;
+  message.battery_voltage_mv = get_battery_voltage_mv();
+  message.state = state;
+
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
-    message += "," +
-      String(altimeter->agl()) + "," +
-      String(imu_sensor->accelerationX()) + "," +
-      String(imu_sensor->accelerationY()) + "," +
-      String(imu_sensor->accelerationZ()) + "," +
-      String(imu_sensor->gyroX()) + "," +
-      String(imu_sensor->gyroY()) + "," +
-      String(imu_sensor->gyroZ()) + "," +
-      String(gps->fix()) + "," +
-      String(gps->satellites()) + "," +
-      gps->latitude() + "," +
-      gps->longitude();
+    payload.agl = altimeter->agl();
+    payload.acceleration_x = imu_sensor->accelerationX();
+    payload.acceleration_y = imu_sensor->accelerationY();
+    payload.acceleration_z = imu_sensor->accelerationZ();
+    payload.gyroscope_x = imu_sensor->gyroX();
+    payload.gyroscope_y = imu_sensor->gyroY();
+    payload.gyroscope_z = imu_sensor->gyroZ();
+    payload.gps_fix = gps->fix();
+    payload.gps_satellites = gps->satellites();
+    message.payload = payload;
   }
   telemetry->send(message);
 
