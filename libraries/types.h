@@ -7,11 +7,12 @@ enum class STATE {INVALID_STATE, SETUP, IDLE, CALIBRATION, READY, ASCENDING, APO
 
 enum class EVENT {SETUP_COMPLETE, INIT_CALIBRATION, CALIBRATION_COMPLETE, LAUNCHED, APOGEE_TIMER_TIMEOUT, APOGEE_DETECTED, TRIGGER_FTS, CHUTE_EJECTED, Count};
 
+enum class MESSAGE_TYPE {TELEMETRY, DEBUG};
+
 String state_to_str(STATE state);
 String event_to_str(EVENT event);
 
 union TelemetryMessagePayload {
-  uint8_t debug_code;
   struct {
     int32_t agl_cm;
     int16_t acceleration_x;
@@ -26,9 +27,12 @@ union TelemetryMessagePayload {
 };
 
 struct TelemetryMessage {
+  MESSAGE_TYPE type;
+  uint32_t message_count;
   uint32_t met;
   uint8_t free_memory_kb;
   uint16_t battery_voltage_mv;
   STATE state;
   TelemetryMessagePayload payload;
+  char debug_message[60];
 };

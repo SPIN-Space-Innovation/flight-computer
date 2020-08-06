@@ -16,12 +16,12 @@ class Telemetry {
 
   private:
     bool init = false;
-    int message_count;
+    uint32_t message_count;
     static RH_RF95 rf95;
     static RHReliableDatagram rf_manager;
     String logs_filename = "flight.log"; // max length: 8.3
     File logs_file;
-    String marshall(TelemetryMessage message);
+    uint8_t* marshall(TelemetryMessage message);
 
     Telemetry();
 };

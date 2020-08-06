@@ -164,6 +164,7 @@ void FSM::runCurrentState() {
   TelemetryMessage message;
   TelemetryMessagePayload payload;
 
+  message.type = MESSAGE_TYPE::TELEMETRY;
   message.met = millis();
   message.free_memory_kb = freeMemory()/1000;
   message.battery_voltage_mv = get_battery_voltage_mv();
