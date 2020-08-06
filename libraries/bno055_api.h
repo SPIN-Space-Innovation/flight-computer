@@ -10,13 +10,14 @@ class BNO055_API: public IMU {
     float yaw();
     float roll();
 
-    float accelerationX();
-    float accelerationY();
-    float accelerationZ();
+    int16_t accelerationX();
+    int16_t accelerationY();
+    int16_t accelerationZ();
 
-    float gyroX();
-    float gyroY();
-    float gyroZ();
+    // TODO: verify values
+    int16_t gyroX();
+    int16_t gyroY();
+    int16_t gyroZ();
 
     float magX();
     float magY();

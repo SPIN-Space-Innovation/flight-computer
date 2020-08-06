@@ -14,12 +14,12 @@ union TelemetryMessagePayload {
   uint8_t debug_code;
   struct {
     int32_t agl_cm;
-    float acceleration_x;
-    float acceleration_y;
-    float acceleration_z;
-    float gyroscope_x;
-    float gyroscope_y;
-    float gyroscope_z;
+    int16_t acceleration_x;
+    int16_t acceleration_y;
+    int16_t acceleration_z;
+    int16_t gyroscope_x;
+    int16_t gyroscope_y;
+    int16_t gyroscope_z;
     bool gps_fix;
     uint8_t gps_satellites;
   };

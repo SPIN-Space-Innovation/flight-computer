@@ -43,34 +43,34 @@ float BNO055_API::roll() {
   return euler.z();
 }
 
-float BNO055_API::accelerationX() {
+int16_t BNO055_API::accelerationX() {
   readSensorData();
-  return acc.x();
+  return acc.x() * 100;
 }
 
-float BNO055_API::accelerationY() {
+int16_t BNO055_API::accelerationY() {
   readSensorData();
-  return acc.y();
+  return acc.y() * 100;
 }
 
-float BNO055_API::accelerationZ() {
+int16_t BNO055_API::accelerationZ() {
   readSensorData();
-  return acc.z();
+  return acc.z() * 100;
 }
 
-float BNO055_API::gyroX() {
+int16_t BNO055_API::gyroX() {
   readSensorData();
-  return gyro.x();
+  return gyro.x() * (180 / M_PI);
 }
 
-float BNO055_API::gyroY() {
+int16_t BNO055_API::gyroY() {
   readSensorData();
-  return gyro.y();
+  return gyro.y() * (180 / M_PI);
 }
 
-float BNO055_API::gyroZ() {
+int16_t BNO055_API::gyroZ() {
   readSensorData();
-  return gyro.z();
+  return gyro.z() * (180 / M_PI);
 }
 
 float BNO055_API::magX() {

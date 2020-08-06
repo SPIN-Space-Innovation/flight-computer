@@ -35,34 +35,34 @@ float LSM9DS1_API::roll() {
   return 0;
 }
 
-float LSM9DS1_API::accelerationX() {
+int16_t LSM9DS1_API::accelerationX() {
   readSensorData();
-  return acc.acceleration.x;
+  return acc.acceleration.x * 100;
 }
 
-float LSM9DS1_API::accelerationY() {
+int16_t LSM9DS1_API::accelerationY() {
   readSensorData();
-  return acc.acceleration.y;
+  return acc.acceleration.y * 100;
 }
 
-float LSM9DS1_API::accelerationZ() {
+int16_t LSM9DS1_API::accelerationZ() {
   readSensorData();
-  return acc.acceleration.z;
+  return acc.acceleration.z * 100;
 }
 
-float LSM9DS1_API::gyroX() {
+int16_t LSM9DS1_API::gyroX() {
   readSensorData();
-  return gyro.gyro.x;
+  return gyro.gyro.x * (180 / M_PI);
 }
 
-float LSM9DS1_API::gyroY() {
+int16_t LSM9DS1_API::gyroY() {
   readSensorData();
-  return gyro.gyro.y;
+  return gyro.gyro.y * (180 / M_PI);
 }
 
-float LSM9DS1_API::gyroZ() {
+int16_t LSM9DS1_API::gyroZ() {
   readSensorData();
-  return gyro.gyro.z;
+  return gyro.gyro.z * (180 / M_PI);
 }
 
 float LSM9DS1_API::magX() {
