@@ -1,17 +1,17 @@
 #include "altimeter.h"
 #include "Adafruit_BMP280.h"
-
+#include <stdint.h>
 
 class BMP280_API: public Altimeter {
   static Adafruit_BMP280 sensor;
 
   public:
     static BMP280_API& getInstance();
-    float altitude();
+    int32_t altitude_cm();
     float pressure();
-    float agl();
+    int32_t aglCM();
 
-    float getGroundLevel();
+    int32_t getGroundLevel();
 
     void setup();
     void calibrate();
@@ -19,6 +19,6 @@ class BMP280_API: public Altimeter {
   private:
     BMP280_API();
 
-    float ground_level = 0;
+    int32_t ground_level = 0;
     void setGroundLevel();
 };

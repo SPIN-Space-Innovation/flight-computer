@@ -170,7 +170,7 @@ void FSM::runCurrentState() {
   message.state = state;
 
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
-    payload.agl = altimeter->agl();
+    payload.agl_cm = altimeter->aglCM();
     payload.acceleration_x = imu_sensor->accelerationX();
     payload.acceleration_y = imu_sensor->accelerationY();
     payload.acceleration_z = imu_sensor->accelerationZ();

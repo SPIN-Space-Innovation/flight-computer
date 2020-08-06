@@ -13,23 +13,23 @@ BMP3XX_API& BMP3XX_API::getInstance() {
   return instance;
 }
 
-float BMP3XX_API::altitude() {
-  return sensor.readAltitude(SEALEVELPRESSURE_HPA);
+int32_t BMP3XX_API::altitude_cm() {
+  return sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100;
 }
 
 float BMP3XX_API::pressure() {
   return sensor.pressure / 100.0;
 }
 
-float BMP3XX_API::agl() {
-  return altitude() - ground_level;
+int32_t BMP3XX_API::aglCM() {
+  return altitude_cm() - ground_level;
 }
 
 void BMP3XX_API::setGroundLevel() {
-  ground_level = sensor.readAltitude(SEALEVELPRESSURE_HPA);
+  ground_level = altitude_cm();
 }
 
-float BMP3XX_API::getGroundLevel() {
+int32_t BMP3XX_API::getGroundLevel() {
   return ground_level;
 }
 

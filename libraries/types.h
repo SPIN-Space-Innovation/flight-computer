@@ -13,7 +13,7 @@ String event_to_str(EVENT event);
 union TelemetryMessagePayload {
   uint8_t debug_code;
   struct {
-    float agl;
+    int32_t agl_cm;
     float acceleration_x;
     float acceleration_y;
     float acceleration_z;

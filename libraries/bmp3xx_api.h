@@ -7,11 +7,11 @@ class BMP3XX_API: public Altimeter {
 
   public:
     static BMP3XX_API& getInstance();
-    float altitude();
+    int32_t altitude_cm();
     float pressure();
-    float agl();
+    int32_t aglCM();
 
-    float getGroundLevel();
+    int32_t getGroundLevel();
 
     void setup();
     void calibrate();
@@ -19,6 +19,6 @@ class BMP3XX_API: public Altimeter {
   private:
     BMP3XX_API();
 
-    float ground_level = 0;
+    int32_t ground_level = 0;
     void setGroundLevel();
 };

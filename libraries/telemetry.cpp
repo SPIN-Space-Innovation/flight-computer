@@ -24,7 +24,7 @@ String Telemetry::marshall(TelemetryMessage message) {
 
   if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
     message_str += "," +
-      String(message.payload.agl) + "," +
+      String(message.payload.agl_cm) + "," +
       String(message.payload.acceleration_x) + "," +
       String(message.payload.acceleration_y) + "," +
       String(message.payload.acceleration_z) + "," +
