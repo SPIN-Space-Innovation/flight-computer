@@ -5,7 +5,7 @@
 #define SERIAL_DEBUG false
 #define SD_LOGS true
 #define SD_CS 10
-#define MAX_MESSAGE_SIZE 65
+#define MAX_MESSAGE_SIZE 85
 #define TELEMETRY_MESSAGE_SIZE 31
 
 // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on

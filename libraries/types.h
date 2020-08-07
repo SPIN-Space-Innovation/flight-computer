@@ -34,7 +34,7 @@ struct TelemetryMessage {
   uint16_t battery_voltage_mv;
   STATE state;
   TelemetryMessagePayload payload;
-  char debug_message[60];
+  char debug_message[80];
 };
 
 String stringifyTelemetryMessage(TelemetryMessage message);
