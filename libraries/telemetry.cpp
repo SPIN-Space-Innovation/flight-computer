@@ -20,10 +20,10 @@ Telemetry& Telemetry::getInstance() {
 uint8_t* Telemetry::marshall(TelemetryMessage message) {
   static uint8_t stream[MAX_MESSAGE_SIZE];
   stream[0] = (uint8_t)message.type;
-  stream[1] = (message_count & 0xFF000000) >> 24 ;
-  stream[2] = (message_count & 0x00FF0000) >> 16;
-  stream[3] = (message_count & 0x0000FF00) >> 8;
-  stream[4] = message_count & 0x000000FF;
+  stream[1] = (message.count & 0xFF000000) >> 24 ;
+  stream[2] = (message.count & 0x00FF0000) >> 16;
+  stream[3] = (message.count & 0x0000FF00) >> 8;
+  stream[4] = message.count & 0x000000FF;
 
   if (message.type == MESSAGE_TYPE::DEBUG) {
     memcpy(stream + 5, message.debug_message, sizeof(message.debug_message));
@@ -74,11 +74,13 @@ uint8_t* Telemetry::marshall(TelemetryMessage message) {
 
 void Telemetry::send(TelemetryMessage message) {
   ++message_count;
+  message.count = message_count;
   if (!init) {
     return;
   }
 
   uint8_t *stream = marshall(message);
+  String stringifiedMessage = stringifyTelemetryMessage(message);
   int message_size = message.type == MESSAGE_TYPE::DEBUG ? MAX_MESSAGE_SIZE : TELEMETRY_MESSAGE_SIZE;
 
 #if SERIAL_DEBUG

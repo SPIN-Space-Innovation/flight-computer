@@ -28,7 +28,7 @@ union TelemetryMessagePayload {
 
 struct TelemetryMessage {
   MESSAGE_TYPE type;
-  uint32_t message_count;
+  uint32_t count;
   uint32_t met;
   uint8_t free_memory_kb;
   uint16_t battery_voltage_mv;
@@ -36,3 +36,5 @@ struct TelemetryMessage {
   TelemetryMessagePayload payload;
   char debug_message[60];
 };
+
+String stringifyTelemetryMessage(TelemetryMessage message);
