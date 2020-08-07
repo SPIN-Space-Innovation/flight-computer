@@ -48,19 +48,15 @@ uint8_t* Telemetry::marshall(TelemetryMessage message) {
 
       stream[17] = (message.payload.acceleration_x & 0xFF00) >> 8;
       stream[18] = message.payload.acceleration_x & 0x00FF;
-
       stream[19] = (message.payload.acceleration_y & 0xFF00) >> 8;
       stream[20] = message.payload.acceleration_y & 0x00FF;
-
       stream[21] = (message.payload.acceleration_z & 0xFF00) >> 8;
       stream[22] = message.payload.acceleration_z & 0x00FF;
 
       stream[23] = (message.payload.gyroscope_x & 0xFF00) >> 8;
       stream[24] = message.payload.gyroscope_x & 0x00FF;
-
       stream[25] = (message.payload.gyroscope_y & 0xFF00) >> 8;
       stream[26] = message.payload.gyroscope_y & 0x00FF;
-
       stream[27] = (message.payload.gyroscope_z & 0xFF00) >> 8;
       stream[28] = message.payload.gyroscope_z & 0x00FF;
 
