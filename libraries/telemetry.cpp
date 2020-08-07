@@ -85,12 +85,13 @@ void Telemetry::send(TelemetryMessage message) {
       Serial.print(stream[i], BIN);
     }
     Serial.println();
+    Serial.println("STRINGIFIED: " + stringifiedMessage);
 #endif
 
 #if SD_LOGS
   logs_file = SD.open(logs_filename, FILE_WRITE);
   if (logs_file) {
-    logs_file.println(stream);
+    logs_file.println(stringifiedMessage);
     logs_file.close();
   }
 #endif
