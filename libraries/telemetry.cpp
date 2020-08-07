@@ -118,6 +118,7 @@ void Telemetry::setup() {
 
   rf95.setSignalBandwidth(500000);
   rf95.setSpreadingFactor(8);
+  rf95.setTxPower(18);
 
 #if SD_LOGS
   if (!SD.begin(SD_CS)) {
