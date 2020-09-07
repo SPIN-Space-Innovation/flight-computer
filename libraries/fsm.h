@@ -46,6 +46,9 @@ class FSM {
     void onIDLE();
     void onCalibration();
     void onReady();
+    void onEjectionTestReady();
+    void onEjectionTestEject();
+    void onEjectionTestComplete();
     void onAscending();
     void onApogeeTimeout();
     void onDeployingChute();

@@ -21,8 +21,13 @@ FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceive
     Transition(STATE::SETUP, EVENT::SETUP_COMPLETE, STATE::IDLE),
     Transition(STATE::IDLE, EVENT::INIT_CALIBRATION, STATE::CALIBRATION),
     Transition(STATE::READY, EVENT::INIT_CALIBRATION, STATE::CALIBRATION),
+    Transition(STATE::READY, EVENT::SET_EJECTION_TEST, STATE::EJECTION_TEST_READY),
     Transition(STATE::CALIBRATION, EVENT::CALIBRATION_COMPLETE, STATE::READY),
     Transition(STATE::READY, EVENT::LAUNCHED, STATE::ASCENDING),
+
+    // Ejection Test
+    Transition(STATE::EJECTION_TEST_READY, EVENT::TRIGGER_FTS, STATE::EJECTION_TEST_EJECT),
+    Transition(STATE::EJECTION_TEST_EJECT, EVENT::CHUTE_EJECTED, STATE::EJECTION_TEST_COMPLETE),
 
     // Flying
     Transition(STATE::ASCENDING, EVENT::APOGEE_TIMER_TIMEOUT, STATE::APOGEE_TIMEOUT),
@@ -63,7 +68,7 @@ void FSM::process_event(EVENT event) {
   if (state_transitions[(int)state][(int)event] != STATE::INVALID_STATE) {
     state = state_transitions[(int)state][(int)event];
 
-    if (state == STATE::DEPLOYING_CHUTE) {
+    if (state == STATE::DEPLOYING_CHUTE || state == STATE::EJECTION_TEST_EJECT) {
       ejection_start = millis();
     }
   } else {
@@ -122,6 +127,15 @@ void FSM::onReady() {
     process_event(EVENT::LAUNCHED);
   }
 }
+
+void FSM::onEjectionTestReady() {}
+
+void FSM::onEjectionTestEject() {
+  onDeployingChute();
+  // set high frequency
+}
+
+void FSM::onEjectionTestComplete() {}
 
 void FSM::onAscending() {
   float agl = altimeter->agl();
@@ -196,6 +210,15 @@ void FSM::runCurrentState() {
       break;
     case STATE::READY:
       onReady();
+      break;
+    case STATE::EJECTION_TEST_READY:
+      onEjectionTestReady();
+      break;
+    case STATE::EJECTION_TEST_EJECT:
+      onEjectionTestEject();
+      break;
+    case STATE::EJECTION_TEST_COMPLETE:
+      onEjectionTestComplete();
       break;
     case STATE::ASCENDING:
       onAscending();
