@@ -2,7 +2,7 @@
 #include <Adafruit_LSM9DS1.h>
 #include "lsm9ds1_api.h"
 
-#define READ_INTERVAL (10)
+#define IMU_REFRESH_RATE 100 // Hz
 
 Adafruit_LSM9DS1 LSM9DS1_API::sensor;
 
@@ -13,7 +13,7 @@ LSM9DS1_API& LSM9DS1_API::getInstance() {
 
 void LSM9DS1_API::readSensorData() {
   // TODO: fix units
-  if (millis() - last_read < READ_INTERVAL) {
+  if (millis() - last_read < 1000/IMU_REFRESH_RATE) {
     return;
   }
 
@@ -90,7 +90,7 @@ void LSM9DS1_API::setup() {
     while(1);
   }
 
-  sensor.setupAccel(sensor.LSM9DS1_ACCELRANGE_16G);
+  sensor.setupAccel(sensor.LSM9DS1_ACCELRANGE_16G, sensor.LSM9DS1_ACCELDATARATE_119HZ);
   sensor.setupMag(sensor.LSM9DS1_MAGGAIN_4GAUSS);
   sensor.setupGyro(sensor.LSM9DS1_GYROSCALE_500DPS);
 }
