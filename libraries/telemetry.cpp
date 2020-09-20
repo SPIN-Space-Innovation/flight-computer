@@ -98,9 +98,12 @@ void Telemetry::send(TelemetryMessage message) {
   }
 #endif
 
-  rf95.send(stream, message_size);
-  rf95.waitPacketSent();
-  rf95.setModeRx(); // continue listening
+  if (millis() - last_radio_message_time > radio_throttle_ms) {
+    rf95.send(stream, message_size);
+    rf95.waitPacketSent();
+    rf95.setModeRx(); // continue listening
+    last_radio_message_time = millis();
+  }
 }
 
 void Telemetry::send(String debug_message) {
@@ -150,6 +153,10 @@ String Telemetry::receiveMessage() {
 
   rf_manager.recvfromAck(buf, &len, &from);
   return String((char*)buf);
+}
+
+void Telemetry::setRadioThrottle(uint16_t radio_throttle_ms) {
+  this->radio_throttle_ms = radio_throttle_ms;
 }
 
 Telemetry::Telemetry() {}

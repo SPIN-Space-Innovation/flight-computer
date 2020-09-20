@@ -11,6 +11,7 @@ class Telemetry {
     void send(TelemetryMessage message);
     void send(String data);
     void setup();
+    void setRadioThrottle(uint16_t radio_throttle_ms);
     bool messageAvailable();
     String receiveMessage();
 
@@ -22,6 +23,8 @@ class Telemetry {
     String logs_filename = "flight.log"; // max length: 8.3
     File logs_file;
     unsigned long last_sd_sync = 0;
+    unsigned long last_radio_message_time = 0;
+    uint16_t radio_throttle_ms = 0; // no throttling
 
     uint8_t* marshall(TelemetryMessage message);
 
