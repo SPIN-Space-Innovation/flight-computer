@@ -7,7 +7,7 @@
 #define SD_CS 10
 #define SD_OFFLOAD_INTERVAL 1000 // ms
 #define MAX_MESSAGE_SIZE 85
-#define TELEMETRY_MESSAGE_SIZE 31
+#define TELEMETRY_MESSAGE_SIZE 33
 
 // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on
 RH_RF95 Telemetry::rf95(8, 3);
@@ -41,28 +41,31 @@ uint8_t* Telemetry::marshall(TelemetryMessage message) {
 
     stream[12] = (uint8_t)message.state;
 
+    stream[13] = (message.backup_deployer_status & 0xFF00) >> 8;
+    stream[14] = message.backup_deployer_status & 0x00FF;
+
     if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
-      stream[13] = (message.payload.agl_cm & 0xFF000000) >> 24 ;
-      stream[14] = (message.payload.agl_cm & 0x00FF0000) >> 16;
-      stream[15] = (message.payload.agl_cm & 0x0000FF00) >> 8;
-      stream[16] = message.payload.agl_cm & 0x000000FF;
+      stream[15] = (message.payload.agl_cm & 0xFF000000) >> 24 ;
+      stream[16] = (message.payload.agl_cm & 0x00FF0000) >> 16;
+      stream[17] = (message.payload.agl_cm & 0x0000FF00) >> 8;
+      stream[18] = message.payload.agl_cm & 0x000000FF;
 
-      stream[17] = (message.payload.acceleration_x & 0xFF00) >> 8;
-      stream[18] = message.payload.acceleration_x & 0x00FF;
-      stream[19] = (message.payload.acceleration_y & 0xFF00) >> 8;
-      stream[20] = message.payload.acceleration_y & 0x00FF;
-      stream[21] = (message.payload.acceleration_z & 0xFF00) >> 8;
-      stream[22] = message.payload.acceleration_z & 0x00FF;
+      stream[19] = (message.payload.acceleration_x & 0xFF00) >> 8;
+      stream[20] = message.payload.acceleration_x & 0x00FF;
+      stream[21] = (message.payload.acceleration_y & 0xFF00) >> 8;
+      stream[22] = message.payload.acceleration_y & 0x00FF;
+      stream[23] = (message.payload.acceleration_z & 0xFF00) >> 8;
+      stream[24] = message.payload.acceleration_z & 0x00FF;
 
-      stream[23] = (message.payload.gyroscope_x & 0xFF00) >> 8;
-      stream[24] = message.payload.gyroscope_x & 0x00FF;
-      stream[25] = (message.payload.gyroscope_y & 0xFF00) >> 8;
-      stream[26] = message.payload.gyroscope_y & 0x00FF;
-      stream[27] = (message.payload.gyroscope_z & 0xFF00) >> 8;
-      stream[28] = message.payload.gyroscope_z & 0x00FF;
+      stream[25] = (message.payload.gyroscope_x & 0xFF00) >> 8;
+      stream[26] = message.payload.gyroscope_x & 0x00FF;
+      stream[27] = (message.payload.gyroscope_y & 0xFF00) >> 8;
+      stream[28] = message.payload.gyroscope_y & 0x00FF;
+      stream[29] = (message.payload.gyroscope_z & 0xFF00) >> 8;
+      stream[30] = message.payload.gyroscope_z & 0x00FF;
 
-      stream[29] = (uint8_t)message.payload.gps_fix;
-      stream[30] = message.payload.gps_satellites;
+      stream[31] = (uint8_t)message.payload.gps_fix;
+      stream[32] = message.payload.gps_satellites;
     }
   }
 
