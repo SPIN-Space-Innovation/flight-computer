@@ -21,6 +21,8 @@ class Telemetry {
     static RHReliableDatagram rf_manager;
     String logs_filename = "flight.log"; // max length: 8.3
     File logs_file;
+    unsigned long last_sd_sync = 0;
+
     uint8_t* marshall(TelemetryMessage message);
 
     Telemetry();

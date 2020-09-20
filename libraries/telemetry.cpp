@@ -5,6 +5,7 @@
 #define SERIAL_DEBUG false
 #define SD_LOGS true
 #define SD_CS 10
+#define SD_OFFLOAD_INTERVAL 1000 // ms
 #define MAX_MESSAGE_SIZE 85
 #define TELEMETRY_MESSAGE_SIZE 31
 
@@ -89,10 +90,11 @@ void Telemetry::send(TelemetryMessage message) {
 #endif
 
 #if SD_LOGS
-  logs_file = SD.open(logs_filename, FILE_WRITE);
-  if (logs_file) {
-    logs_file.println(stringifiedMessage);
+  logs_file.println(stringifiedMessage);
+  if (millis() - last_sd_sync > SD_OFFLOAD_INTERVAL) {
     logs_file.close();
+    logs_file = SD.open(logs_filename, FILE_WRITE);
+    last_sd_sync = millis();
   }
 #endif
 
@@ -131,11 +133,6 @@ void Telemetry::setup() {
   }
 
   logs_file = SD.open(logs_filename, FILE_WRITE);
-  if (!logs_file) { // test if we can open the file
-    while(1);
-  } else {
-    logs_file.close();
-  }
 #endif
 
   message_count = 0;
