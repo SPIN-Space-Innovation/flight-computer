@@ -9,12 +9,13 @@
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
 
-FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter)
+FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
   : telemetry(telemetry)
   , imu_sensor(imu_sensor)
   , altimeter(altimeter)
   , gps(gps)
   , igniter(igniter)
+  , loop_frequency(loop_frequency)
 {
   Transition flight_state_transitions[] = {
     // Ground

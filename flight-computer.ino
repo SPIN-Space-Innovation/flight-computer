@@ -13,9 +13,9 @@ FSM *fsm;
 // TODO: improve buzzer code
 const int buzzer = 17;
 bool sound = false;
+uint8_t loop_frequency = 10; // Hz
 
 #define SERIAL_DEBUG false
-#define LOOP_FREQUENCY 10 // Hz
 
 void setup() {
 #if SERIAL_DEBUG
@@ -24,7 +24,7 @@ void setup() {
 
   pinMode(buzzer, OUTPUT);
   tone(buzzer, 500);
-  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter);
+  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
   noTone(buzzer);
 }
 
@@ -55,7 +55,7 @@ void loop() {
   }
   fsm->runCurrentState();
 
-  int delayTime = (1000/LOOP_FREQUENCY) - (millis() - timerStart);
+  int delayTime = (1000/loop_frequency) - (millis() - timerStart);
 
   delay(max(0, delayTime));
 }
