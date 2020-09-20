@@ -133,12 +133,13 @@ void FSM::onEjectionTestReady() {}
 
 void FSM::onEjectionTestEject() {
   telemetry->setRadioThrottle(1000);
+  *loop_frequency = 100;
   onDeployingChute();
-  // set high frequency
 }
 
 void FSM::onEjectionTestComplete() {
   telemetry->setRadioThrottle(0);
+  *loop_frequency = 10;
 }
 
 void FSM::onAscending() {
