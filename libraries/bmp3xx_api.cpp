@@ -5,6 +5,7 @@
 #define BMP_MOSI (11) // SD1
 #define BMP_CS   (10)
 #define SEALEVELPRESSURE_HPA (1013.25)
+#define BMP_REFRESH_RATE 50 // Hz
 
 Adafruit_BMP3XX BMP3XX_API::sensor;
 
@@ -13,8 +14,19 @@ BMP3XX_API& BMP3XX_API::getInstance() {
   return instance;
 }
 
+
+void BMP3XX_API::readSensorData() {
+  if (millis() - last_sensor_read < 1000/BMP_REFRESH_RATE) {
+    return;
+  }
+
+  cached_altitude_cm = sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100;
+  last_sensor_read = millis();
+}
+
 int32_t BMP3XX_API::altitude_cm() {
-  return sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100;
+  readSensorData();
+  return cached_altitude_cm;
 }
 
 float BMP3XX_API::pressure() {
