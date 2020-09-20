@@ -4,7 +4,7 @@
 #define LAUNCH_AGL_THRESHOLD 5 // meters
 #define APOGEE_AGL_DIFF_THRESHOLD 5 // meters
 #define LAUNCH_ACCELERATION_THRESHOLD 3 // g
-#define TIME_TO_APOGEE 10 // s
+#define TIME_TO_APOGEE 15 // s
 #define GRAVITY 981 // cm/s^2 -- update on other planets
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
