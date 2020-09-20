@@ -131,11 +131,14 @@ void FSM::onReady() {
 void FSM::onEjectionTestReady() {}
 
 void FSM::onEjectionTestEject() {
+  telemetry->setRadioThrottle(1000);
   onDeployingChute();
   // set high frequency
 }
 
-void FSM::onEjectionTestComplete() {}
+void FSM::onEjectionTestComplete() {
+  telemetry->setRadioThrottle(0);
+}
 
 void FSM::onAscending() {
   float agl = altimeter->agl();
@@ -186,12 +189,14 @@ void FSM::runCurrentState() {
 
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
     payload.agl_cm = altimeter->aglCM();
+
     payload.acceleration_x = imu_sensor->accelerationX();
     payload.acceleration_y = imu_sensor->accelerationY();
     payload.acceleration_z = imu_sensor->accelerationZ();
     payload.gyroscope_x = imu_sensor->gyroX();
     payload.gyroscope_y = imu_sensor->gyroY();
     payload.gyroscope_z = imu_sensor->gyroZ();
+
     payload.gps_fix = gps->fix();
     payload.gps_satellites = gps->satellites();
     message.payload = payload;
