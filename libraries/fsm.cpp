@@ -24,6 +24,10 @@ FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceive
     Transition(STATE::READY, EVENT::INIT_CALIBRATION, STATE::CALIBRATION),
     Transition(STATE::READY, EVENT::SET_EJECTION_TEST, STATE::EJECTION_TEST_READY),
     Transition(STATE::CALIBRATION, EVENT::CALIBRATION_COMPLETE, STATE::READY),
+    Transition(STATE::READY, EVENT::START_BACKUP_COUNTDOWN, STATE::ARM_BACKUP_DEPLOYER),
+    Transition(STATE::READY, EVENT::RESET_BACKUP_COUNTDOWN, STATE::RESET_BACKUP_DEPLOYER),
+    Transition(STATE::ARM_BACKUP_DEPLOYER, EVENT::BACKUP_COUNTDOWN_STARTED, STATE::READY),
+    Transition(STATE::RESET_BACKUP_DEPLOYER, EVENT::BACKUP_COUNTDOWN_RESETTED, STATE::READY),
     Transition(STATE::READY, EVENT::LAUNCHED, STATE::ASCENDING),
 
     // Ejection Test
@@ -133,6 +137,16 @@ void FSM::onReady() {
   }
 }
 
+void FSM::onArmBackupDeployer() {
+  BackupDeployer::startArmCountdown();
+  process_event(EVENT::BACKUP_COUNTDOWN_STARTED);
+}
+
+void FSM::onResetBackupDeployer() {
+  BackupDeployer::resetCountdown();
+  process_event(EVENT::BACKUP_COUNTDOWN_RESETTED);
+}
+
 void FSM::onEjectionTestReady() {}
 
 void FSM::onEjectionTestEject() {
@@ -222,6 +236,12 @@ void FSM::runCurrentState() {
       break;
     case STATE::READY:
       onReady();
+      break;
+    case STATE::ARM_BACKUP_DEPLOYER:
+      onArmBackupDeployer();
+      break;
+    case STATE::RESET_BACKUP_DEPLOYER:
+      onResetBackupDeployer();
       break;
     case STATE::EJECTION_TEST_READY:
       onEjectionTestReady();
