@@ -52,9 +52,9 @@ void BMP3XX_API::setup() {
 }
 
 void BMP3XX_API::calibrate() {
-  sensor.setTemperatureOversampling(BMP3_OVERSAMPLING_16X);
-  sensor.setPressureOversampling(BMP3_OVERSAMPLING_16X);
-  sensor.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
+  sensor.setPressureOversampling(BMP3_OVERSAMPLING_8X);
+  sensor.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_15);
+  sensor.setOutputDataRate(BMP3_ODR_100_HZ);
 
   // TODO: use something better than a constant here
   while (sensor.readAltitude(SEALEVELPRESSURE_HPA) > 1700) {
