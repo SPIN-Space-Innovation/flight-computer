@@ -17,7 +17,14 @@ BMP3XX_API& BMP3XX_API::getInstance() {
 
 
 void BMP3XX_API::readSensorData() {
-  if (millis() - last_sensor_read < 1000/BMP_REFRESH_RATE) {
+  if (millis() - last_sensor_read < 1000/BMP_REFRESH_RATE || broken_connection) {
+    return;
+  }
+
+  Wire.begin();
+  Wire.beginTransmission(BMP3XX_DEFAULT_ADDRESS);
+  if (Wire.endTransmission() != 0) {
+    broken_connection = true;
     return;
   }
 

@@ -22,6 +22,7 @@ class BMP3XX_API: public Altimeter {
     unsigned long last_sensor_read = 0;
     int32_t cached_altitude_cm;
     int32_t ground_level = 0;
+    bool broken_connection;
     void setGroundLevel();
 
     void readSensorData();
