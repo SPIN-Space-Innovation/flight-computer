@@ -8,7 +8,6 @@
 #define GRAVITY 981 // cm/s^2 -- update on other planets
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
-#define MAX_ALLOWED_AGL_READING 2000 // m
 
 FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
   : telemetry(telemetry)
@@ -163,7 +162,7 @@ void FSM::onEjectionTestComplete() {
 
 void FSM::onAscending() {
   float agl = altimeter->agl();
-  if (agl < MAX_ALLOWED_AGL_READING && agl > max_agl) { // ignore faulty readings from sensor
+  if (agl > max_agl) {
     max_agl = agl;
   }
 
