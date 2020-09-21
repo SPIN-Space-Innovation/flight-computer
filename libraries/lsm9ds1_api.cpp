@@ -13,7 +13,14 @@ LSM9DS1_API& LSM9DS1_API::getInstance() {
 
 void LSM9DS1_API::readSensorData() {
   // TODO: fix units
-  if (millis() - last_read < 1000/IMU_REFRESH_RATE) {
+  if (millis() - last_read < 1000/IMU_REFRESH_RATE || broken_connection) {
+    return;
+  }
+
+  Wire.begin();
+  Wire.beginTransmission(LSM9DS1_ADDRESS_ACCELGYRO);
+  if (Wire.endTransmission() != 0) {
+    broken_connection = true;
     return;
   }
 

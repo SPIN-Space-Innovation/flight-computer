@@ -32,4 +32,5 @@ class LSM9DS1_API: public IMU {
     unsigned long last_read = 0;
     void readSensorData();
     sensors_event_t acc, mag, gyro, temp;
+    bool broken_connection = false;
 };
