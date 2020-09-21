@@ -6,6 +6,7 @@
 #define BMP_CS   (10)
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define BMP_REFRESH_RATE 50 // Hz
+#define MAX_ALTITUDE_STEP 100000 // cm
 
 Adafruit_BMP3XX BMP3XX_API::sensor;
 
@@ -20,6 +21,11 @@ void BMP3XX_API::readSensorData() {
     return;
   }
 
+  int32_t reading = sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100;
+  if (abs(reading - cached_altitude_cm) >= MAX_ALTITUDE_STEP) {
+    // Ignore reading if difference is extreme. Probably problem with the sensor.
+    return;
+  }
   cached_altitude_cm = sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100;
   last_sensor_read = millis();
 }
