@@ -21,10 +21,16 @@ void setup() {
   Serial.begin(115200);
 #endif
 
+#if BUZZER
   pinMode(buzzer, OUTPUT);
   tone(buzzer, 500);
+#endif
+
   fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
+
+#if BUZZER
   noTone(buzzer);
+#endif
 }
 
 void loop() {
@@ -45,6 +51,7 @@ void loop() {
   }
 #endif
 
+#if BUZZER
   if (sound) {
     sound = false;
     noTone(buzzer);
@@ -52,6 +59,8 @@ void loop() {
     sound = true;
     tone(buzzer, 500);
   }
+#endif
+
   fsm->runCurrentState();
 
   int delayTime = (1000/loop_frequency) - (millis() - timerStart);
