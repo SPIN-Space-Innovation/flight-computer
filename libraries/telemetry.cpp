@@ -1,9 +1,8 @@
+#include "definitions.h"
 #include "telemetry.h"
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
-#define SERIAL_DEBUG false
-#define SD_LOGS true
 #define SD_CS 10
 #define SD_OFFLOAD_INTERVAL 1000 // ms
 #define MAX_MESSAGE_SIZE 85

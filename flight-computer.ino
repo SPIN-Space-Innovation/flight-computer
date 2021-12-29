@@ -3,6 +3,7 @@
 #include "fsm.h"
 #include "mosfet_igniter.h"
 #include "adafruit_gps_api.h"
+#include "definitions.h"
 
 LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
 BMP3XX_API altimeter = BMP3XX_API::getInstance();
@@ -14,8 +15,6 @@ FSM *fsm;
 const int buzzer = 17;
 bool sound = false;
 uint8_t loop_frequency = 10; // Hz
-
-#define SERIAL_DEBUG false
 
 void setup() {
 #if SERIAL_DEBUG
