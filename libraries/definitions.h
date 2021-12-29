@@ -1,3 +1,3 @@
-#define SERIAL_DEBUG true
+#define SERIAL_DEBUG false
 #define SD_LOGS false
 #define IGN_DEBUG true
