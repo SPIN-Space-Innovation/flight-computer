@@ -1,0 +1,36 @@
+[submodule "libraries/external/Adafruit_BNO055"]
+	path = libraries/external/Adafruit_BNO055
+	url = https://github.com/themicp/Adafruit_BNO055.git
+[submodule "libraries/external/Adafruit_BMP280_Library"]
+	path = libraries/external/Adafruit_BMP280_Library
+	url = https://github.com/adafruit/Adafruit_BMP280_Library.git
+[submodule "libraries/external/Adafruit_BMP3XX"]
+	path = libraries/external/Adafruit_BMP3XX
+	url = https://github.com/adafruit/Adafruit_BMP3XX.git
+[submodule "libraries/external/Adafruit_Sensor"]
+	path = libraries/external/Adafruit_Sensor
+	url = https://github.com/adafruit/Adafruit_Sensor.git
+[submodule "libraries/external/Adafruit_LSM9DS1"]
+	path = libraries/external/Adafruit_LSM9DS1
+	url = https://github.com/themicp/Adafruit_LSM9DS1.git
+[submodule "libraries/external/Adafruit_BusIO"]
+	path = libraries/external/Adafruit_BusIO
+	url = https://github.com/adafruit/Adafruit_BusIO.git
+[submodule "libraries/external/Adafruit_LIS3MDL"]
+	path = libraries/external/Adafruit_LIS3MDL
+	url = https://github.com/adafruit/Adafruit_LIS3MDL.git
+[submodule "libraries/external/RadioHead"]
+	path = libraries/external/RadioHead
+	url = git@github.com:themicp/RadioHead.git
+[submodule "ground-receiver/libraries/external/RadioHead"]
+	path = ground-receiver/libraries/external/RadioHead
+	url = git@github.com:themicp/RadioHead.git
+[submodule "ground-receiver/libraries/external/ArduinoJson"]
+	path = ground-receiver/libraries/external/ArduinoJson
+	url = https://github.com/bblanchon/ArduinoJson.git
+[submodule "libraries/external/Adafruit_GPS"]
+	path = libraries/external/Adafruit_GPS
+	url = https://github.com/adafruit/Adafruit_GPS
+[submodule "libraries/external/SD"]
+	path = libraries/external/SD
+	url = https://github.com/arduino-libraries/SD
