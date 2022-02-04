@@ -73,6 +73,7 @@ void BMP3XX_API::calibrate() {
   while (sensor.readAltitude(SEALEVELPRESSURE_HPA) > 1700) {
     delay(100);
   }
+  delay(1000); // TODO: refine the value. New BMP needed more time
 
   setGroundLevel();
 }
