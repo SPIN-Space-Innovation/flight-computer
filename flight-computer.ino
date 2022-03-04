@@ -1,3 +1,15 @@
+/**
+ * @file flight-computer.ino
+ *
+ * @brief This file contains ... TBD
+ *
+ * @ingroup flight-computer
+ * (Note: this needs exactly one @defgroup somewhere)
+ *
+ * @author Themis Papameletiou
+ * Contact: <themicp@gmail.com>
+ */
+
 #include "bmp3xx_api.h"
 #include "lsm9ds1_api.h"
 #include "fsm.h"
@@ -26,6 +38,7 @@ void setup() {
   tone(buzzer, 500);
 #endif
 
+  /* instantiate the finite state machine component */
   fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
 
 #if BUZZER
@@ -33,11 +46,19 @@ void setup() {
 #endif
 }
 
+/**
+ * @brief Main control loop function
+ *
+ */
 void loop() {
   int timerStart = millis();
 
+  /* If some new message is available */
   if (telemetry.messageAvailable()) {
+
     String message = telemetry.receiveMessage();
+
+    /* process a command message */
     if (message.substring(0, 3).equals("CMD")) {
       int event = message.substring(4).toInt();
       fsm->process_event((EVENT)event);

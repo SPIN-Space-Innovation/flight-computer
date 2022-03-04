@@ -1,4 +1,4 @@
-#define SERIAL_DEBUG false
+#define SERIAL_DEBUG true
 #define SD_LOGS false
 #define IGN_DEBUG true
-#define BUZZER true
+#define BUZZER false

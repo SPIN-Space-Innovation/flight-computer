@@ -19,7 +19,12 @@ class Transition {
     {}
 };
 
+/**
+ * @brief Finite State Machine (FSM) implementation
+ *
+ */
 class FSM {
+
   public:
     template<size_t N>
     void register_state_transitions(Transition (&transitions)[N]);
@@ -27,7 +32,12 @@ class FSM {
     void process_event(EVENT event);
     void runCurrentState();
 
-    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency);
+    FSM(Telemetry* telemetry,
+        IMU* imu_sensor,
+        Altimeter* altimeter,
+        GPSReceiver* gps,
+        Igniter* igniter,
+        uint8_t* loop_frequency);
 
   private:
     STATE state = STATE::SETUP;

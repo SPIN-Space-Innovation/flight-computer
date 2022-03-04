@@ -70,14 +70,28 @@ void FSM::register_state_transitions(Transition (&transitions)[N]) {
 void FSM::process_event(EVENT event) {
   telemetry->send("FSM Event: " + event_to_str(event));
 
+  /*
+  ** If current state, incoming event combination is valid,
+  ** switch to the next state, according to the defined state machine,
+  ** else return a warning message TM.
+  */
   if (state_transitions[(int)state][(int)event] != STATE::INVALID_STATE) {
     state = state_transitions[(int)state][(int)event];
 
-    if (state == STATE::DEPLOYING_CHUTE || state == STATE::EJECTION_TEST_EJECT) {
+    /*
+    ** If ejection has been triggered, either to perform an ejection test
+    ** or to actually deploy the parachute, get a time stamp to measure
+    ** deployment duration
+    */
+    if ( state == STATE::DEPLOYING_CHUTE
+      || state == STATE::EJECTION_TEST_EJECT )
+    {
       ejection_start = millis();
     }
+
   } else {
-    telemetry->send("No transition from state " + state_to_str(state) + " with event " + event_to_str(event));
+    telemetry->send("No transition from state " + state_to_str(state)
+      + " with event " + event_to_str(event));
   }
 
   if (event == EVENT::LAUNCHED) {
@@ -161,7 +175,9 @@ void FSM::onEjectionTestComplete() {
 }
 
 void FSM::onAscending() {
+
   float agl = altimeter->agl();
+
   if (agl > max_agl) {
     max_agl = agl;
   }
@@ -171,6 +187,7 @@ void FSM::onAscending() {
   } else if (millis() - launch_time > TIME_TO_APOGEE * 1000) {
     process_event(EVENT::APOGEE_TIMER_TIMEOUT);
   }
+
   // TODO: check IMU ?
 }
 
