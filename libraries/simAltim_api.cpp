@@ -108,15 +108,15 @@ void SIM_ALTIM_API::setup()
 
 void SIM_ALTIM_API::calibrate()
 {
-    sensor.setPressureOversampling(BMP3_OVERSAMPLING_8X);
-    sensor.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_15);
-    sensor.setOutputDataRate(BMP3_ODR_100_HZ);
+    // sensor.setPressureOversampling(BMP3_OVERSAMPLING_8X);
+    // sensor.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_15);
+    // sensor.setOutputDataRate(BMP3_ODR_100_HZ);
 
     // TODO: use something better than a constant here
-    while (sensor.readAltitude(SEA_LVL_PRESSURE_HPA) > 1700)
-    {
-        delay(100);
-    }
+    // while (sensor.readAltitude(SEA_LVL_PRESSURE_HPA) > 1700)
+    // {
+    //     delay(100);
+    // }
 
     setGroundLevel();
 }
