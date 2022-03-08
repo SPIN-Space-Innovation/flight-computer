@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include "Arduino.h"
 #include "simAltim_api.h"
 
 #define SEA_LVL_PRESSURE_HPA (1013.25)
@@ -33,9 +35,9 @@ void SIM_ALTIM_API::updateDataFromSensor()
         && (curTimeMsec - last_sensor_read < SNSR_UPD_INTERVAL_MSEC) )
     {
         // reading = sensor.readAltitude(SEA_LVL_PRESSURE_HPA) * 100;
-        reading = 1;
+        reading = cached_altitude_cm += 2;
 
-        /* Check reading validity and only cahce the new reading
+        /* Check reading validity and only cache the new reading
         ** if the difference is within a pre-defined expected max range */
         if (abs(reading - cached_altitude_cm) < MAX_ALT_STEP_CM)
         {
@@ -63,7 +65,8 @@ int32_t SIM_ALTIM_API::altitude_cm()
  */
 float SIM_ALTIM_API::pressure()
 {
-    return sensor.pressure / 100.0;
+    // return sensor.pressure / 100.0;
+    return 50 / 100.0;
 }
 
 /**

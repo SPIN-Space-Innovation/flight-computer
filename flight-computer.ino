@@ -10,7 +10,7 @@
  * Contact: <themicp@gmail.com>
  */
 
-#include "bmp3xx_api.h"
+#include "simAltim_api.h"
 #include "lsm9ds1_api.h"
 #include "fsm.h"
 #include "mosfet_igniter.h"
@@ -18,7 +18,7 @@
 #include "definitions.h"
 
 LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
-BMP3XX_API altimeter = BMP3XX_API::getInstance();
+SIM_ALTIM_API altimeter = SIM_ALTIM_API::getInstance();
 Telemetry telemetry = Telemetry::getInstance();
 MosfetIgniter igniter = MosfetIgniter::getInstance();
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
