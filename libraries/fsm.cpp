@@ -220,6 +220,8 @@ void FSM::runCurrentState() {
 
     payload.gps_fix = gps->fix();
     payload.gps_satellites = gps->satellites();
+    payload.gps_latitude = gps->latitude();
+    payload.gps_longitude = gps->longitude();
     message.payload = payload;
   }
   telemetry->send(message);
