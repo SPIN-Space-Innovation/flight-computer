@@ -5,8 +5,6 @@
 #define SERVER_ADDRESS 2
 #define SD_CS 10
 #define SD_OFFLOAD_INTERVAL 1000 // ms
-#define MAX_MESSAGE_SIZE 85
-#define TELEMETRY_MESSAGE_SIZE 33
 
 // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on
 RH_RF95 Telemetry::rf95(8, 3);
@@ -17,60 +15,6 @@ Telemetry& Telemetry::getInstance() {
   return instance;
 }
 
-uint8_t* Telemetry::marshall(TelemetryMessage message) {
-  static uint8_t stream[MAX_MESSAGE_SIZE];
-  stream[0] = (uint8_t)message.type;
-  stream[1] = (message.count & 0xFF000000) >> 24 ;
-  stream[2] = (message.count & 0x00FF0000) >> 16;
-  stream[3] = (message.count & 0x0000FF00) >> 8;
-  stream[4] = message.count & 0x000000FF;
-
-  if (message.type == MESSAGE_TYPE::DEBUG) {
-    memcpy(stream + 5, message.debug_message, sizeof(message.debug_message));
-  } else if (message.type == MESSAGE_TYPE::TELEMETRY) {
-    stream[5] = (message.met & 0xFF000000) >> 24 ;
-    stream[6] = (message.met & 0x00FF0000) >> 16;
-    stream[7] = (message.met & 0x0000FF00) >> 8;
-    stream[8] = message.met & 0x000000FF;
-
-    stream[9] = message.free_memory_kb;
-
-    stream[10] = (message.battery_voltage_mv & 0xFF00) >> 8;
-    stream[11] = message.battery_voltage_mv & 0x00FF;
-
-    stream[12] = (uint8_t)message.state;
-
-    stream[13] = (message.backup_deployer_status & 0xFF00) >> 8;
-    stream[14] = message.backup_deployer_status & 0x00FF;
-
-    if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
-      stream[15] = (message.payload.agl_cm & 0xFF000000) >> 24 ;
-      stream[16] = (message.payload.agl_cm & 0x00FF0000) >> 16;
-      stream[17] = (message.payload.agl_cm & 0x0000FF00) >> 8;
-      stream[18] = message.payload.agl_cm & 0x000000FF;
-
-      stream[19] = (message.payload.acceleration_x & 0xFF00) >> 8;
-      stream[20] = message.payload.acceleration_x & 0x00FF;
-      stream[21] = (message.payload.acceleration_y & 0xFF00) >> 8;
-      stream[22] = message.payload.acceleration_y & 0x00FF;
-      stream[23] = (message.payload.acceleration_z & 0xFF00) >> 8;
-      stream[24] = message.payload.acceleration_z & 0x00FF;
-
-      stream[25] = (message.payload.gyroscope_x & 0xFF00) >> 8;
-      stream[26] = message.payload.gyroscope_x & 0x00FF;
-      stream[27] = (message.payload.gyroscope_y & 0xFF00) >> 8;
-      stream[28] = message.payload.gyroscope_y & 0x00FF;
-      stream[29] = (message.payload.gyroscope_z & 0xFF00) >> 8;
-      stream[30] = message.payload.gyroscope_z & 0x00FF;
-
-      stream[31] = (uint8_t)message.payload.gps_fix;
-      stream[32] = message.payload.gps_satellites;
-    }
-  }
-
-  return stream;
-}
-
 void Telemetry::send(TelemetryMessage message) {
   ++message_count;
   message.count = message_count;
@@ -78,17 +22,24 @@ void Telemetry::send(TelemetryMessage message) {
     return;
   }
 
-  uint8_t *stream = marshall(message);
+  const uint8_t *stream = (uint8_t*)&message;
+  size_t message_size = sizeof(TelemetryMessage);
+  if (message.type != MESSAGE_TYPE::DEBUG) {
+    message_size -= sizeof(message.debug_message);
+  }
   String stringifiedMessage = stringifyTelemetryMessage(message);
-  int message_size = message.type == MESSAGE_TYPE::DEBUG ? MAX_MESSAGE_SIZE : TELEMETRY_MESSAGE_SIZE;
 
 #if SERIAL_DEBUG
-    Serial.print("RADIO: ");
-    for (int i = 0; i < message_size; ++i) {
+/*
+    Serial.print("RADIO (");
+    Serial.print(message_size);
+    Serial.print("): ");
+    for (int i = 0; i < sizeof(TelemetryMessage); ++i) {
       Serial.print(stream[i], BIN);
     }
     Serial.println();
-    Serial.println("STRINGIFIED: " + stringifiedMessage);
+*/
+    Serial.println("TELEMETRY (" + String(message_size) + " bytes): " + stringifiedMessage);
 #endif
 
 #if SD_LOGS

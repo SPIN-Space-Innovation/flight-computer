@@ -26,7 +26,5 @@ class Telemetry {
     unsigned long last_radio_message_time = 0;
     uint16_t radio_throttle_ms = 0; // no throttling
 
-    uint8_t* marshall(TelemetryMessage message);
-
     Telemetry();
 };
