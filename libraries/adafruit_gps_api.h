@@ -7,8 +7,8 @@ class Adafruit_GPS_API: public GPSReceiver {
 
     void setup();
     bool fix();
-    String latitude();
-    String longitude();
+    int32_t latitude();
+    int32_t longitude();
     float altitude();
     int satellites();
 

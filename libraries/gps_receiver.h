@@ -4,8 +4,8 @@ class GPSReceiver {
   public:
     virtual void setup();
     virtual bool fix();
-    virtual String latitude();
-    virtual String longitude();
+    virtual int32_t latitude();
+    virtual int32_t longitude();
     virtual float altitude();
     virtual int satellites();
 };

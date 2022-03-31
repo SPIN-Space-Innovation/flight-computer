@@ -36,16 +36,16 @@ bool Adafruit_GPS_API::fix() {
   return receiver.fix;
 }
 
-String Adafruit_GPS_API::latitude() {
+int32_t Adafruit_GPS_API::latitude() {
   readData();
-  if (!fix()) return "--";
-  return String(receiver.latitude) + receiver.lat;
+  if (!fix()) return 0;
+  return receiver.latitude_fixed;
 }
 
-String Adafruit_GPS_API::longitude() {
+int32_t Adafruit_GPS_API::longitude() {
   readData();
-  if (!fix()) return "--";
-  return String(receiver.longitude) + receiver.lon;
+  if (!fix()) return 0;
+  return receiver.longitude_fixed;
 }
 
 float Adafruit_GPS_API::altitude() {
