@@ -12,20 +12,18 @@ enum class MESSAGE_TYPE {TELEMETRY, DEBUG};
 String state_to_str(STATE state);
 String event_to_str(EVENT event);
 
-union TelemetryMessagePayload {
-  struct {
-    int32_t agl_cm;
-    int16_t acceleration_x;
-    int16_t acceleration_y;
-    int16_t acceleration_z;
-    int16_t gyroscope_x;
-    int16_t gyroscope_y;
-    int16_t gyroscope_z;
-    bool gps_fix;
-    uint8_t gps_satellites;
-    int32_t gps_latitude;
-    int32_t gps_longitude;
-  };
+struct TelemetryMessagePayload {
+  int32_t agl_cm;
+  int16_t acceleration_x;
+  int16_t acceleration_y;
+  int16_t acceleration_z;
+  int16_t gyroscope_x;
+  int16_t gyroscope_y;
+  int16_t gyroscope_z;
+  bool gps_fix;
+  uint8_t gps_satellites;
+  int32_t gps_latitude;
+  int32_t gps_longitude;
 };
 
 struct TelemetryMessage {
