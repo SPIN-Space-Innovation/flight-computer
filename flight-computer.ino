@@ -38,9 +38,11 @@ void loop() {
 
   if (telemetry.messageAvailable()) {
     String message = telemetry.receiveMessage();
-    if (message.substring(0, 3).equals("CMD")) {
-      int event = message.substring(4).toInt();
-      fsm->process_event((EVENT)event);
+    if (message.substring(0, 5).equals("SPCMD")) {
+      int event;
+      if (sscanf(message.c_str(), "SPCMD:%i--", &event) == 1) {
+        fsm->process_event((EVENT)event);
+      }
     }
   }
 
