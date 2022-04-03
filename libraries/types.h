@@ -34,6 +34,7 @@ struct TelemetryMessage {
   uint16_t battery_voltage_mv;
   STATE state;
   bool sd_logs_enabled;
+  uint8_t selected_igniter;
   TelemetryMessagePayload payload;
   char debug_message[80];
 };

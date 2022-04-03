@@ -30,7 +30,8 @@ String stringifyTelemetryMessage(TelemetryMessage message) {
       String(message.free_memory_kb) + "," +
       String(message.battery_voltage_mv) + "," +
       String(state_to_str(message.state)) + "," +
-      (message.sd_logs_enabled ? "true" : "false");
+      String(message.sd_logs_enabled) + "," +
+      String(message.selected_igniter);
 
     if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
       message_str += "," +

@@ -212,6 +212,7 @@ void FSM::runCurrentState() {
 #else
   message.sd_logs_enabled = false;
 #endif
+  message.selected_igniter = IGNITER;
 
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
     payload.agl_cm = altimeter->aglCM();
