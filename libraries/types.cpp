@@ -25,16 +25,11 @@ String stringifyTelemetryMessage(TelemetryMessage message) {
   if (message.type == MESSAGE_TYPE::DEBUG) {
     message_str += message.debug_message;
   } else if (message.type == MESSAGE_TYPE::TELEMETRY) {
-    uint8_t backup_deployer_state = (message.backup_deployer_status & 0xFF00) >> 8;
-    uint8_t backup_deployer_timer = message.backup_deployer_status & 0x00FF;
-
     message_str +=
       String(message.met) + "," +
       String(message.free_memory_kb) + "," +
       String(message.battery_voltage_mv) + "," +
-      String(state_to_str(message.state)) + "," +
-      String(backup_deployer_state) + "," +
-      String(backup_deployer_timer);
+      String(state_to_str(message.state));
 
     if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
       message_str += "," +

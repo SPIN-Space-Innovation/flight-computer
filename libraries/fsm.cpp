@@ -206,7 +206,6 @@ void FSM::runCurrentState() {
   message.free_memory_kb = freeMemory()/1000;
   message.battery_voltage_mv = get_battery_voltage_mv();
   message.state = state;
-  message.backup_deployer_status = BackupDeployer::getStatus();
 
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
     payload.agl_cm = altimeter->aglCM();
