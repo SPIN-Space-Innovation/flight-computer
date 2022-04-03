@@ -2,13 +2,14 @@
 #include "Arduino.h"
 #include "definitions.h"
 
-const int mosfet_pin = 5; // IGN1
-const int IGN_LED = 16; // IGN1
+struct IgniterOptions {
+  int mosfet_pin;
+  int led_pin;
+};
 
-/*
-const int mosfet_pin = 6; // IGN2
-const int IGN_LED = 15; // IGN2
-*/
+IgniterOptions igniters[2] = {
+  {5, 16}, {6, 15}
+};
 
 MosfetIgniter& MosfetIgniter::getInstance() {
   static MosfetIgniter instance;
@@ -16,23 +17,23 @@ MosfetIgniter& MosfetIgniter::getInstance() {
 }
 
 void MosfetIgniter::setup() {
-  pinMode(mosfet_pin, OUTPUT);
+  pinMode(igniters[IGNITER - 1].mosfet_pin, OUTPUT);
 #if IGN_DEBUG
-  pinMode(IGN_LED, OUTPUT);
+  pinMode(igniters[IGNITER - 1].led_pin, OUTPUT);
 #endif
-  digitalWrite(mosfet_pin, LOW);
+  digitalWrite(igniters[IGNITER - 1].mosfet_pin, LOW);
 }
 
 void MosfetIgniter::enable() {
-  digitalWrite(mosfet_pin, HIGH);
+  digitalWrite(igniters[IGNITER - 1].mosfet_pin, HIGH);
 #if IGN_DEBUG
-  digitalWrite(IGN_LED, HIGH);
+  digitalWrite(igniters[IGNITER - 1].led_pin, HIGH);
 #endif
 }
 
 void MosfetIgniter::disable() {
-  digitalWrite(mosfet_pin, LOW);
+  digitalWrite(igniters[IGNITER - 1].mosfet_pin, LOW);
 #if IGN_DEBUG
-  digitalWrite(IGN_LED, LOW);
+  digitalWrite(igniters[IGNITER - 1].led_pin, LOW);
 #endif
 }
