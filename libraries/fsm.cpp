@@ -1,4 +1,5 @@
 #include "fsm.h"
+#include "definitions.h"
 #include "memoryUsage.h"
 
 #define LAUNCH_AGL_THRESHOLD 5 // meters
@@ -206,6 +207,11 @@ void FSM::runCurrentState() {
   message.free_memory_kb = freeMemory()/1000;
   message.battery_voltage_mv = get_battery_voltage_mv();
   message.state = state;
+#if SD_LOGS
+  message.sd_logs_enabled = true;
+#else
+  message.sd_logs_enabled = false;
+#endif
 
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
     payload.agl_cm = altimeter->aglCM();
