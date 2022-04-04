@@ -46,7 +46,8 @@ String stringifyTelemetryMessage(TelemetryMessage message) {
         String(message.payload.gyroscope_y) + "," +
         String(message.payload.gyroscope_z) + "," +
         String(message.payload.gps_fix) + "," +
-        String(message.payload.gps_satellites);
+        String(message.payload.gps_satellites) + ","
+        String(message.payload.continuity);
     }
   }
 

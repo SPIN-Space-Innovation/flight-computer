@@ -221,6 +221,8 @@ void FSM::runCurrentState() {
     payload.gps_fix = gps->fix();
     payload.gps_satellites = gps->satellites();
     message.payload = payload;
+
+    //bazw bool 
   }
   telemetry->send(message);
 

@@ -34,3 +34,12 @@ void MosfetIgniter::disable() {
   digitalWrite(IGN1_LED, LOW);
 #endif
 }
+
+void MosfetIgniter::continuity() {
+  int state = digitalRead();
+  if(state == HIGH) {
+    Serial.print("HIGH");
+  } else {
+    Serial.print("LOW");
+  }
+}
