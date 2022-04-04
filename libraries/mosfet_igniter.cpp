@@ -3,6 +3,7 @@
 #include "definitions.h"
 
 const int mosfet_pin = 5; // IGN1
+const int continuity_pin = 11; //IGN1 GND 
 // const int mosfet_pin = 6; // IGN2
 //
 const int IGN1_LED = 16;
@@ -35,11 +36,13 @@ void MosfetIgniter::disable() {
 #endif
 }
 
-void MosfetIgniter::continuity() {
-  int state = digitalRead();
+bool MosfetIgniter::continuity() {
+  int state = digitalRead(continuity_pin);
   if(state == HIGH) {
     Serial.print("HIGH");
+    return true;
   } else {
     Serial.print("LOW");
+    return false;
   }
 }

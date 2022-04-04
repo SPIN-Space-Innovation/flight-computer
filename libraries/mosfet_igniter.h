@@ -6,5 +6,5 @@ class MosfetIgniter: public Igniter {
     void setup();
     void enable();
     void disable();
-    void continuity();
+    bool continuity();
 };

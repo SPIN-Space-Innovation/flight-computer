@@ -220,9 +220,10 @@ void FSM::runCurrentState() {
 
     payload.gps_fix = gps->fix();
     payload.gps_satellites = gps->satellites();
+
+    payload.continuity = igniter->continuity();
     message.payload = payload;
 
-    //bazw bool 
   }
   telemetry->send(message);
 

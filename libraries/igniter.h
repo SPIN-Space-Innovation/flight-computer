@@ -5,5 +5,5 @@ class Igniter {
     virtual void setup();
     virtual void enable();
     virtual void disable();
-    virtual void continuity();
+    virtual bool continuity();
 };

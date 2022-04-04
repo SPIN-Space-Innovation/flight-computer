@@ -23,7 +23,7 @@ union TelemetryMessagePayload {
     int16_t gyroscope_z;
     bool gps_fix;
     uint8_t gps_satellites;
-    uint8_t continuity;
+    bool continuity;
   };
 };
 

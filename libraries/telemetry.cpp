@@ -65,6 +65,7 @@ uint8_t* Telemetry::marshall(TelemetryMessage message) {
 
       stream[31] = (uint8_t)message.payload.gps_fix;
       stream[32] = message.payload.gps_satellites;
+      stream[33] = message.payload.continuity;
     }
   }
 
