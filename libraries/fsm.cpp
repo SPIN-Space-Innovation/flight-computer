@@ -6,7 +6,11 @@
 #define APOGEE_AGL_DIFF_THRESHOLD 5 // meters
 #define LAUNCH_ACCELERATION_THRESHOLD 3 // g
 #define TIME_TO_APOGEE 15 // s
-#define GRAVITY 981 // cm/s^2 -- update on other planets
+#define GRAVITY 981 // cm/s^2 -- Earth
+/*
+#define GRAVITY 372 // cm/s^2 -- Mars
+#define GRAVITY 162 // cm/s^2 -- Moon
+*/
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
 
@@ -133,7 +137,7 @@ void FSM::onCalibration() {
 
 void FSM::onReady() {
   if (altimeter->agl() > LAUNCH_AGL_THRESHOLD or
-      imu_sensor->accelerationX() / GRAVITY > LAUNCH_ACCELERATION_THRESHOLD) {
+      (imu_sensor->accelerationX() / GRAVITY) * -1 > LAUNCH_ACCELERATION_THRESHOLD) {
     process_event(EVENT::LAUNCHED);
   }
 }
