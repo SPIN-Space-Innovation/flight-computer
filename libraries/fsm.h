@@ -48,6 +48,7 @@ class FSM {
     void onIDLE();
     void onCalibration();
     void onReady();
+    void onLaunched();
     void onArmBackupDeployer();
     void onResetBackupDeployer();
     void onEjectionTestReady();

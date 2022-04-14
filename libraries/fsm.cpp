@@ -86,9 +86,16 @@ void FSM::process_event(EVENT event) {
   }
 
   if (event == EVENT::LAUNCHED) {
-    // TODO: not the best place to do that
-    launch_time = millis();
+    onLaunched();
   }
+}
+
+void FSM::onLaunched() {
+  // TODO: not the best place to do that
+  launch_time = millis();
+
+  telemetry->setRadioThrottle(1000);
+  *loop_frequency = 100;
 }
 
 void FSM::onSetup() {
@@ -188,6 +195,8 @@ void FSM::onDeployingChute() {
   if (millis() - ejection_start > EJECTION_TIMEOUT) {
     igniter->disable();
     process_event(EVENT::CHUTE_EJECTED);
+    telemetry->setRadioThrottle(0);
+    *loop_frequency = 10;
   }
 }
 
