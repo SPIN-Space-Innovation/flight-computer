@@ -15,7 +15,7 @@ void Adafruit_GPS_API::setup() {
   last_read = 0;
 
   receiver.begin(9600);
-  receiver.sendCommand(PMTK_SET_NMEA_OUTPUT_GGAONLY);
+  receiver.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCONLY);
   receiver.sendCommand(PMTK_SET_NMEA_UPDATE_10HZ);
   receiver.sendCommand(PMTK_API_SET_FIX_CTL_5HZ);
 }
