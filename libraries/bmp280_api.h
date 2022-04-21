@@ -8,7 +8,7 @@ class BMP280_API: public Altimeter {
   public:
     static BMP280_API& getInstance();
     int32_t altitude_cm();
-    float pressure();
+    int32_t pressure();
     int32_t aglCM();
 
     int32_t getGroundLevelCM();

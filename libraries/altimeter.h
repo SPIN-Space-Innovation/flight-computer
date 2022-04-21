@@ -14,7 +14,7 @@ class Altimeter {
       return (float)aglCM() / 100;
     }
 
-    virtual float pressure(); // pascal
+    virtual int32_t pressure(); // pascal
 
     virtual int32_t getGroundLevelCM();
 

@@ -16,7 +16,7 @@ int32_t BMP280_API::altitude_cm() {
   return sensor.readAltitude() * 100;
 }
 
-float BMP280_API::pressure() {
+int32_t BMP280_API::pressure() {
   return sensor.readPressure();
 }
 

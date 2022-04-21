@@ -14,6 +14,7 @@ String event_to_str(EVENT event);
 
 struct TelemetryMessagePayload {
   int32_t agl_cm;
+  int32_t pressure;
   int16_t acceleration_x;
   int16_t acceleration_y;
   int16_t acceleration_z;

@@ -42,8 +42,8 @@ int32_t BMP3XX_API::altitude_cm() {
   return cached_altitude_cm;
 }
 
-float BMP3XX_API::pressure() {
-  return sensor.pressure / 100.0;
+int32_t BMP3XX_API::pressure() {
+  return sensor.pressure;
 }
 
 int32_t BMP3XX_API::aglCM() {
