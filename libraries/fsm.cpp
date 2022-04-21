@@ -6,6 +6,7 @@
 #define APOGEE_AGL_DIFF_THRESHOLD 5 // meters
 #define LAUNCH_ACCELERATION_THRESHOLD 3 // g
 #define TIME_TO_APOGEE 15 // s
+#define BOOST_TIME 12 // s
 #define GRAVITY 981 // cm/s^2 -- Earth
 /*
 #define GRAVITY 372 // cm/s^2 -- Mars
@@ -178,7 +179,8 @@ void FSM::onAscending() {
     max_agl = agl;
   }
 
-  if (max_agl - agl >= APOGEE_AGL_DIFF_THRESHOLD) {
+  if (max_agl - agl >= APOGEE_AGL_DIFF_THRESHOLD &&
+    millis() - launch_time > BOOST_TIME * 1000) {
     process_event(EVENT::APOGEE_DETECTED);
   } else if (millis() - launch_time > TIME_TO_APOGEE * 1000) {
     process_event(EVENT::APOGEE_TIMER_TIMEOUT);
