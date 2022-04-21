@@ -37,6 +37,7 @@ String stringifyTelemetryMessage(TelemetryMessage message) {
       message_str += "," +
         String(message.payload.agl_cm) + "," +
         String(message.payload.pressure) + "," +
+        String(message.payload.temperature) + "," +
         String(message.payload.acceleration_x) + "," +
         String(message.payload.acceleration_y) + "," +
         String(message.payload.acceleration_z) + "," +

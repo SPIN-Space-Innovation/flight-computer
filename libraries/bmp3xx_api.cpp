@@ -46,6 +46,10 @@ int32_t BMP3XX_API::pressure() {
   return sensor.pressure;
 }
 
+int16_t BMP3XX_API::temperature() {
+  return sensor.temperature * 100;
+}
+
 int32_t BMP3XX_API::aglCM() {
   return altitude_cm() - ground_level;
 }

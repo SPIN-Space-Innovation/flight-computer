@@ -9,6 +9,7 @@ class BMP3XX_API: public Altimeter {
     static BMP3XX_API& getInstance();
     int32_t altitude_cm();
     int32_t pressure();
+    int16_t temperature();
     int32_t aglCM();
 
     int32_t getGroundLevelCM();

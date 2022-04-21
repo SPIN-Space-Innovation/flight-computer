@@ -15,6 +15,7 @@ class Altimeter {
     }
 
     virtual int32_t pressure(); // pascal
+    virtual int16_t temperature(); // Celcius * 100
 
     virtual int32_t getGroundLevelCM();
 
