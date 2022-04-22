@@ -82,12 +82,12 @@ void FSM::process_event(EVENT event) {
     if (state == STATE::DEPLOYING_CHUTE || state == STATE::EJECTION_TEST_EJECT) {
       ejection_start = millis();
     }
+
+    if (event == EVENT::LAUNCHED) {
+      onLaunched();
+    }
   } else {
     telemetry->send("No transition from state " + state_to_str(state) + " with event " + event_to_str(event));
-  }
-
-  if (event == EVENT::LAUNCHED) {
-    onLaunched();
   }
 }
 
