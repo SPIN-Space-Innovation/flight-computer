@@ -69,7 +69,7 @@ void BMP3XX_API::setup() {
 }
 
 void BMP3XX_API::calibrate() {
-  sensor.setPressureOversampling(BMP3_OVERSAMPLING_8X);
+  sensor.setPressureOversampling(BMP3_OVERSAMPLING_16X);
   sensor.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_15);
   sensor.setOutputDataRate(BMP3_ODR_100_HZ);
 
