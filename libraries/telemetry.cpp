@@ -74,6 +74,7 @@ void Telemetry::setup() {
     while(1);
   }
 
+  rf95.setFrequency(432.25);
   rf95.setSignalBandwidth(500000);
   rf95.setSpreadingFactor(8);
   rf95.setTxPower(18);
