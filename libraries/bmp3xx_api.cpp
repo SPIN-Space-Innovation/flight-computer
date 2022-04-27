@@ -4,7 +4,7 @@
 #define BMP_MISO (12) // SD0
 #define BMP_MOSI (11) // SD1
 #define BMP_CS   (10)
-#define SEALEVELPRESSURE_HPA (1013.25)
+#define SEALEVELPRESSURE_HPA (1013.7)
 #define BMP_REFRESH_RATE 50 // Hz
 #define MAX_ALTITUDE_STEP 100000 // cm
 
