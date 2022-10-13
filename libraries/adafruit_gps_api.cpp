@@ -24,7 +24,8 @@ void Adafruit_GPS_API::readData() {
   if (millis() - last_read < 100) {
     return;
   }
-  receiver.read();
+  while(receiver.read());
+  //while(receiver.available());
   last_read = millis();
   if (receiver.newNMEAreceived()) {
     receiver.parse(receiver.lastNMEA());
