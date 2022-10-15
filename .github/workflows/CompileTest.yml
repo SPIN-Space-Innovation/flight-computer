@@ -1,0 +1,44 @@
+name: Compile Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  compile-test:
+    strategy:
+      matrix:
+        arduino-platform: [ "adafruit:samd" ]
+        include:
+          - arduino-platform: "adafruit:samd"
+            fqbn: "adafruit:samd:adafruit_feather_m0"
+    
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v1
+        with:
+          version: "0.11.0"
+
+      - name: Add Support for board
+        run: |
+          arduino-cli config init
+          powershell -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command "Set-Content -Path '~\AppData\Local\Arduino15\arduino-cli.yaml' -Value 'board_manager:'; Add-Content -Path '~\AppData\Local\Arduino15\arduino-cli.yaml' -Value '  additional_urls:'; Add-Content -Path '~\AppData\Local\Arduino15\arduino-cli.yaml' -Value '    [https://adafruit.github.io/arduino-board-index/package_adafruit_index.json]';"
+
+      - name: Install platform
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install ${{ matrix.arduino-platform }}
+
+      - name: Install Libraries
+        run: powershell -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command "New-Item '~\Documents\Arduino\' -ItemType Directory | out-null; New-Item '~\Documents\Arduino\libraries\' -ItemType Directory | out-null; New-Item '~\Documents\Arduino\libraries\flight-computer\' -ItemType Directory | out-null; ((Get-ChildItem 'libraries\' -Filter '*.h') + (Get-ChildItem 'libraries\' -Filter '*.cpp')) | Copy-Item -Destination '~\Documents\Arduino\libraries\flight-computer\' -Force -PassThru | out-null; Copy-Item -Path 'libraries\external\*' -Destination '~\Documents\Arduino\libraries\' -Recurse | out-null;"
+      
+      - name: Compile Sketch
+        run: arduino-cli compile -b ${{ matrix.fqbn }}
