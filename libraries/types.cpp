@@ -1,20 +1,68 @@
 #include <stdint.h>
 #include "types.h"
 
+/**
+ * @brief Strigified States
+ * 
+ * @see STATE
+ */
+static String StateNames[] = { 
+  "INVALID_STATE",
+  "SETUP",
+  "IDLE",
+  "CALIBRATION",
+  "READY",
+  "ARM_BACKUP_DEPLOYER",
+  "RESET_BACKUP_DEPLOYER",
+  "EJECTION_TEST_READY",
+  "EJECTION_TEST_EJECT",
+  "EJECTION_TEST_COMPLETE",
+  "ASCENDING",
+  "APOGEE_TIMEOUT",
+  "DEPLOYING_CHUTE",
+  "RECOVERING"
+};
+
+/**
+ * @brief Strigified Events
+ * 
+ * @see EVENT
+ */
+static String EventNames[] = {
+  "SETUP_COMPLETE",
+  "INIT_CALIBRATION",
+  "CALIBRATION_COMPLETE",
+  "START_BACKUP_COUNTDOWN",
+  "BACKUP_COUNTDOWN_STARTED",
+  "RESET_BACKUP_COUNTDOWN",
+  "BACKUP_COUNTDOWN_RESETTED",
+  "SET_EJECTION_TEST",
+  "LAUNCHED",
+  "APOGEE_TIMER_TIMEOUT",
+  "APOGEE_DETECTED",
+  "TRIGGER_FTS",
+  "CHUTE_EJECTED",
+  "GO_IDLE"
+};
+
+static String Unknown = "Unknown";
+
 String state_to_str(STATE state) {
-  String names[] = {"INVALID_STATE", "SETUP", "IDLE", "CALIBRATION", "READY", "ARM_BACKUP_DEPLOYER", "RESET_BACKUP_DEPLOYER", "EJECTION_TEST_READY",  "EJECTION_TEST_EJECT", "EJECTION_TEST_COMPLETE", "ASCENDING", "APOGEE_TIMEOUT", "DEPLOYING_CHUTE", "RECOVERING"};
-  if ((int)state >= (int)STATE::Count or (int)state < 0) {
-    return "Unknown";
+  if ((int)state >= (int)STATE::Count) { /* Check if state passed is invalid by
+                                            checking if the state is bigger
+                                            than Count. */
+    return Unknown;
   }
-  return names[(int)state];
+  return StateNames[(int)state];
 }
 
 String event_to_str(EVENT event) {
-  String names[] = {"SETUP_COMPLETE", "INIT_CALIBRATION", "CALIBRATION_COMPLETE", "START_BACKUP_COUNTDOWN", "BACKUP_COUNTDOWN_STARTED", "RESET_BACKUP_COUNTDOWN",  "BACKUP_COUNTDOWN_RESETTED", "SET_EJECTION_TEST", "LAUNCHED", "APOGEE_TIMER_TIMEOUT", "APOGEE_DETECTED", "TRIGGER_FTS", "CHUTE_EJECTED", "GO_IDLE"};
-  if ((int)event >= (int)EVENT::Count or (int)event < 0) {
-    return "Unknown";
+  if ((int)event >= (int)EVENT::Count) { /* Check if event passed is invalid by
+                                            checking if the event is bigger
+                                            than Count. */
+    return Unknown;
   }
-  return names[(int)event];
+  return EventNames[(int)event];
 }
 
 String stringifyTelemetryMessage(TelemetryMessage message) {
