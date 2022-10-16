@@ -10,7 +10,7 @@
  * 
  * @author themicp
  */
-enum class STATE {
+enum class STATE : uint8_t {
   INVALID_STATE, /*!< Invalid state. */
   SETUP, /*!< Program still setting up. */
   IDLE, /*!< Program is idling. */
@@ -28,7 +28,7 @@ enum class STATE {
   Count /*!< */
 };
 
-enum class EVENT {
+enum class EVENT : uint8_t {
   SETUP_COMPLETE, /*!< */
   INIT_CALIBRATION, /*!< */
   CALIBRATION_COMPLETE, /*!< */
