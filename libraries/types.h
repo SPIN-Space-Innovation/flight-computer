@@ -3,42 +3,152 @@
 #include <stdint.h>
 #include "Arduino.h"
 
-enum class STATE {INVALID_STATE, SETUP, IDLE, CALIBRATION, READY, ARM_BACKUP_DEPLOYER, RESET_BACKUP_DEPLOYER, EJECTION_TEST_READY, EJECTION_TEST_EJECT, EJECTION_TEST_COMPLETE, ASCENDING, APOGEE_TIMEOUT, DEPLOYING_CHUTE, RECOVERING, Count};
 
-enum class EVENT {SETUP_COMPLETE, INIT_CALIBRATION, CALIBRATION_COMPLETE, START_BACKUP_COUNTDOWN, BACKUP_COUNTDOWN_STARTED, RESET_BACKUP_COUNTDOWN, BACKUP_COUNTDOWN_RESETTED, SET_EJECTION_TEST, LAUNCHED, APOGEE_TIMER_TIMEOUT, APOGEE_DETECTED, TRIGGER_FTS, CHUTE_EJECTED, GO_IDLE, Count};
+/**
+ * @see state_to_str
+ * @see TelemetryMessage
+ * 
+ * @author themicp
+ */
+enum class STATE {
+  INVALID_STATE, /*!< Invalid state. */
+  SETUP, /*!< Program still setting up. */
+  IDLE, /*!< Program is idling. */
+  CALIBRATION, /*!< Program is still calibrating. */
+  READY, /*!< Program is ready to run normally. */
+  ARM_BACKUP_DEPLOYER, /*!< */
+  RESET_BACKUP_DEPLOYER,  /*!< */
+  EJECTION_TEST_READY, /*!< */
+  EJECTION_TEST_EJECT, /*!< */
+  EJECTION_TEST_COMPLETE, /*!< */
+  ASCENDING, /*!< The rocket has detected that it is ascending. */
+  APOGEE_TIMEOUT, /*!< */
+  DEPLOYING_CHUTE, /*!< */
+  RECOVERING, /*!< The recovery process of the rocket has began. */
+  Count /*!< */
+};
 
-enum class MESSAGE_TYPE {TELEMETRY, DEBUG};
+enum class EVENT {
+  SETUP_COMPLETE, /*!< */
+  INIT_CALIBRATION, /*!< */
+  CALIBRATION_COMPLETE, /*!< */
+  START_BACKUP_COUNTDOWN, /*!< */
+  BACKUP_COUNTDOWN_STARTED, /*!< */
+  RESET_BACKUP_COUNTDOWN, /*!< */
+  BACKUP_COUNTDOWN_RESETTED, /*!< */
+  SET_EJECTION_TEST, /*!< */
+  LAUNCHED, /*!< */
+  APOGEE_TIMER_TIMEOUT, /*!< */
+  APOGEE_DETECTED, /*!< */
+  TRIGGER_FTS, /*!< */
+  CHUTE_EJECTED, /*!< */
+  GO_IDLE, /*!< */
+  Count /*!< */
+};
 
+enum class MESSAGE_TYPE {
+  TELEMETRY, /*!< Data from sensors and state. */
+  DEBUG /*!< Debug message. Usefull for detecting problems. */
+};
+
+
+/**
+ * @brief Strigify STATE.
+ * Returns Arduino String version of enum class STATE.
+ * 
+ * @param state Enum class STATE to be stringified.
+ * @return String Stringified version of enum.
+ * 
+ * @see STATE
+ * @examplecode
+ * @code{.cpp}
+ * String stringifiedState = state_to_str(STATE::READY);
+ * Serial.println(stringifiedState);
+ * @endcode
+ * 
+ * @author themicp
+ */
 String state_to_str(STATE state);
+
+/**
+ * @brief Strigify EVENT.
+ * Returns Arduino String version of enum class EVENT.
+ * 
+ * @param event Enum class EVENT to be stringified.
+ * @return String Stringified version of enum.
+ * 
+ * @see EVENT
+ * @examplecode
+ * @code{.cpp}
+ * String stringifiedEvent = state_to_str(EVENT::LAUNCHED);
+ * Serial.println(stringifiedEvent);
+ * @endcode
+ * 
+ * @author themicp
+ */
 String event_to_str(EVENT event);
 
+
+/**
+ * @brief Used to store data from the sensors.
+ * 
+ * @see TelemetryMessage
+ * 
+ * @author themicp
+ */
 struct TelemetryMessagePayload {
-  int32_t agl_cm;
-  int32_t pressure;
-  int16_t temperature;
-  int16_t acceleration_x;
-  int16_t acceleration_y;
-  int16_t acceleration_z;
-  int16_t gyroscope_x;
-  int16_t gyroscope_y;
-  int16_t gyroscope_z;
-  bool gps_fix;
-  uint8_t gps_satellites;
-  int32_t gps_latitude;
-  int32_t gps_longitude;
+  int32_t agl_cm; /*!< Altitude from ground level in m. */
+  int32_t pressure; /*!< Pressure returned from sensor in Pascal. */
+  int16_t temperature; /*!< Temperature returned from sensor in Celcius * 100. */
+  int16_t acceleration_x; /*!< Acceleration in the x axis returned from sensor in cm / s^2. */
+  int16_t acceleration_y; /*!< Acceleration in the y axis returned from sensor in cm / s^2. */
+  int16_t acceleration_z; /*!< Acceleration in the z axis returned from sensor in cm / s^2. */
+  int16_t gyroscope_x; /*!< Angular velocity in the x axis returned from sensor in degrees / s. */
+  int16_t gyroscope_y; /*!< Angular velocity in the y axis returned from sensor in degrees / s. */
+  int16_t gyroscope_z; /*!< Angular velocity in the z axis returned from sensor in degrees / s. */
+  bool gps_fix; /*!< GPS Module has direct access to at least 3 satelites. */
+  uint8_t gps_satellites; /*!< Number of satelites availabe to the GPS Module. */
+  int32_t gps_latitude; /*!< Latitude returned from the GPS module in DDMM.MMMM. */
+  int32_t gps_longitude; /*!< Longitude returned from the GPS module in DDDMM.MMMM. */
 };
 
+/**
+ * @brief Used to transfer data between flight computer and ground station.
+ * 
+ * @see stringifyTelemetryMessage
+ * 
+ * @author themicp
+ */
 struct TelemetryMessage {
-  MESSAGE_TYPE type;
-  uint32_t count;
-  uint32_t met;
-  uint8_t free_memory_kb;
-  uint16_t battery_voltage_mv;
-  STATE state;
-  bool sd_logs_enabled;
-  uint8_t selected_igniter;
-  TelemetryMessagePayload payload;
-  char debug_message[80];
+  MESSAGE_TYPE type; /*!< Determines if the Message is for data or Debug purposes. */
+  uint32_t count; /*!< Incremental number to determine the number of packets lost in transmission. */
+  uint32_t met; /*!< Milliseconds from the boot time of the microcontroller. */
+  uint8_t free_memory_kb; /*!< Unused memory from the stack and heap. */
+  uint16_t battery_voltage_mv; /*!< Voltage of the battery. Usefull in determining battery percentage. */
+  STATE state; /*!< State of the microcontroller and the rocket in general. */
+  bool sd_logs_enabled; /*!< True if the logging output will be saved to the SD as well. */
+  uint8_t selected_igniter; /*!< */
+  TelemetryMessagePayload payload; /*!< Data returned from the sensors. */
+  char debug_message[80]; /*!< Debug message c style string. */
 };
 
+/**
+ * @brief Strigify TelemetryMessage.
+ * Returns Arduino String version of struct TelemetryMessage. <br />
+ * Used to store Telemetry message to the SD. <br />
+ * To be depricated and replaced by the new Logger.
+ * 
+ * @param message struct TelemetryMessage to be stringified.
+ * @return String Stringified version of struct.
+ * 
+ * @see TelemetryMessage
+ * @examplecode
+ * @code{.cpp}
+ * struct TelemetryMessage message = { 0 };
+ * ...
+ * Serial.println(stringifyTelemetryMessage(message));
+ * @endcode
+ * 
+ * @author themicp
+ */
 String stringifyTelemetryMessage(TelemetryMessage message);
