@@ -156,6 +156,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Construct a new <a class="el" href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a> object.</h1>
+<p >Private constructor used to create static object for singleton design pattern.</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 </div>
 </div>
@@ -182,6 +185,10 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Returns Altitude.</h1>
+<p >This function is used to return the last recorder altitude of the gps module. The value returned is in meters.</p>
+<dl class="section return"><dt>Returns</dt><dd>float The altitude in meters.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#aa2ec7d87c475637765e629dad6417e4b">GPSReceiver</a>.</p>
 
@@ -209,6 +216,13 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Checks if GPS Module has access to 3 satelites.</h1>
+<p >Each GPS modules needs direct access to 3 satelits to be able to determine its latitude and longitude. <br  />
+ This function returns whether the module is able to access atleast 3 satelites.</p>
+<dl class="section return"><dt>Returns</dt><dd>true When the GPS module has successfully "paired" to 3 satelites. </dd>
+<dd>
+false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#a0f55b9b707930dc83ffe8916e2551192">GPSReceiver</a>.</p>
 
@@ -261,6 +275,10 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Returns latitude.</h1>
+<p >This function is used to return the last recorder latitude of the gps module. The value returned is in degrees and minutes in the following format: Latitude: DDMM.MMMM (The first two characters are the degrees.)</p>
+<dl class="section return"><dt>Returns</dt><dd>int32_t The latitude in degress and minutes.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#aeff614c592e6c187e977212e4ab8d977">GPSReceiver</a>.</p>
 
@@ -288,6 +306,10 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Returns longitude.</h1>
+<p >This function is used to return the last recorder longitude of the gps module. The value returned is in degrees and minutes in the following format: Longitude: DDDMM.MMMM (The first three characters are the degrees.)</p>
+<dl class="section return"><dt>Returns</dt><dd>int32_t The longitude in degress and minutes.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#aff9912231f3989505a8cda64a113c0bf">GPSReceiver</a>.</p>
 
@@ -315,6 +337,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Reads the latest data from the serial.</h1>
+<p >Clear the GPS buffer and read the last data available from the GPS module.</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 </div>
 </div>
@@ -340,6 +365,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Returns the number of available satelites.</h1>
+<dl class="section return"><dt>Returns</dt><dd>int The number of satelites available to the GPS Module.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#a4dc4c4f37930296db67ef05f894ce488">GPSReceiver</a>.</p>
 
@@ -367,6 +395,17 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Setup Adafruit GPS Receiver.</h1>
+<p >Initialize the setup process of the GPS module. <br  />
+ The setup function does not mean that the GPS module will function normally or that it will have access to at least 3 satelites.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classGPSReceiver.html">GPSReceiver</a> </dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000001">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a> = <a class="code hl_function" href="classAdafruit__GPS__API.html#a4afd16722ece152aaf8ac9ff9024d6d6">Adafruit_GPS_API::getInstance</a>();</div>
+<div class="line"><a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.setup();</div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html"><div class="ttname"><a href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a></div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:4</div></div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html_a4afd16722ece152aaf8ac9ff9024d6d6"><div class="ttname"><a href="classAdafruit__GPS__API.html#a4afd16722ece152aaf8ac9ff9024d6d6">Adafruit_GPS_API::getInstance</a></div><div class="ttdeci">static Adafruit_GPS_API &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.cpp:9</div></div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html_ad416f58255ad6f40a964bf7248d42238"><div class="ttname"><a href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">Adafruit_GPS_API::receiver</a></div><div class="ttdeci">static Adafruit_GPS receiver</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:90</div></div>
+</div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#a9031c3119747695a131d972aedf38cb1">GPSReceiver</a>.</p>
 
@@ -392,6 +431,8 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Last read data time.</h1>
+<p >Ensure data is read every 100ms. </p>
 
 </div>
 </div>
