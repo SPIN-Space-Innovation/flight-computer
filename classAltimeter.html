@@ -131,6 +131,21 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Altitude in meters.</h1>
+<p >Returns the Altitude in meters.<br  />
+ The altitude can be computed by the pressure or the GPS.<br  />
+ The altitude is realtive to ground level.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBMP280__API.html">BMP280_API</a> </dd>
+<dd>
+<a class="el" href="classBMP3XX__API.html">BMP3XX_API</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000005">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#ad64da9b5909d5749b85d52c33aaa7656">agl</a>());</div>
+<div class="ttc" id="aclassAltimeter_html"><div class="ttname"><a href="classAltimeter.html">Altimeter</a></div><div class="ttdef"><b>Definition:</b> altimeter.h:5</div></div>
+<div class="ttc" id="aclassAltimeter_html_ad64da9b5909d5749b85d52c33aaa7656"><div class="ttname"><a href="classAltimeter.html#ad64da9b5909d5749b85d52c33aaa7656">Altimeter::agl</a></div><div class="ttdeci">float agl()</div><div class="ttdef"><b>Definition:</b> altimeter.h:94</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>float Altitude from reference point.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 </div>
 </div>
@@ -156,6 +171,20 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Altitude in centimeters.</h1>
+<p >Returns the Altitude in centimeters.<br  />
+ The altitude can be computed by the pressure or the GPS.<br  />
+ The altitude is realtive to ground level.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBMP280__API.html">BMP280_API</a> </dd>
+<dd>
+<a class="el" href="classBMP3XX__API.html">BMP3XX_API</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000004">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">aglCM</a>());</div>
+<div class="ttc" id="aclassAltimeter_html_a84a76ba004cf333ef549fa687397b655"><div class="ttname"><a href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">Altimeter::aglCM</a></div><div class="ttdeci">virtual int32_t aglCM()</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP280__API.html#aac3e2da06e292ee2d5cadde9148fdc1b">BMP280_API</a>, and <a class="el" href="classBMP3XX__API.html#a6d942d4bc6241a5b577459ed2d81fedc">BMP3XX_API</a>.</p>
 
@@ -183,6 +212,20 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Altitude in meters.</h1>
+<p >Returns the Altitude in meters.<br  />
+ The altitude can be computed by the pressure or the GPS.<br  />
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBMP280__API.html">BMP280_API</a> </dd>
+<dd>
+<a class="el" href="classBMP3XX__API.html">BMP3XX_API</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000003">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a47b98d432adf4f23de4a4e003004f4ca">altitude</a>());</div>
+<div class="ttc" id="aclassAltimeter_html_a47b98d432adf4f23de4a4e003004f4ca"><div class="ttname"><a href="classAltimeter.html#a47b98d432adf4f23de4a4e003004f4ca">Altimeter::altitude</a></div><div class="ttdeci">float altitude()</div><div class="ttdef"><b>Definition:</b> altimeter.h:47</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>float Altitude from reference point.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 </div>
 </div>
@@ -208,6 +251,20 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Altitude in centimeters.</h1>
+<p >Returns the Altitude in centimeters.<br  />
+ The altitude can be computed by the pressure or the GPS.<br  />
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBMP280__API.html">BMP280_API</a> </dd>
+<dd>
+<a class="el" href="classBMP3XX__API.html">BMP3XX_API</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000002">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">altitude_cm</a>());</div>
+<div class="ttc" id="aclassAltimeter_html_a75859ddfdff90f12a1b9ddf8a859550a"><div class="ttname"><a href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">Altimeter::altitude_cm</a></div><div class="ttdeci">virtual int32_t altitude_cm()</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">BMP280_API</a>, and <a class="el" href="classBMP3XX__API.html#aaa3043323d2c203770d0db76c76b4286">BMP3XX_API</a>.</p>
 
@@ -235,6 +292,9 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Calibrate altimeter.</h1>
+<p >Altimeters need to be calibrated from data stored in persistend storage.</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP280__API.html#a0c2fb9279b2195db09eefdfd0b65dfe5">BMP280_API</a>, and <a class="el" href="classBMP3XX__API.html#a0f4f212dd85c78da2f8b936e8afe9530">BMP3XX_API</a>.</p>
 
@@ -262,6 +322,9 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get the Ground Level height.</h1>
+<dl class="section return"><dt>Returns</dt><dd>int32_t Ground level height.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP280__API.html#ae7d05efd957a8ff5995065fde7720c6b">BMP280_API</a>, and <a class="el" href="classBMP3XX__API.html#abecd08829988a7a5c4bbf0e2d76d58c8">BMP3XX_API</a>.</p>
 
@@ -289,6 +352,19 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Pressure in Pascal.</h1>
+<p >Returns the pressure in Pascal.<br  />
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBMP280__API.html">BMP280_API</a> </dd>
+<dd>
+<a class="el" href="classBMP3XX__API.html">BMP3XX_API</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000006">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a1663f6d6d9b84f45d94e13d18ad06ee0">pressure</a>());</div>
+<div class="ttc" id="aclassAltimeter_html_a1663f6d6d9b84f45d94e13d18ad06ee0"><div class="ttname"><a href="classAltimeter.html#a1663f6d6d9b84f45d94e13d18ad06ee0">Altimeter::pressure</a></div><div class="ttdeci">virtual int32_t pressure()</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Pressure from last reading.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP280__API.html#a034e073b93b1d18f9b3dcc5d4ab39218">BMP280_API</a>, and <a class="el" href="classBMP3XX__API.html#a6ab62d74eb6a81e4074b0798722cd7d5">BMP3XX_API</a>.</p>
 
@@ -343,6 +419,10 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Setup the <a class="el" href="classAltimeter.html">Altimeter</a> module.</h1>
+<p >Initialize the setup process of the altimeter module. <br  />
+</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP280__API.html#abc6172b2b4b669692d3ff7fbd161de36">BMP280_API</a>, and <a class="el" href="classBMP3XX__API.html#ae22fc2ab62a8c065ee5e24bdf3284727">BMP3XX_API</a>.</p>
 
@@ -370,6 +450,19 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Temperature in Celcius * 100.</h1>
+<p >Returns the temperature in celcius * 100.<br  />
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBMP280__API.html">BMP280_API</a> </dd>
+<dd>
+<a class="el" href="classBMP3XX__API.html">BMP3XX_API</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000007">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a3da45b4054e64271b3385c14ce81a088">temperature</a>());</div>
+<div class="ttc" id="aclassAltimeter_html_a3da45b4054e64271b3385c14ce81a088"><div class="ttname"><a href="classAltimeter.html#a3da45b4054e64271b3385c14ce81a088">Altimeter::temperature</a></div><div class="ttdeci">virtual int16_t temperature()</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int16_t Temperature from last reading.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented in <a class="el" href="classBMP3XX__API.html#a72118dbe7683b276a5d045cfdeef9804">BMP3XX_API</a>.</p>
 

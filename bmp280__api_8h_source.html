@@ -78,21 +78,26 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>  <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">static</span> <a class="code hl_class" href="classBMP280__API.html">BMP280_API</a>&amp; <a class="code hl_function" href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">getInstance</a>();</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm</a>();</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#a034e073b93b1d18f9b3dcc5d4ab39218">pressure</a>();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#aac3e2da06e292ee2d5cadde9148fdc1b">aglCM</a>();</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#ae7d05efd957a8ff5995065fde7720c6b">getGroundLevelCM</a>();</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBMP280__API.html#abc6172b2b4b669692d3ff7fbd161de36">setup</a>();</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBMP280__API.html#a0c2fb9279b2195db09eefdfd0b65dfe5">calibrate</a>();</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="classBMP280__API.html#aed02a2522ad452530bc828cf56f3d648">BMP280_API</a>();</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">   22</a></span>    int32_t <a class="code hl_variable" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a> = 0;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBMP280__API.html#ae47a4a98eaf3ae55caff2aa1b25c6d6b">setGroundLevel</a>();</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm</a>();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#a034e073b93b1d18f9b3dcc5d4ab39218">pressure</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#aac3e2da06e292ee2d5cadde9148fdc1b">aglCM</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    int32_t <a class="code hl_function" href="classBMP280__API.html#ae7d05efd957a8ff5995065fde7720c6b">getGroundLevelCM</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBMP280__API.html#abc6172b2b4b669692d3ff7fbd161de36">setup</a>();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBMP280__API.html#a0c2fb9279b2195db09eefdfd0b65dfe5">calibrate</a>();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_function" href="classBMP280__API.html#aed02a2522ad452530bc828cf56f3d648">BMP280_API</a>();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">  108</a></span>    int32_t <a class="code hl_variable" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a> = 0;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBMP280__API.html#ae47a4a98eaf3ae55caff2aa1b25c6d6b">setGroundLevel</a>();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>};</div>
 <div class="ttc" id="aaltimeter_8h_html"><div class="ttname"><a href="altimeter_8h.html">altimeter.h</a></div></div>
 <div class="ttc" id="aclassAltimeter_html"><div class="ttname"><a href="classAltimeter.html">Altimeter</a></div><div class="ttdef"><b>Definition:</b> altimeter.h:5</div></div>
 <div class="ttc" id="aclassBMP280__API_html"><div class="ttname"><a href="classBMP280__API.html">BMP280_API</a></div><div class="ttdef"><b>Definition:</b> bmp280_api.h:5</div></div>
@@ -101,7 +106,7 @@ $(function() {
 <div class="ttc" id="aclassBMP280__API_html_a425336b01206a90b1d16cffdd87fa6c0"><div class="ttname"><a href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">BMP280_API::altitude_cm</a></div><div class="ttdeci">int32_t altitude_cm()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:15</div></div>
 <div class="ttc" id="aclassBMP280__API_html_a6500062d6b6874ed0a3621258491816c"><div class="ttname"><a href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">BMP280_API::getInstance</a></div><div class="ttdeci">static BMP280_API &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:10</div></div>
 <div class="ttc" id="aclassBMP280__API_html_aa261ef94cdbf39d1d14bb563f972f4ba"><div class="ttname"><a href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">BMP280_API::sensor</a></div><div class="ttdeci">static Adafruit_BMP280 sensor</div><div class="ttdef"><b>Definition:</b> bmp280_api.h:6</div></div>
-<div class="ttc" id="aclassBMP280__API_html_aa6d9e6cd96a85a2fbc0bf9e06c96c893"><div class="ttname"><a href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">BMP280_API::ground_level</a></div><div class="ttdeci">int32_t ground_level</div><div class="ttdef"><b>Definition:</b> bmp280_api.h:22</div></div>
+<div class="ttc" id="aclassBMP280__API_html_aa6d9e6cd96a85a2fbc0bf9e06c96c893"><div class="ttname"><a href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">BMP280_API::ground_level</a></div><div class="ttdeci">int32_t ground_level</div><div class="ttdef"><b>Definition:</b> bmp280_api.h:108</div></div>
 <div class="ttc" id="aclassBMP280__API_html_aac3e2da06e292ee2d5cadde9148fdc1b"><div class="ttname"><a href="classBMP280__API.html#aac3e2da06e292ee2d5cadde9148fdc1b">BMP280_API::aglCM</a></div><div class="ttdeci">int32_t aglCM()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:23</div></div>
 <div class="ttc" id="aclassBMP280__API_html_abc6172b2b4b669692d3ff7fbd161de36"><div class="ttname"><a href="classBMP280__API.html#abc6172b2b4b669692d3ff7fbd161de36">BMP280_API::setup</a></div><div class="ttdeci">void setup()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:35</div></div>
 <div class="ttc" id="aclassBMP280__API_html_ae47a4a98eaf3ae55caff2aa1b25c6d6b"><div class="ttname"><a href="classBMP280__API.html#ae47a4a98eaf3ae55caff2aa1b25c6d6b">BMP280_API::setGroundLevel</a></div><div class="ttdeci">void setGroundLevel()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:27</div></div>

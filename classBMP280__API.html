@@ -163,6 +163,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Construct a new <a class="el" href="classBMP3XX__API.html">BMP3XX_API</a> object.</h1>
+<p >Private constructor used to create static object for singleton design pattern.</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 </div>
 </div>
@@ -189,6 +192,20 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Altitude in centimeters.</h1>
+<p >Returns the Altitude in centimeters.<br  />
+ The altitude can be computed by the pressure or the GPS.<br  />
+ The altitude is realtive to ground level.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classAltimeter.html">Altimeter</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000010">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classBMP280__API.html">BMP280_API</a>&amp; alt = <a class="code hl_function" href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">BMP280_API::getInstance</a>();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classBMP280__API.html#aac3e2da06e292ee2d5cadde9148fdc1b">aglCM</a>());</div>
+<div class="ttc" id="aclassBMP280__API_html"><div class="ttname"><a href="classBMP280__API.html">BMP280_API</a></div><div class="ttdef"><b>Definition:</b> bmp280_api.h:5</div></div>
+<div class="ttc" id="aclassBMP280__API_html_a6500062d6b6874ed0a3621258491816c"><div class="ttname"><a href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">BMP280_API::getInstance</a></div><div class="ttdeci">static BMP280_API &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:10</div></div>
+<div class="ttc" id="aclassBMP280__API_html_aac3e2da06e292ee2d5cadde9148fdc1b"><div class="ttname"><a href="classBMP280__API.html#aac3e2da06e292ee2d5cadde9148fdc1b">BMP280_API::aglCM</a></div><div class="ttdeci">int32_t aglCM()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:23</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">Altimeter</a>.</p>
 
@@ -216,6 +233,18 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Altitude in centimeters.</h1>
+<p >Returns the Altitude in centimeters.<br  />
+ The altitude can be computed by the pressure or the GPS.<br  />
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classAltimeter.html">Altimeter</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000008">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classBMP280__API.html">BMP280_API</a>&amp; alt = <a class="code hl_function" href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">BMP280_API::getInstance</a>();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm</a>());</div>
+<div class="ttc" id="aclassBMP280__API_html_a425336b01206a90b1d16cffdd87fa6c0"><div class="ttname"><a href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">BMP280_API::altitude_cm</a></div><div class="ttdeci">int32_t altitude_cm()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:15</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">Altimeter</a>.</p>
 
@@ -243,6 +272,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Calibrate altimeter.</h1>
+<p >Altimeters need to be calibrated from data stored in persistend storage.</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a09c3d3384e05d5389b7e612e13e3b745">Altimeter</a>.</p>
 
@@ -270,6 +302,9 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get the Ground Level height.</h1>
+<dl class="section return"><dt>Returns</dt><dd>int32_t Ground level height.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#ad9ab0e06cefd6f1cbe872c28434a9c14">Altimeter</a>.</p>
 
@@ -322,6 +357,17 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Get Pressure in Pascal.</h1>
+<p >Returns the pressure in Pascal.<br  />
+</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classAltimeter.html">Altimeter</a></dd></dl>
+<dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000009">Example Code:</a></b></dt><dd></dd></dl>
+<div class="fragment"><div class="line"><a class="code hl_class" href="classBMP280__API.html">BMP280_API</a>&amp; alt = <a class="code hl_function" href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">BMP280_API::getInstance</a>();</div>
+<div class="line">...</div>
+<div class="line">Serial.println(alt.<a class="code hl_function" href="classBMP280__API.html#a034e073b93b1d18f9b3dcc5d4ab39218">pressure</a>());</div>
+<div class="ttc" id="aclassBMP280__API_html_a034e073b93b1d18f9b3dcc5d4ab39218"><div class="ttname"><a href="classBMP280__API.html#a034e073b93b1d18f9b3dcc5d4ab39218">BMP280_API::pressure</a></div><div class="ttdeci">int32_t pressure()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:19</div></div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Pressure from last reading.</dd></dl>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a1663f6d6d9b84f45d94e13d18ad06ee0">Altimeter</a>.</p>
 
@@ -376,6 +422,10 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Setup the <a class="el" href="classAltimeter.html">Altimeter</a> module.</h1>
+<p >Initialize the setup process of the altimeter module. <br  />
+</p>
+<dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a14d64fc43f86c3796a2d5ba7a9bc81be">Altimeter</a>.</p>
 
@@ -401,6 +451,7 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<h1>Reference ground level.</h1>
 
 </div>
 </div>
