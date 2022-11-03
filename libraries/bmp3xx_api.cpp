@@ -21,7 +21,9 @@ BMP3XX_API& BMP3XX_API::getInstance() {
 
 
 void BMP3XX_API::readSensorData() {
+  logger->Verbose("BMP3XX: Update: Init");
   if (millis() - last_sensor_read < 1000/BMP_REFRESH_RATE || broken_connection) {
+    logger->Verbose("BMP3XX: Update: Failed: Not enough time between updates");
     return;
   }
 
@@ -29,6 +31,7 @@ void BMP3XX_API::readSensorData() {
   Wire.beginTransmission(BMP3XX_DEFAULT_ADDRESS);
   if (Wire.endTransmission() != 0) {
     broken_connection = true;
+    logger->Verbose("BMP3XX: Update: Failed: Broken connection");
     return;
   }
 
@@ -39,6 +42,7 @@ void BMP3XX_API::readSensorData() {
   }
   cached_altitude_cm = sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100;
   last_sensor_read = millis();
+  logger->Verbose("BMP3XX: Update: Finished");
 }
 
 int32_t BMP3XX_API::altitude_cm() {
@@ -67,9 +71,11 @@ int32_t BMP3XX_API::getGroundLevelCM() {
 }
 
 void BMP3XX_API::setup() {
+  logger->Verbose("BMP3XX: Setup: Init");
   if (!sensor.begin()) {
     while(1); //Freeze
   }
+  logger->Verbose("BMP3XX: Setup: Finished");
 }
 
 void BMP3XX_API::calibrate() {
