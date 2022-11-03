@@ -33,27 +33,7 @@ void Telemetry::send(TelemetryMessage message) {
   }
   String stringifiedMessage = stringifyTelemetryMessage(message);
 
-#if SERIAL_DEBUG
-/*
-    Serial.print("RADIO (");
-    Serial.print(message_size);
-    Serial.print("): ");
-    for (int i = 0; i < sizeof(TelemetryMessage); ++i) {
-      Serial.print(stream[i], BIN);
-    }
-    Serial.println();
-*/
-    Serial.println("TELEMETRY (" + String(message_size) + " bytes): " + stringifiedMessage);
-#endif
-
-#if SD_LOGS
-  logs_file.println(stringifiedMessage);
-  if (millis() - last_sd_sync > SD_OFFLOAD_INTERVAL) {
-    logs_file.close();
-    logs_file = SD.open(logs_filename, FILE_WRITE);
-    last_sd_sync = millis();
-  }
-#endif
+  logger->Information("%s", stringifyTelemetryMessage);
 
   if (millis() - last_radio_message_time > radio_throttle_ms) {
     rf95.send(stream, message_size);
@@ -82,19 +62,6 @@ void Telemetry::setup() {
   rf95.setSignalBandwidth(500000);
   rf95.setSpreadingFactor(8);
   rf95.setTxPower(18);
-
-#if SD_LOGS
-  if (!SD.begin(SD_CS)) {
-    while(1);
-  }
-
-  if (SD.exists(logs_filename)) {
-    // TODO: Rotate log files
-    // SD.remove(logs_filename);
-  }
-
-  logs_file = SD.open(logs_filename, FILE_WRITE);
-#endif
 
   message_count = 0;
   init = true;
