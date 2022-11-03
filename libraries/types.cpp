@@ -1,5 +1,9 @@
+#include <Logger.h>
+
 #include <stdint.h>
 #include "types.h"
+
+extern SPIN::Log::ILogger* logger;
 
 /**
  * @brief Strigified States

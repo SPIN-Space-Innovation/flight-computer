@@ -1,3 +1,5 @@
+#include <Logger.h>
+
 #include "fsm.h"
 #include "definitions.h"
 #include "memoryUsage.h"
@@ -14,6 +16,8 @@
 */
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
+
+extern SPIN::Log::ILogger* logger;
 
 FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
   : telemetry(telemetry)

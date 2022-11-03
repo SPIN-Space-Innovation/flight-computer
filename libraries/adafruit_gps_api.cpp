@@ -1,6 +1,10 @@
+#include <Logger.h>
+
 #include "adafruit_gps_api.h"
 
 #define GPSSerial Serial1
+
+extern SPIN::Log::ILogger* logger;
 
 Adafruit_GPS_API::Adafruit_GPS_API() {};
 

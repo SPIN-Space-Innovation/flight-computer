@@ -1,6 +1,10 @@
+#include <Logger.h>
+
 #include "Wire.h"
 #include "Arduino.h"
 #include "backup_deployer.h"
+
+extern SPIN::Log::ILogger* logger;
 
 void BackupDeployer::setup() {
   Wire.begin();

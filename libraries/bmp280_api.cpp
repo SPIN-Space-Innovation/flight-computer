@@ -1,9 +1,13 @@
+#include <Logger.h>
+
 #include "bmp280_api.h"
 
 #define BMP_SCK  (13)
 #define BMP_MISO (12) // SD0
 #define BMP_MOSI (11) // SD1
 #define BMP_CS   (10)
+
+extern SPIN::Log::ILogger* logger;
 
 Adafruit_BMP280 BMP280_API::sensor;
 

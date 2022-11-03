@@ -1,3 +1,5 @@
+#include <Logger.h>
+
 #include "mosfet_igniter.h"
 #include "Arduino.h"
 #include "definitions.h"
@@ -6,6 +8,8 @@ struct IgniterOptions {
   int mosfet_pin;
   int led_pin;
 };
+
+extern SPIN::Log::ILogger* logger;
 
 IgniterOptions igniters[2] = {
   {5, 16}, {6, 15}

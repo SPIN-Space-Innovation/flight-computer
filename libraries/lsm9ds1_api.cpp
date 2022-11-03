@@ -1,8 +1,12 @@
+#include <Logger.h>
+
 #include <Adafruit_Sensor.h>
 #include <Adafruit_LSM9DS1.h>
 #include "lsm9ds1_api.h"
 
 #define IMU_REFRESH_RATE 100 // Hz
+
+extern SPIN::Log::ILogger* logger;
 
 Adafruit_LSM9DS1 LSM9DS1_API::sensor;
 

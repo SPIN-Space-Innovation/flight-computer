@@ -1,3 +1,5 @@
+#include <Logger.h>
+
 #include "bmp3xx_api.h"
 
 #define BMP_SCK  (13)
@@ -7,6 +9,8 @@
 #define SEALEVELPRESSURE_HPA (1013.7)
 #define BMP_REFRESH_RATE 50 // Hz
 #define MAX_ALTITUDE_STEP 100000 // cm
+
+extern SPIN::Log::ILogger* logger;
 
 Adafruit_BMP3XX BMP3XX_API::sensor;
 
