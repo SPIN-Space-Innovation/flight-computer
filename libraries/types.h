@@ -18,32 +18,32 @@ enum class STATE : uint8_t {
   READY, /*!< Program is ready to run normally. */
   ARM_BACKUP_DEPLOYER, /*!< */
   RESET_BACKUP_DEPLOYER,  /*!< */
-  EJECTION_TEST_READY, /*!< */
-  EJECTION_TEST_EJECT, /*!< */
-  EJECTION_TEST_COMPLETE, /*!< */
-  ASCENDING, /*!< The rocket has detected that it is ascending. */
-  APOGEE_TIMEOUT, /*!< */
-  DEPLOYING_CHUTE, /*!< */
+  EJECTION_TEST_READY, /*!< The system is ready for the ejection test*/
+  EJECTION_TEST_EJECT, /*!< Triggers the ejection for testing*/
+  EJECTION_TEST_COMPLETE, /*!< Confirms that ejection was completed*/
+  ASCENDING, /*!< The rocket is in ascending state*/
+  APOGEE_TIMEOUT, /*!< The state after forced ejection*/
+  DEPLOYING_CHUTE, /*!< Apogee is detected and gets ready for ejection*/
   RECOVERING, /*!< The recovery process of the rocket has began. */
-  Count /*!< */
+  Count /*!< Number of states*/
 };
 
 enum class EVENT : uint8_t {
-  SETUP_COMPLETE, /*!< */
-  INIT_CALIBRATION, /*!< */
-  CALIBRATION_COMPLETE, /*!< */
+  SETUP_COMPLETE, /*!< Set up is completed*/
+  INIT_CALIBRATION, /*!< Calibration has started*/
+  CALIBRATION_COMPLETE, /*!< Calibration is completed*/
   START_BACKUP_COUNTDOWN, /*!< */
   BACKUP_COUNTDOWN_STARTED, /*!< */
   RESET_BACKUP_COUNTDOWN, /*!< */
   BACKUP_COUNTDOWN_RESETTED, /*!< */
-  SET_EJECTION_TEST, /*!< */
-  LAUNCHED, /*!< */
-  APOGEE_TIMER_TIMEOUT, /*!< */
-  APOGEE_DETECTED, /*!< */
-  TRIGGER_FTS, /*!< */
-  CHUTE_EJECTED, /*!< */
-  GO_IDLE, /*!< */
-  Count /*!< */
+  SET_EJECTION_TEST, /*!< Calibrates the system for ejection test*/
+  LAUNCHED, /*!< The rocket has detected that it is launched*/
+  APOGEE_TIMER_TIMEOUT, /*!< The rocket doesn't detect apogee after 15 sec and cause forced ejection*/
+  APOGEE_DETECTED, /*!< The apogee is detected*/
+  TRIGGER_FTS, /*!< Triggers flight termination state (ejection)*/
+  CHUTE_EJECTED, /*!< Triggers the ejection after apogee is detected*/
+  GO_IDLE, /*!< System returns to IDLE state*/
+  Count /*!< Number of events*/
 };
 
 enum class MESSAGE_TYPE {
