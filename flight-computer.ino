@@ -1,3 +1,7 @@
+#include <inttypes.h>
+
+#include "Logger.h"
+
 #include "bmp3xx_api.h"
 #include "lsm9ds1_api.h"
 #include "fsm.h"
@@ -11,15 +15,27 @@ Telemetry telemetry = Telemetry::getInstance();
 MosfetIgniter igniter = MosfetIgniter::getInstance();
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
 FSM *fsm;
+SPIN::Log::ILogger* logger = nullptr;
 // TODO: improve buzzer code
 const int buzzer = 17;
 bool sound = false;
 uint8_t loop_frequency = 10; // Hz
 
 void setup() {
+  SPIN::Log::SimpleLoggerFactory loggerFactory;
 #if SERIAL_DEBUG
   Serial.begin(115200);
+  loggerFactory.AddSink(SPIN::Log::Sinks::SerialSink(SPIN::Log::Sinks::SerialSinkConfigurations()
+    .SetStream(&Serial)
+    .SetColoured(true)));
 #endif
+
+#if SD_LOGS
+  SD.begin(SD_CS);
+  loggerFactory.AddSink(SPIN::Log::Sinks::FileSink(SPIN::Log::Sinks::FileSinkConfigurations()
+    .SetFileNameFormatter("log-%" PRIu32 ".log")));
+#endif
+  logger = loggerFactory.Build();
 
 #if BUZZER
   pinMode(buzzer, OUTPUT);
