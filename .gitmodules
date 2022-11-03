@@ -34,3 +34,6 @@
 [submodule "libraries/external/SD"]
 	path = libraries/external/SD
 	url = https://github.com/arduino-libraries/SD
+[submodule "libraries/external/SPIN-Logger"]
+	path = libraries/external/SPIN-Logger
+	url = git@github.com:SPIN-Space-Innovation/Logger.git
