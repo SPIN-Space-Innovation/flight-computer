@@ -37,9 +37,11 @@ int32_t BMP280_API::getGroundLevelCM() {
 }
 
 void BMP280_API::setup() {
+  logger->Verbose("BMP280: Setup: Init");
   if (!sensor.begin()) {
     while(1); //Freeze
   }
+  logger->Verbose("BMP280: Setup: Finished");
 }
 
 void BMP280_API::calibrate() {
