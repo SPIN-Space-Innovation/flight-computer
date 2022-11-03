@@ -16,6 +16,7 @@ Adafruit_GPS_API& Adafruit_GPS_API::getInstance() {
 }
 
 void Adafruit_GPS_API::setup() {
+  logger->Verbose("GPS: Setup: Init");
   last_read = 0;
 
   receiver.begin(9600);
@@ -28,11 +29,14 @@ void Adafruit_GPS_API::setup() {
   
   // Possition fix update every 1Hz.
   receiver.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
+  logger->Verbose("GPS: Setup: Finished");
 }
 
 void Adafruit_GPS_API::readData() {
+  logger->Verbose("GPS: Update: Init");
   // Wait for 100ms between meassurments.
   if (millis() - last_read < 100) {
+    logger->Verbose("GPS: Update: Failed: Not enough time between updates");
     return;
   }
 
@@ -45,6 +49,8 @@ void Adafruit_GPS_API::readData() {
   if (receiver.newNMEAreceived()) {
     receiver.parse(receiver.lastNMEA());
   }
+
+  logger->Verbose("GPS: Update: Finished");
 }
 
 bool Adafruit_GPS_API::fix() {
