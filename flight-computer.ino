@@ -1,6 +1,6 @@
 #include <inttypes.h>
 
-#include "Logger.h"
+#include "SPIN-Logger.hpp"
 
 #include "bmp3xx_api.h"
 #include "lsm9ds1_api.h"
@@ -9,13 +9,29 @@
 #include "adafruit_gps_api.h"
 #include "definitions.h"
 
+
+static auto serialSink = SPIN::Log::Sinks::Factory::SerialSinkFactory()
+        .SetStream(&Serial)
+        .SetColoured(true)
+        .Build();
+
+static auto fileSink = SPIN::Log::Sinks::Factory::FileSinkFactory()
+        .SetFileNameFormatter("log-%" PRIu32 ".log")
+        .Build();
+
+SPIN::Log::CFormattedLogger<1024> logger = SPIN::Log::Factory::CFormattedLoggerFactory()
+        .AddSink(&serialSink)
+        .AddSink(&fileSink)
+        .Build<1024>();
+
+
 LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
 BMP3XX_API altimeter = BMP3XX_API::getInstance();
 Telemetry telemetry = Telemetry::getInstance();
 MosfetIgniter igniter = MosfetIgniter::getInstance();
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
 FSM *fsm;
-SPIN::Log::ILogger* logger = nullptr;
+
 // TODO: improve buzzer code
 const int buzzer = 17;
 bool sound = false;

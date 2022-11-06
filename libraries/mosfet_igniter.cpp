@@ -9,7 +9,7 @@ struct IgniterOptions {
   int led_pin;
 };
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 IgniterOptions igniters[2] = {
   {5, 16}, {6, 15}

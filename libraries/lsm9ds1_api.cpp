@@ -6,7 +6,7 @@
 
 #define IMU_REFRESH_RATE 100 // Hz
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 Adafruit_LSM9DS1 LSM9DS1_API::sensor;
 

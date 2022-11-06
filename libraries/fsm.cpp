@@ -17,7 +17,7 @@
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
   : telemetry(telemetry)

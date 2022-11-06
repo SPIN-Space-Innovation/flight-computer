@@ -9,7 +9,7 @@
 
 #define READ_INTERVAL (10)
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 Adafruit_BNO055 BNO055_API::sensor(55, 0x28);
 

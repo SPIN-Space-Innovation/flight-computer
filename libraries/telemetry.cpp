@@ -8,7 +8,7 @@
 #define SD_CS 10
 #define SD_OFFLOAD_INTERVAL 1000 // ms
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on
 RH_RF95 Telemetry::rf95(8, 3);

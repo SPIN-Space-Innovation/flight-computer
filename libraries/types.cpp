@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "types.h"
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 /**
  * @brief Strigified States

@@ -4,7 +4,7 @@
 
 #define GPSSerial Serial1
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger logger;
 
 Adafruit_GPS_API::Adafruit_GPS_API() {};
 

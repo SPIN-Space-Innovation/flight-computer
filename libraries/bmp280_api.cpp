@@ -7,7 +7,7 @@
 #define BMP_MOSI (11) // SD1
 #define BMP_CS   (10)
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 Adafruit_BMP280 BMP280_API::sensor;
 

@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "backup_deployer.h"
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 void BackupDeployer::setup() {
   Wire.begin();

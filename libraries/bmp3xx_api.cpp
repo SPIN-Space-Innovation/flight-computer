@@ -10,7 +10,7 @@
 #define BMP_REFRESH_RATE 50 // Hz
 #define MAX_ALTITUDE_STEP 100000 // cm
 
-extern SPIN::Log::ILogger* logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 Adafruit_BMP3XX BMP3XX_API::sensor;
 
