@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -159,7 +160,8 @@ Static Private Attributes</h2></td></tr>
 <h1>Construct a new <a class="el" href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a> object.</h1>
 <p >Private constructor used to create static object for singleton design pattern.</p>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
-
+<div class="fragment"><div class="line"><span class="lineno">    5</span>{};</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -191,6 +193,23 @@ Static Private Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#aa2ec7d87c475637765e629dad6417e4b">GPSReceiver</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>                                 {</div>
+<div class="line"><span class="lineno">   80</span>  <span class="comment">// Check if last data is updated.</span></div>
+<div class="line"><span class="lineno">   81</span>  <a class="code hl_function" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData</a>();</div>
+<div class="line"><span class="lineno">   82</span>  </div>
+<div class="line"><span class="lineno">   83</span>  <span class="comment">// Return 0 if no fix.</span></div>
+<div class="line"><span class="lineno">   84</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">fix</a>())</div>
+<div class="line"><span class="lineno">   85</span>  {</div>
+<div class="line"><span class="lineno">   86</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   87</span>  }</div>
+<div class="line"><span class="lineno">   88</span> </div>
+<div class="line"><span class="lineno">   89</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.altitude;</div>
+<div class="line"><span class="lineno">   90</span>}</div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html_a37c4c996a1c33574a430550158f1a7e9"><div class="ttname"><a href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">Adafruit_GPS_API::fix</a></div><div class="ttdeci">bool fix()</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.cpp:46</div></div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html_ad416f58255ad6f40a964bf7248d42238"><div class="ttname"><a href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">Adafruit_GPS_API::receiver</a></div><div class="ttdeci">static Adafruit_GPS receiver</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:90</div></div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html_af6867f63f6ac08def9248b2c737022ed"><div class="ttname"><a href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">Adafruit_GPS_API::readData</a></div><div class="ttdeci">void readData()</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.cpp:29</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">fix()</a>, <a class="el" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData()</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>
@@ -225,6 +244,14 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#a0f55b9b707930dc83ffe8916e2551192">GPSReceiver</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>                           {</div>
+<div class="line"><span class="lineno">   47</span>  <span class="comment">// Check if last data is updated.</span></div>
+<div class="line"><span class="lineno">   48</span>  <a class="code hl_function" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData</a>();</div>
+<div class="line"><span class="lineno">   49</span> </div>
+<div class="line"><span class="lineno">   50</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.fix;</div>
+<div class="line"><span class="lineno">   51</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData()</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>
@@ -250,7 +277,12 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
   </tr>
 </table>
 </div><div class="memdoc">
-
+<div class="fragment"><div class="line"><span class="lineno">    9</span>                                                {</div>
+<div class="line"><span class="lineno">   10</span>  <span class="keyword">static</span> <a class="code hl_class" href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a> instance;</div>
+<div class="line"><span class="lineno">   11</span>  <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">   12</span>}</div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html"><div class="ttname"><a href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a></div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:4</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a31900b72fe1dafab0d009a8520de7606" name="a31900b72fe1dafab0d009a8520de7606"></a>
@@ -281,6 +313,20 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#aeff614c592e6c187e977212e4ab8d977">GPSReceiver</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>                                   {</div>
+<div class="line"><span class="lineno">   54</span>  <span class="comment">// Check if last data is updated.</span></div>
+<div class="line"><span class="lineno">   55</span>  <a class="code hl_function" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData</a>();</div>
+<div class="line"><span class="lineno">   56</span>  </div>
+<div class="line"><span class="lineno">   57</span>  <span class="comment">// Return 0 if no fix.</span></div>
+<div class="line"><span class="lineno">   58</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">fix</a>())</div>
+<div class="line"><span class="lineno">   59</span>  {</div>
+<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   61</span>  }</div>
+<div class="line"><span class="lineno">   62</span> </div>
+<div class="line"><span class="lineno">   63</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.latitude_fixed;</div>
+<div class="line"><span class="lineno">   64</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">fix()</a>, <a class="el" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData()</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>
@@ -312,6 +358,20 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#aff9912231f3989505a8cda64a113c0bf">GPSReceiver</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>                                    {</div>
+<div class="line"><span class="lineno">   67</span>  <span class="comment">// Check if last data is updated.</span></div>
+<div class="line"><span class="lineno">   68</span>  <a class="code hl_function" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData</a>();</div>
+<div class="line"><span class="lineno">   69</span>  </div>
+<div class="line"><span class="lineno">   70</span>  <span class="comment">// Return 0 if no fix.</span></div>
+<div class="line"><span class="lineno">   71</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">fix</a>())</div>
+<div class="line"><span class="lineno">   72</span>  {</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   74</span>  }</div>
+<div class="line"><span class="lineno">   75</span> </div>
+<div class="line"><span class="lineno">   76</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.longitude_fixed;</div>
+<div class="line"><span class="lineno">   77</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#a37c4c996a1c33574a430550158f1a7e9">fix()</a>, <a class="el" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData()</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>
@@ -340,6 +400,25 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
 <h1>Reads the latest data from the serial.</h1>
 <p >Clear the GPS buffer and read the last data available from the GPS module.</p>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   29</span>                                {</div>
+<div class="line"><span class="lineno">   30</span>  <span class="comment">// Wait for 100ms between meassurments.</span></div>
+<div class="line"><span class="lineno">   31</span>  <span class="keywordflow">if</span> (millis() - <a class="code hl_variable" href="classAdafruit__GPS__API.html#a704e4c339f1ca86b8bdf5aae54a5b8bc">last_read</a> &lt; 100) {</div>
+<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   33</span>  }</div>
+<div class="line"><span class="lineno">   34</span> </div>
+<div class="line"><span class="lineno">   35</span>  <span class="comment">// Empty buffer.</span></div>
+<div class="line"><span class="lineno">   36</span>  <span class="keywordflow">while</span>(<a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.read());</div>
+<div class="line"><span class="lineno">   37</span> </div>
+<div class="line"><span class="lineno">   38</span>  <a class="code hl_variable" href="classAdafruit__GPS__API.html#a704e4c339f1ca86b8bdf5aae54a5b8bc">last_read</a> = millis();</div>
+<div class="line"><span class="lineno">   39</span> </div>
+<div class="line"><span class="lineno">   40</span>  <span class="comment">// Parse data.</span></div>
+<div class="line"><span class="lineno">   41</span>  <span class="keywordflow">if</span> (<a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.newNMEAreceived()) {</div>
+<div class="line"><span class="lineno">   42</span>    <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.parse(<a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.lastNMEA());</div>
+<div class="line"><span class="lineno">   43</span>  }</div>
+<div class="line"><span class="lineno">   44</span>}</div>
+<div class="ttc" id="aclassAdafruit__GPS__API_html_a704e4c339f1ca86b8bdf5aae54a5b8bc"><div class="ttname"><a href="classAdafruit__GPS__API.html#a704e4c339f1ca86b8bdf5aae54a5b8bc">Adafruit_GPS_API::last_read</a></div><div class="ttdeci">unsigned long last_read</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:97</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#a704e4c339f1ca86b8bdf5aae54a5b8bc">last_read</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>
@@ -370,6 +449,14 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#a4dc4c4f37930296db67ef05f894ce488">GPSReceiver</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   92</span>                                 {</div>
+<div class="line"><span class="lineno">   93</span>  <span class="comment">// Check if last data is updated.</span></div>
+<div class="line"><span class="lineno">   94</span>  <a class="code hl_function" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData</a>();</div>
+<div class="line"><span class="lineno">   95</span> </div>
+<div class="line"><span class="lineno">   96</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.satellites;</div>
+<div class="line"><span class="lineno">   97</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#af6867f63f6ac08def9248b2c737022ed">readData()</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>
@@ -402,12 +489,26 @@ false When the GPS module has not successfully "paired" to 3 satelites.</dd></dl
 <dl class="examplecode"><dt><b><a class="el" href="examplecode.html#_examplecode000001">Example Code:</a></b></dt><dd></dd></dl>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a> <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a> = <a class="code hl_function" href="classAdafruit__GPS__API.html#a4afd16722ece152aaf8ac9ff9024d6d6">Adafruit_GPS_API::getInstance</a>();</div>
 <div class="line"><a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.setup();</div>
-<div class="ttc" id="aclassAdafruit__GPS__API_html"><div class="ttname"><a href="classAdafruit__GPS__API.html">Adafruit_GPS_API</a></div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:4</div></div>
 <div class="ttc" id="aclassAdafruit__GPS__API_html_a4afd16722ece152aaf8ac9ff9024d6d6"><div class="ttname"><a href="classAdafruit__GPS__API.html#a4afd16722ece152aaf8ac9ff9024d6d6">Adafruit_GPS_API::getInstance</a></div><div class="ttdeci">static Adafruit_GPS_API &amp; getInstance()</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.cpp:9</div></div>
-<div class="ttc" id="aclassAdafruit__GPS__API_html_ad416f58255ad6f40a964bf7248d42238"><div class="ttname"><a href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">Adafruit_GPS_API::receiver</a></div><div class="ttdeci">static Adafruit_GPS receiver</div><div class="ttdef"><b>Definition:</b> adafruit_gps_api.h:90</div></div>
 </div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classGPSReceiver.html#a9031c3119747695a131d972aedf38cb1">GPSReceiver</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>                             {</div>
+<div class="line"><span class="lineno">   15</span>  <a class="code hl_variable" href="classAdafruit__GPS__API.html#a704e4c339f1ca86b8bdf5aae54a5b8bc">last_read</a> = 0;</div>
+<div class="line"><span class="lineno">   16</span> </div>
+<div class="line"><span class="lineno">   17</span>  <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.begin(9600);</div>
+<div class="line"><span class="lineno">   18</span> </div>
+<div class="line"><span class="lineno">   19</span>  <span class="comment">// turn on GPRMC and GGA.</span></div>
+<div class="line"><span class="lineno">   20</span>  <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);</div>
+<div class="line"><span class="lineno">   21</span>  </div>
+<div class="line"><span class="lineno">   22</span>  <span class="comment">// Update every 1Hz.</span></div>
+<div class="line"><span class="lineno">   23</span>  <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ);</div>
+<div class="line"><span class="lineno">   24</span>  </div>
+<div class="line"><span class="lineno">   25</span>  <span class="comment">// Possition fix update every 1Hz.</span></div>
+<div class="line"><span class="lineno">   26</span>  <a class="code hl_variable" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);</div>
+<div class="line"><span class="lineno">   27</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAdafruit__GPS__API.html#a704e4c339f1ca86b8bdf5aae54a5b8bc">last_read</a>, and <a class="el" href="classAdafruit__GPS__API.html#ad416f58255ad6f40a964bf7248d42238">receiver</a>.</p>
 
 </div>
 </div>

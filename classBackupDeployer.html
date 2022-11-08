@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -105,6 +106,19 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   26</span>                                   {</div>
+<div class="line"><span class="lineno">   27</span>  uint16_t response = 0;</div>
+<div class="line"><span class="lineno">   28</span>  Wire.begin();</div>
+<div class="line"><span class="lineno">   29</span>  Wire.requestFrom(<a class="code hl_define" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>, 2);</div>
+<div class="line"><span class="lineno">   30</span>  <span class="keywordflow">while</span> (Wire.available()) {</div>
+<div class="line"><span class="lineno">   31</span>    response = response &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">   32</span>    response |= Wire.read();</div>
+<div class="line"><span class="lineno">   33</span>  }</div>
+<div class="line"><span class="lineno">   34</span>  <span class="keywordflow">return</span> response;</div>
+<div class="line"><span class="lineno">   35</span>}</div>
+<div class="ttc" id="abackup__deployer_8h_html_a0cb08e8add0021a2ae9f93bc26918481"><div class="ttname"><a href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a></div><div class="ttdeci">#define BACKUP_DEPLOYER_ADDRESS</div><div class="ttdef"><b>Definition:</b> backup_deployer.h:3</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>.</p>
 
 </div>
 </div>
@@ -130,6 +144,15 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                                    {</div>
+<div class="line"><span class="lineno">   20</span>  Wire.begin();</div>
+<div class="line"><span class="lineno">   21</span>  Wire.beginTransmission(<a class="code hl_define" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>);</div>
+<div class="line"><span class="lineno">   22</span>  Wire.write(<a class="code hl_define" href="backup__deployer_8h.html#a19be9a82c6a207096afde0b1329f61ca">DISARM_COMMAND</a>);</div>
+<div class="line"><span class="lineno">   23</span>  Wire.endTransmission();</div>
+<div class="line"><span class="lineno">   24</span>}</div>
+<div class="ttc" id="abackup__deployer_8h_html_a19be9a82c6a207096afde0b1329f61ca"><div class="ttname"><a href="backup__deployer_8h.html#a19be9a82c6a207096afde0b1329f61ca">DISARM_COMMAND</a></div><div class="ttdeci">#define DISARM_COMMAND</div><div class="ttdef"><b>Definition:</b> backup_deployer.h:5</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>, and <a class="el" href="backup__deployer_8h.html#a19be9a82c6a207096afde0b1329f61ca">DISARM_COMMAND</a>.</p>
 
 </div>
 </div>
@@ -155,6 +178,15 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">    5</span>                           {</div>
+<div class="line"><span class="lineno">    6</span>  Wire.begin();</div>
+<div class="line"><span class="lineno">    7</span>  Wire.beginTransmission(<a class="code hl_define" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>);</div>
+<div class="line"><span class="lineno">    8</span>  Wire.write(<a class="code hl_define" href="backup__deployer_8h.html#a9bc1b35f6ec02612a26e8452abacd234">IDLE_COMMAND</a>);</div>
+<div class="line"><span class="lineno">    9</span>  Wire.endTransmission();</div>
+<div class="line"><span class="lineno">   10</span>}</div>
+<div class="ttc" id="abackup__deployer_8h_html_a9bc1b35f6ec02612a26e8452abacd234"><div class="ttname"><a href="backup__deployer_8h.html#a9bc1b35f6ec02612a26e8452abacd234">IDLE_COMMAND</a></div><div class="ttdeci">#define IDLE_COMMAND</div><div class="ttdef"><b>Definition:</b> backup_deployer.h:6</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>, and <a class="el" href="backup__deployer_8h.html#a9bc1b35f6ec02612a26e8452abacd234">IDLE_COMMAND</a>.</p>
 
 </div>
 </div>
@@ -180,6 +212,15 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   12</span>                                       {</div>
+<div class="line"><span class="lineno">   13</span>  Wire.begin();</div>
+<div class="line"><span class="lineno">   14</span>  Wire.beginTransmission(<a class="code hl_define" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>);</div>
+<div class="line"><span class="lineno">   15</span>  Wire.write(<a class="code hl_define" href="backup__deployer_8h.html#a4493b9f72dc689a5b20f4c9642730d69">ARM_COUNTDOWN_COMMAND</a>);</div>
+<div class="line"><span class="lineno">   16</span>  Wire.endTransmission();</div>
+<div class="line"><span class="lineno">   17</span>}</div>
+<div class="ttc" id="abackup__deployer_8h_html_a4493b9f72dc689a5b20f4c9642730d69"><div class="ttname"><a href="backup__deployer_8h.html#a4493b9f72dc689a5b20f4c9642730d69">ARM_COUNTDOWN_COMMAND</a></div><div class="ttdeci">#define ARM_COUNTDOWN_COMMAND</div><div class="ttdef"><b>Definition:</b> backup_deployer.h:4</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="backup__deployer_8h.html#a4493b9f72dc689a5b20f4c9642730d69">ARM_COUNTDOWN_COMMAND</a>, and <a class="el" href="backup__deployer_8h.html#a0cb08e8add0021a2ae9f93bc26918481">BACKUP_DEPLOYER_ADDRESS</a>.</p>
 
 </div>
 </div>

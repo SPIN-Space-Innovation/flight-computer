@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -166,7 +167,8 @@ Static Private Attributes</h2></td></tr>
 <h1>Construct a new <a class="el" href="classBMP3XX__API.html">BMP3XX_API</a> object.</h1>
 <p >Private constructor used to create static object for singleton design pattern.</p>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
-
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -208,6 +210,13 @@ Static Private Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                          {</div>
+<div class="line"><span class="lineno">   24</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm</a>() - <a class="code hl_variable" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a>;</div>
+<div class="line"><span class="lineno">   25</span>}</div>
+<div class="ttc" id="aclassBMP280__API_html_a425336b01206a90b1d16cffdd87fa6c0"><div class="ttname"><a href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">BMP280_API::altitude_cm</a></div><div class="ttdeci">int32_t altitude_cm()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:15</div></div>
+<div class="ttc" id="aclassBMP280__API_html_aa6d9e6cd96a85a2fbc0bf9e06c96c893"><div class="ttname"><a href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">BMP280_API::ground_level</a></div><div class="ttdeci">int32_t ground_level</div><div class="ttdef"><b>Definition:</b> bmp280_api.h:108</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm()</a>, and <a class="el" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a>.</p>
 
 </div>
 </div>
@@ -242,11 +251,16 @@ Static Private Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classBMP280__API.html">BMP280_API</a>&amp; alt = <a class="code hl_function" href="classBMP280__API.html#a6500062d6b6874ed0a3621258491816c">BMP280_API::getInstance</a>();</div>
 <div class="line">...</div>
 <div class="line">Serial.println(alt.<a class="code hl_function" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm</a>());</div>
-<div class="ttc" id="aclassBMP280__API_html_a425336b01206a90b1d16cffdd87fa6c0"><div class="ttname"><a href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">BMP280_API::altitude_cm</a></div><div class="ttdeci">int32_t altitude_cm()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:15</div></div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   15</span>                                {</div>
+<div class="line"><span class="lineno">   16</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.readAltitude() * 100;</div>
+<div class="line"><span class="lineno">   17</span>}</div>
+<div class="ttc" id="aclassBMP280__API_html_aa261ef94cdbf39d1d14bb563f972f4ba"><div class="ttname"><a href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">BMP280_API::sensor</a></div><div class="ttdeci">static Adafruit_BMP280 sensor</div><div class="ttdef"><b>Definition:</b> bmp280_api.h:6</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.</p>
 
 </div>
 </div>
@@ -277,6 +291,19 @@ Static Private Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a09c3d3384e05d5389b7e612e13e3b745">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>                           {</div>
+<div class="line"><span class="lineno">   42</span>  <a class="code hl_variable" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.setSampling(</div>
+<div class="line"><span class="lineno">   43</span>    Adafruit_BMP280::MODE_NORMAL,</div>
+<div class="line"><span class="lineno">   44</span>    Adafruit_BMP280::SAMPLING_X16,</div>
+<div class="line"><span class="lineno">   45</span>    Adafruit_BMP280::SAMPLING_X16,</div>
+<div class="line"><span class="lineno">   46</span>    Adafruit_BMP280::FILTER_X2, <span class="comment">// TODO: verify that value</span></div>
+<div class="line"><span class="lineno">   47</span>    Adafruit_BMP280::STANDBY_MS_1);</div>
+<div class="line"><span class="lineno">   48</span> </div>
+<div class="line"><span class="lineno">   49</span>  <a class="code hl_function" href="classBMP280__API.html#ae47a4a98eaf3ae55caff2aa1b25c6d6b">setGroundLevel</a>();</div>
+<div class="line"><span class="lineno">   50</span>}</div>
+<div class="ttc" id="aclassBMP280__API_html_ae47a4a98eaf3ae55caff2aa1b25c6d6b"><div class="ttname"><a href="classBMP280__API.html#ae47a4a98eaf3ae55caff2aa1b25c6d6b">BMP280_API::setGroundLevel</a></div><div class="ttdeci">void setGroundLevel()</div><div class="ttdef"><b>Definition:</b> bmp280_api.cpp:27</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>, and <a class="el" href="classBMP280__API.html#ae47a4a98eaf3ae55caff2aa1b25c6d6b">setGroundLevel()</a>.</p>
 
 </div>
 </div>
@@ -307,6 +334,11 @@ Static Private Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#ad9ab0e06cefd6f1cbe872c28434a9c14">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>                                     {</div>
+<div class="line"><span class="lineno">   32</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a>;</div>
+<div class="line"><span class="lineno">   33</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a>.</p>
 
 </div>
 </div>
@@ -332,7 +364,11 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<div class="fragment"><div class="line"><span class="lineno">   10</span>                                    {</div>
+<div class="line"><span class="lineno">   11</span>  <span class="keyword">static</span> <a class="code hl_class" href="classBMP280__API.html">BMP280_API</a> instance;</div>
+<div class="line"><span class="lineno">   12</span>  <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">   13</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a034e073b93b1d18f9b3dcc5d4ab39218" name="a034e073b93b1d18f9b3dcc5d4ab39218"></a>
@@ -370,6 +406,11 @@ Static Private Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a1663f6d6d9b84f45d94e13d18ad06ee0">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                             {</div>
+<div class="line"><span class="lineno">   20</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.readPressure();</div>
+<div class="line"><span class="lineno">   21</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.</p>
 
 </div>
 </div>
@@ -397,6 +438,11 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a881d12d58c134eb33a13f7009f36d7cc">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>                                {</div>
+<div class="line"><span class="lineno">   28</span>  <a class="code hl_variable" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a> = <a class="code hl_function" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm</a>();</div>
+<div class="line"><span class="lineno">   29</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#a425336b01206a90b1d16cffdd87fa6c0">altitude_cm()</a>, and <a class="el" href="classBMP280__API.html#aa6d9e6cd96a85a2fbc0bf9e06c96c893">ground_level</a>.</p>
 
 </div>
 </div>
@@ -428,6 +474,13 @@ Static Private Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAltimeter.html#a14d64fc43f86c3796a2d5ba7a9bc81be">Altimeter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   35</span>                       {</div>
+<div class="line"><span class="lineno">   36</span>  <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.begin()) {</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">while</span>(1); <span class="comment">//Freeze</span></div>
+<div class="line"><span class="lineno">   38</span>  }</div>
+<div class="line"><span class="lineno">   39</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBMP280__API.html#aa261ef94cdbf39d1d14bb563f972f4ba">sensor</a>.</p>
 
 </div>
 </div>

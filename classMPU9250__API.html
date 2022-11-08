@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -173,6 +174,45 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                         {</div>
+<div class="line"><span class="lineno">  109</span>  <span class="keywordtype">byte</span> c = <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.readByte(<a class="code hl_define" href="MPU9250__API_8cpp.html#af4d54e584a662662888836b3a9b9eb08">MPU9250_ADDRESS</a>, WHO_AM_I_MPU9250);</div>
+<div class="line"><span class="lineno">  110</span> </div>
+<div class="line"><span class="lineno">  111</span>  <span class="keywordflow">if</span> (c == 0x71) {</div>
+<div class="line"><span class="lineno">  112</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.MPU9250SelfTest(<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.selfTest);</div>
+<div class="line"><span class="lineno">  113</span> </div>
+<div class="line"><span class="lineno">  114</span>    <span class="comment">// Calibrate gyro and accelerometers, load biases in bias registers</span></div>
+<div class="line"><span class="lineno">  115</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.calibrateMPU9250(<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gyroBias, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.accelBias);</div>
+<div class="line"><span class="lineno">  116</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.initMPU9250();</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>    <span class="keywordtype">byte</span> d = <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.readByte(AK8963_ADDRESS, WHO_AM_I_AK8963);</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">if</span> (d != 0x48) {</div>
+<div class="line"><span class="lineno">  120</span>      <span class="comment">// Communication failed, stop here</span></div>
+<div class="line"><span class="lineno">  121</span>      Serial.println(F(<span class="stringliteral">&quot;Communication failed, abort!&quot;</span>));</div>
+<div class="line"><span class="lineno">  122</span>      Serial.flush();</div>
+<div class="line"><span class="lineno">  123</span>      abort();</div>
+<div class="line"><span class="lineno">  124</span>    }</div>
+<div class="line"><span class="lineno">  125</span> </div>
+<div class="line"><span class="lineno">  126</span>    <span class="comment">// Get magnetometer calibration from AK8963 ROM</span></div>
+<div class="line"><span class="lineno">  127</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.initAK8963(<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.factoryMagCalibration);</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>    <span class="comment">// Get sensor resolutions, only need to do this once</span></div>
+<div class="line"><span class="lineno">  130</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.getAres();</div>
+<div class="line"><span class="lineno">  131</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.getGres();</div>
+<div class="line"><span class="lineno">  132</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.getMres();</div>
+<div class="line"><span class="lineno">  133</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  134</span>    Serial.print(<span class="stringliteral">&quot;Could not connect to MPU9250: 0x&quot;</span>);</div>
+<div class="line"><span class="lineno">  135</span>    Serial.println(c, HEX);</div>
+<div class="line"><span class="lineno">  136</span> </div>
+<div class="line"><span class="lineno">  137</span>    <span class="comment">// Communication failed, stop here</span></div>
+<div class="line"><span class="lineno">  138</span>    Serial.println(F(<span class="stringliteral">&quot;Communication failed, abort!&quot;</span>));</div>
+<div class="line"><span class="lineno">  139</span>    Serial.flush();</div>
+<div class="line"><span class="lineno">  140</span>    abort();</div>
+<div class="line"><span class="lineno">  141</span>  }</div>
+<div class="line"><span class="lineno">  142</span>}</div>
+<div class="ttc" id="aMPU9250__API_8cpp_html_af4d54e584a662662888836b3a9b9eb08"><div class="ttname"><a href="MPU9250__API_8cpp.html#af4d54e584a662662888836b3a9b9eb08">MPU9250_ADDRESS</a></div><div class="ttdeci">#define MPU9250_ADDRESS</div><div class="ttdef"><b>Definition:</b> MPU9250_API.cpp:7</div></div>
+<div class="ttc" id="aclassMPU9250__API_html_a874c15400abbef40cfe412f8b26aee06"><div class="ttname"><a href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">MPU9250_API::sensor</a></div><div class="ttdeci">static MPU9250 sensor</div><div class="ttdef"><b>Definition:</b> MPU9250_API.h:5</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="MPU9250__API_8cpp.html#af4d54e584a662662888836b3a9b9eb08">MPU9250_ADDRESS</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -201,6 +241,13 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a10159c775fbea6a18325bc67d62157c9">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>                                 {</div>
+<div class="line"><span class="lineno">   64</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   65</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.ax;</div>
+<div class="line"><span class="lineno">   66</span>}</div>
+<div class="ttc" id="aclassMPU9250__API_html_a706e57ed430ab6fc871982b02512a308"><div class="ttname"><a href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">MPU9250_API::readSensorData</a></div><div class="ttdeci">void readSensorData()</div><div class="ttdef"><b>Definition:</b> MPU9250_API.cpp:16</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -228,6 +275,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a894f88b7bde622795aa53bee54a831d6">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   68</span>                                 {</div>
+<div class="line"><span class="lineno">   69</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   70</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.ay;</div>
+<div class="line"><span class="lineno">   71</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -255,6 +308,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#adc1a560797555979f1f70adb5e6036f2">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   73</span>                                 {</div>
+<div class="line"><span class="lineno">   74</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   75</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.az;</div>
+<div class="line"><span class="lineno">   76</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -280,7 +339,12 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<div class="fragment"><div class="line"><span class="lineno">    9</span>                                             {</div>
+<div class="line"><span class="lineno">   10</span>  <span class="keyword">static</span> <a class="code hl_class" href="classMPU9250__API.html">MPU9250_API</a> instance;</div>
+<div class="line"><span class="lineno">   11</span>  <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">   12</span>}</div>
+<div class="ttc" id="aclassMPU9250__API_html"><div class="ttname"><a href="classMPU9250__API.html">MPU9250_API</a></div><div class="ttdef"><b>Definition:</b> MPU9250_API.h:4</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a4022d383f375510515be51a19c314c7e" name="a4022d383f375510515be51a19c314c7e"></a>
@@ -307,6 +371,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#ab9a1cced3e301a51ec667609d64d9db5">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>                         {</div>
+<div class="line"><span class="lineno">   79</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   80</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gx;</div>
+<div class="line"><span class="lineno">   81</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -334,6 +404,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#ac608b7bbecd073dce29b6f420790f1fe">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>                         {</div>
+<div class="line"><span class="lineno">   84</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   85</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gy;</div>
+<div class="line"><span class="lineno">   86</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -361,6 +437,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#af242b8a214877776791c5b510841508c">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   88</span>                         {</div>
+<div class="line"><span class="lineno">   89</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   90</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gz;</div>
+<div class="line"><span class="lineno">   91</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -378,6 +460,12 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   93</span>                        {</div>
+<div class="line"><span class="lineno">   94</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   95</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mx;</div>
+<div class="line"><span class="lineno">   96</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -395,6 +483,12 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   98</span>                        {</div>
+<div class="line"><span class="lineno">   99</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">  100</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.my;</div>
+<div class="line"><span class="lineno">  101</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -412,6 +506,12 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">  103</span>                        {</div>
+<div class="line"><span class="lineno">  104</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">  105</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mz;</div>
+<div class="line"><span class="lineno">  106</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -439,6 +539,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#aab481885d15c2965f0115f0c9cea09f6">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>                         {</div>
+<div class="line"><span class="lineno">   49</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   50</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.pitch;</div>
+<div class="line"><span class="lineno">   51</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -464,6 +570,39 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   16</span>                                 {</div>
+<div class="line"><span class="lineno">   17</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.readAccelData(<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.accelCount);</div>
+<div class="line"><span class="lineno">   18</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.ax = (float)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.accelCount[0] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.aRes; <span class="comment">// - sensor.accelBias[0];</span></div>
+<div class="line"><span class="lineno">   19</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.ay = (<span class="keywordtype">float</span>)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.accelCount[1] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.aRes; <span class="comment">// - sensor.accelBias[1];</span></div>
+<div class="line"><span class="lineno">   20</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.az = (float)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.accelCount[2] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.aRes; <span class="comment">// - sensor.accelBias[2];</span></div>
+<div class="line"><span class="lineno">   21</span> </div>
+<div class="line"><span class="lineno">   22</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.readGyroData(<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gyroCount);</div>
+<div class="line"><span class="lineno">   23</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gx = (float)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gyroCount[0] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gRes;</div>
+<div class="line"><span class="lineno">   24</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gy = (<span class="keywordtype">float</span>)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gyroCount[1] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gRes;</div>
+<div class="line"><span class="lineno">   25</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gz = (float)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gyroCount[2] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gRes;</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.readMagData(<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magCount);</div>
+<div class="line"><span class="lineno">   28</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mx = (float)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magCount[0] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mRes * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.factoryMagCalibration[0] - <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magBias[0];</div>
+<div class="line"><span class="lineno">   29</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.my = (<span class="keywordtype">float</span>)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magCount[1] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mRes * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.factoryMagCalibration[1] - <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magBias[1];</div>
+<div class="line"><span class="lineno">   30</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mz = (float)<a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magCount[2] * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mRes * <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.factoryMagCalibration[2] - <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.magBias[2];</div>
+<div class="line"><span class="lineno">   31</span> </div>
+<div class="line"><span class="lineno">   32</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.updateTime();</div>
+<div class="line"><span class="lineno">   33</span> </div>
+<div class="line"><span class="lineno">   34</span>  MahonyQuaternionUpdate(</div>
+<div class="line"><span class="lineno">   35</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.ax, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.ay, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.az, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gx * DEG_TO_RAD,</div>
+<div class="line"><span class="lineno">   36</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gy * DEG_TO_RAD, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.gz * DEG_TO_RAD, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.my,</div>
+<div class="line"><span class="lineno">   37</span>    <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mx, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.mz, <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.deltat);</div>
+<div class="line"><span class="lineno">   38</span> </div>
+<div class="line"><span class="lineno">   39</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.yaw = atan2(2.0f * (*(getQ()+1) * *(getQ()+2) + *getQ() * *(getQ()+3)), *getQ() * *getQ() + *(getQ()+1) * *(getQ()+1) - *(getQ()+2) * *(getQ()+2) - *(getQ()+3) * *(getQ()+3));</div>
+<div class="line"><span class="lineno">   40</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.pitch = -asin(2.0f * (*(getQ()+1) * *(getQ()+3) - *getQ() * *(getQ()+2)));</div>
+<div class="line"><span class="lineno">   41</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.roll = atan2(2.0f * (*getQ() * *(getQ()+1) + *(getQ()+2) * *(getQ()+3)), *getQ() * *getQ() - *(getQ()+1) * *(getQ()+1) - *(getQ()+2) * *(getQ()+2) + *(getQ()+3) * *(getQ()+3));</div>
+<div class="line"><span class="lineno">   42</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.pitch *= RAD_TO_DEG;</div>
+<div class="line"><span class="lineno">   43</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.yaw *= RAD_TO_DEG;</div>
+<div class="line"><span class="lineno">   44</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.yaw -= 5;</div>
+<div class="line"><span class="lineno">   45</span>  <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.roll *= RAD_TO_DEG;</div>
+<div class="line"><span class="lineno">   46</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -491,6 +630,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a2d912f2f58de83a91d70a92901bcd421">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   58</span>                        {</div>
+<div class="line"><span class="lineno">   59</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   60</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.roll;</div>
+<div class="line"><span class="lineno">   61</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>
@@ -518,6 +663,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a873f397cdec6d7d146bfd96af4a21203">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>                       {</div>
+<div class="line"><span class="lineno">   54</span>  <a class="code hl_function" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   55</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.yaw;</div>
+<div class="line"><span class="lineno">   56</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classMPU9250__API.html#a706e57ed430ab6fc871982b02512a308">readSensorData()</a>, and <a class="el" href="classMPU9250__API.html#a874c15400abbef40cfe412f8b26aee06">sensor</a>.</p>
 
 </div>
 </div>

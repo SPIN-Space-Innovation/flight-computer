@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -146,6 +147,12 @@ Private Member Functions</h2></td></tr>
 <div class="ttc" id="aclassAltimeter_html_ad64da9b5909d5749b85d52c33aaa7656"><div class="ttname"><a href="classAltimeter.html#ad64da9b5909d5749b85d52c33aaa7656">Altimeter::agl</a></div><div class="ttdeci">float agl()</div><div class="ttdef"><b>Definition:</b> altimeter.h:94</div></div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>float Altitude from reference point.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>                {</div>
+<div class="line"><span class="lineno">   95</span>      <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)<a class="code hl_function" href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">aglCM</a>() / 100;</div>
+<div class="line"><span class="lineno">   96</span>    }</div>
+<div class="ttc" id="aclassAltimeter_html_a84a76ba004cf333ef549fa687397b655"><div class="ttname"><a href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">Altimeter::aglCM</a></div><div class="ttdeci">virtual int32_t aglCM()</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">aglCM()</a>.</p>
 
 </div>
 </div>
@@ -182,7 +189,6 @@ Private Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
 <div class="line">...</div>
 <div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">aglCM</a>());</div>
-<div class="ttc" id="aclassAltimeter_html_a84a76ba004cf333ef549fa687397b655"><div class="ttname"><a href="classAltimeter.html#a84a76ba004cf333ef549fa687397b655">Altimeter::aglCM</a></div><div class="ttdeci">virtual int32_t aglCM()</div></div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 
@@ -226,6 +232,12 @@ Private Member Functions</h2></td></tr>
 <div class="ttc" id="aclassAltimeter_html_a47b98d432adf4f23de4a4e003004f4ca"><div class="ttname"><a href="classAltimeter.html#a47b98d432adf4f23de4a4e003004f4ca">Altimeter::altitude</a></div><div class="ttdeci">float altitude()</div><div class="ttdef"><b>Definition:</b> altimeter.h:47</div></div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>float Altitude from reference point.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>                     {</div>
+<div class="line"><span class="lineno">   48</span>      <span class="keywordflow">return</span> (<span class="keywordtype">float</span>)<a class="code hl_function" href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">altitude_cm</a>() / 100;</div>
+<div class="line"><span class="lineno">   49</span>    }</div>
+<div class="ttc" id="aclassAltimeter_html_a75859ddfdff90f12a1b9ddf8a859550a"><div class="ttname"><a href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">Altimeter::altitude_cm</a></div><div class="ttdeci">virtual int32_t altitude_cm()</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">altitude_cm()</a>.</p>
 
 </div>
 </div>
@@ -262,7 +274,6 @@ Private Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><a class="code hl_class" href="classAltimeter.html">Altimeter</a>&amp; alt = BM280_API::getInstance();</div>
 <div class="line">...</div>
 <div class="line">Serial.println(alt.<a class="code hl_function" href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">altitude_cm</a>());</div>
-<div class="ttc" id="aclassAltimeter_html_a75859ddfdff90f12a1b9ddf8a859550a"><div class="ttname"><a href="classAltimeter.html#a75859ddfdff90f12a1b9ddf8a859550a">Altimeter::altitude_cm</a></div><div class="ttdeci">virtual int32_t altitude_cm()</div></div>
 </div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>int32_t Altitude from reference point.</dd></dl>
 <dl class="section author"><dt>Author</dt><dd>themicp </dd></dl>
 

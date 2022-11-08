@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -190,7 +191,8 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<div class="fragment"><div class="line"><span class="lineno">  111</span>{}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -218,6 +220,14 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a10159c775fbea6a18325bc67d62157c9">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>                                  {</div>
+<div class="line"><span class="lineno">   47</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   48</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>.x() * 100;</div>
+<div class="line"><span class="lineno">   49</span>}</div>
+<div class="ttc" id="aclassBNO055__API_html_a1f89b2a8a477b6e35d5d0046b94ac588"><div class="ttname"><a href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">BNO055_API::readSensorData</a></div><div class="ttdeci">void readSensorData()</div><div class="ttdef"><b>Definition:</b> bno055_api.cpp:17</div></div>
+<div class="ttc" id="aclassBNO055__API_html_a94b0242ab35c489158b93662e347ba32"><div class="ttname"><a href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">BNO055_API::acc</a></div><div class="ttdeci">imu::Vector&lt; 3 &gt; acc</div><div class="ttdef"><b>Definition:</b> bno055_api.h:33</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -245,6 +255,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a894f88b7bde622795aa53bee54a831d6">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   51</span>                                  {</div>
+<div class="line"><span class="lineno">   52</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   53</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>.y() * 100;</div>
+<div class="line"><span class="lineno">   54</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -272,6 +288,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#adc1a560797555979f1f70adb5e6036f2">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>                                  {</div>
+<div class="line"><span class="lineno">   57</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   58</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>.z() * 100;</div>
+<div class="line"><span class="lineno">   59</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -299,6 +321,17 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a60636020d55696727711f031e41010db">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   91</span>                           {</div>
+<div class="line"><span class="lineno">   92</span>  uint8_t system, <a class="code hl_variable" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>, accel, <a class="code hl_variable" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>;</div>
+<div class="line"><span class="lineno">   93</span>  system = <a class="code hl_variable" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a> = accel = <a class="code hl_variable" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a> = 0;</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>  <span class="keywordflow">while</span> (<a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.isFullyCalibrated()) {}</div>
+<div class="line"><span class="lineno">   96</span>}</div>
+<div class="ttc" id="aclassBNO055__API_html_a3e79c554a32e2fc3c17ba20ceff4b102"><div class="ttname"><a href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">BNO055_API::mag</a></div><div class="ttdeci">imu::Vector&lt; 3 &gt; mag</div><div class="ttdef"><b>Definition:</b> bno055_api.h:33</div></div>
+<div class="ttc" id="aclassBNO055__API_html_aaa8cbc7bba41ba331080866649a07b33"><div class="ttname"><a href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">BNO055_API::sensor</a></div><div class="ttdeci">static Adafruit_BNO055 sensor</div><div class="ttdef"><b>Definition:</b> bno055_api.h:5</div></div>
+<div class="ttc" id="aclassBNO055__API_html_afea86338aa6234e544129d00fa46ddc3"><div class="ttname"><a href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">BNO055_API::gyro</a></div><div class="ttdeci">imu::Vector&lt; 3 &gt; gyro</div><div class="ttdef"><b>Definition:</b> bno055_api.h:33</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>, <a class="el" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>, and <a class="el" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.</p>
 
 </div>
 </div>
@@ -324,7 +357,12 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<div class="fragment"><div class="line"><span class="lineno">   12</span>                                    {</div>
+<div class="line"><span class="lineno">   13</span>  <span class="keyword">static</span> <a class="code hl_class" href="classBNO055__API.html">BNO055_API</a> instance;</div>
+<div class="line"><span class="lineno">   14</span>  <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">   15</span>}</div>
+<div class="ttc" id="aclassBNO055__API_html"><div class="ttname"><a href="classBNO055__API.html">BNO055_API</a></div><div class="ttdef"><b>Definition:</b> bno055_api.h:4</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a85df1fbdc372627b9344aaae61dc9a3a" name="a85df1fbdc372627b9344aaae61dc9a3a"></a>
@@ -351,6 +389,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#ab9a1cced3e301a51ec667609d64d9db5">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                          {</div>
+<div class="line"><span class="lineno">   62</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   63</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>.x() * (180 / M_PI);</div>
+<div class="line"><span class="lineno">   64</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -378,6 +422,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#ac608b7bbecd073dce29b6f420790f1fe">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>                          {</div>
+<div class="line"><span class="lineno">   67</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   68</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>.y() * (180 / M_PI);</div>
+<div class="line"><span class="lineno">   69</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -405,6 +455,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#af242b8a214877776791c5b510841508c">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>                          {</div>
+<div class="line"><span class="lineno">   72</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   73</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>.z() * (180 / M_PI);</div>
+<div class="line"><span class="lineno">   74</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -422,6 +478,12 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   76</span>                       {</div>
+<div class="line"><span class="lineno">   77</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   78</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>.x();</div>
+<div class="line"><span class="lineno">   79</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -439,6 +501,12 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   81</span>                       {</div>
+<div class="line"><span class="lineno">   82</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   83</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>.y();</div>
+<div class="line"><span class="lineno">   84</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -456,6 +524,12 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                       {</div>
+<div class="line"><span class="lineno">   87</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   88</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>.z();</div>
+<div class="line"><span class="lineno">   89</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -483,6 +557,13 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#aab481885d15c2965f0115f0c9cea09f6">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>                        {</div>
+<div class="line"><span class="lineno">   32</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   33</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>.y();</div>
+<div class="line"><span class="lineno">   34</span>}</div>
+<div class="ttc" id="aclassBNO055__API_html_a2d5a3b1fb6f6824f3e15e9deaf1378d7"><div class="ttname"><a href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">BNO055_API::euler</a></div><div class="ttdeci">imu::Vector&lt; 3 &gt; euler</div><div class="ttdef"><b>Definition:</b> bno055_api.h:33</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -508,6 +589,23 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">   17</span>                                {</div>
+<div class="line"><span class="lineno">   18</span>  <span class="comment">// TODO: fix units</span></div>
+<div class="line"><span class="lineno">   19</span>  <span class="keywordflow">if</span> (millis() - <a class="code hl_variable" href="classBNO055__API.html#a7dc19a6d8f9451a5009099a0223db198">last_read</a> &lt; <a class="code hl_define" href="bno055__api_8cpp.html#a17fe5aa0e1777799e16d3a1f798fffb5">READ_INTERVAL</a>) {</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   21</span>  }</div>
+<div class="line"><span class="lineno">   22</span> </div>
+<div class="line"><span class="lineno">   23</span>  <a class="code hl_variable" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a> = <a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.getVector(Adafruit_BNO055::VECTOR_EULER);</div>
+<div class="line"><span class="lineno">   24</span>  <a class="code hl_variable" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a> = <a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);</div>
+<div class="line"><span class="lineno">   25</span>  <a class="code hl_variable" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a> = <a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);</div>
+<div class="line"><span class="lineno">   26</span>  <a class="code hl_variable" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a> = <a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.getVector(Adafruit_BNO055::VECTOR_MAGNETOMETER);</div>
+<div class="line"><span class="lineno">   27</span> </div>
+<div class="line"><span class="lineno">   28</span>  <a class="code hl_variable" href="classBNO055__API.html#a7dc19a6d8f9451a5009099a0223db198">last_read</a> = millis();</div>
+<div class="line"><span class="lineno">   29</span>}</div>
+<div class="ttc" id="abno055__api_8cpp_html_a17fe5aa0e1777799e16d3a1f798fffb5"><div class="ttname"><a href="bno055__api_8cpp.html#a17fe5aa0e1777799e16d3a1f798fffb5">READ_INTERVAL</a></div><div class="ttdeci">#define READ_INTERVAL</div><div class="ttdef"><b>Definition:</b> bno055_api.cpp:8</div></div>
+<div class="ttc" id="aclassBNO055__API_html_a7dc19a6d8f9451a5009099a0223db198"><div class="ttname"><a href="classBNO055__API.html#a7dc19a6d8f9451a5009099a0223db198">BNO055_API::last_read</a></div><div class="ttdeci">unsigned long last_read</div><div class="ttdef"><b>Definition:</b> bno055_api.h:31</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a94b0242ab35c489158b93662e347ba32">acc</a>, <a class="el" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>, <a class="el" href="classBNO055__API.html#afea86338aa6234e544129d00fa46ddc3">gyro</a>, <a class="el" href="classBNO055__API.html#a7dc19a6d8f9451a5009099a0223db198">last_read</a>, <a class="el" href="classBNO055__API.html#a3e79c554a32e2fc3c17ba20ceff4b102">mag</a>, <a class="el" href="bno055__api_8cpp.html#a17fe5aa0e1777799e16d3a1f798fffb5">READ_INTERVAL</a>, and <a class="el" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.</p>
 
 </div>
 </div>
@@ -535,6 +633,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a2d912f2f58de83a91d70a92901bcd421">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   41</span>                       {</div>
+<div class="line"><span class="lineno">   42</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   43</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>.z();</div>
+<div class="line"><span class="lineno">   44</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>
@@ -562,6 +666,20 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a4eeb2097a6cca8c43b171df4c0c0376e">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>                       {</div>
+<div class="line"><span class="lineno">   99</span>  <span class="comment">// Relative heading -- no magnetometer</span></div>
+<div class="line"><span class="lineno">  100</span>  <span class="keywordflow">if</span>(!<a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.begin(Adafruit_BNO055::OPERATION_MODE_ACCGYRO)) {</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">while</span>(1);</div>
+<div class="line"><span class="lineno">  102</span>  }</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>  <span class="comment">// 2G = 0, 4G = 1, 8G = 2, 16G = 3</span></div>
+<div class="line"><span class="lineno">  105</span>  <a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.setAccelRange(3);</div>
+<div class="line"><span class="lineno">  106</span> </div>
+<div class="line"><span class="lineno">  107</span>  <span class="comment">// TODO: do we need this?</span></div>
+<div class="line"><span class="lineno">  108</span>  <a class="code hl_variable" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.setExtCrystalUse(<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  109</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#aaa8cbc7bba41ba331080866649a07b33">sensor</a>.</p>
 
 </div>
 </div>
@@ -589,6 +707,12 @@ Static Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIMU.html#a873f397cdec6d7d146bfd96af4a21203">IMU</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   36</span>                      {</div>
+<div class="line"><span class="lineno">   37</span>  <a class="code hl_function" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData</a>();</div>
+<div class="line"><span class="lineno">   38</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>.x();</div>
+<div class="line"><span class="lineno">   39</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="classBNO055__API.html#a2d5a3b1fb6f6824f3e15e9deaf1378d7">euler</a>, and <a class="el" href="classBNO055__API.html#a1f89b2a8a477b6e35d5d0046b94ac588">readSensorData()</a>.</p>
 
 </div>
 </div>

@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -126,6 +127,16 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIgniter.html#a684f2e24cf349fc096e86b9df500d08b">Igniter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>                            {</div>
+<div class="line"><span class="lineno">   35</span>  digitalWrite(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].mosfet_pin, LOW);</div>
+<div class="line"><span class="lineno">   36</span><span class="preprocessor">#if IGN_DEBUG</span></div>
+<div class="line"><span class="lineno">   37</span>  digitalWrite(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].led_pin, LOW);</div>
+<div class="line"><span class="lineno">   38</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   39</span>}</div>
+<div class="ttc" id="adefinitions_8h_html_ae1d31407f69a44a9303d604e281b6a1d"><div class="ttname"><a href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a></div><div class="ttdeci">#define IGNITER</div><div class="ttdef"><b>Definition:</b> definitions.h:4</div></div>
+<div class="ttc" id="amosfet__igniter_8cpp_html_ac5586046d38d6a293f81afa3954f6f5c"><div class="ttname"><a href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a></div><div class="ttdeci">IgniterOptions igniters[2]</div><div class="ttdef"><b>Definition:</b> mosfet_igniter.cpp:10</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a>, and <a class="el" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>.</p>
 
 </div>
 </div>
@@ -153,6 +164,14 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIgniter.html#ac92c391dba48d5419f28f2cd81d76385">Igniter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>                           {</div>
+<div class="line"><span class="lineno">   28</span>  digitalWrite(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].mosfet_pin, HIGH);</div>
+<div class="line"><span class="lineno">   29</span><span class="preprocessor">#if IGN_DEBUG</span></div>
+<div class="line"><span class="lineno">   30</span>  digitalWrite(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].led_pin, HIGH);</div>
+<div class="line"><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   32</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a>, and <a class="el" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>.</p>
 
 </div>
 </div>
@@ -178,7 +197,12 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<div class="fragment"><div class="line"><span class="lineno">   14</span>                                          {</div>
+<div class="line"><span class="lineno">   15</span>  <span class="keyword">static</span> <a class="code hl_class" href="classMosfetIgniter.html">MosfetIgniter</a> instance;</div>
+<div class="line"><span class="lineno">   16</span>  <span class="keywordflow">return</span> instance;</div>
+<div class="line"><span class="lineno">   17</span>}</div>
+<div class="ttc" id="aclassMosfetIgniter_html"><div class="ttname"><a href="classMosfetIgniter.html">MosfetIgniter</a></div><div class="ttdef"><b>Definition:</b> mosfet_igniter.h:3</div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a4a3a1da39cb6c200c52a1a99b6fec585" name="a4a3a1da39cb6c200c52a1a99b6fec585"></a>
@@ -205,6 +229,15 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classIgniter.html#a6cbd407af3973ce72fd9771d822922cb">Igniter</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                          {</div>
+<div class="line"><span class="lineno">   20</span>  pinMode(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].mosfet_pin, OUTPUT);</div>
+<div class="line"><span class="lineno">   21</span><span class="preprocessor">#if IGN_DEBUG</span></div>
+<div class="line"><span class="lineno">   22</span>  pinMode(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].led_pin, OUTPUT);</div>
+<div class="line"><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   24</span>  digitalWrite(<a class="code hl_variable" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>[<a class="code hl_define" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a> - 1].mosfet_pin, LOW);</div>
+<div class="line"><span class="lineno">   25</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="definitions_8h.html#ae1d31407f69a44a9303d604e281b6a1d">IGNITER</a>, and <a class="el" href="mosfet__igniter_8cpp.html#ac5586046d38d6a293f81afa3954f6f5c">igniters</a>.</p>
 
 </div>
 </div>

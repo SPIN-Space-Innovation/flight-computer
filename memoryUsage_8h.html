@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SPIN Space-Innovation Logo.png"/></td>
   <td id="projectalign">
    <div id="projectname">SPIN Flight Controller
    </div>
@@ -100,6 +101,19 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="fragment"><div class="line"><span class="lineno">    8</span>                 {</div>
+<div class="line"><span class="lineno">    9</span>  <span class="keywordtype">char</span> top;</div>
+<div class="line"><span class="lineno">   10</span><span class="preprocessor">#ifdef __arm__</span></div>
+<div class="line"><span class="lineno">   11</span>  <span class="keywordflow">return</span> &amp;top - <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(sbrk(0));</div>
+<div class="line"><span class="lineno">   12</span><span class="preprocessor">#elif defined(CORE_TEENSY) || (ARDUINO &gt; 103 &amp;&amp; ARDUINO != 151)</span></div>
+<div class="line"><span class="lineno">   13</span>  <span class="keywordflow">return</span> &amp;top - <a class="code hl_variable" href="memoryUsage_8h.html#ad193a2cc121e0d4614a1c21eb463fb56">__brkval</a>;</div>
+<div class="line"><span class="lineno">   14</span><span class="preprocessor">#else  </span><span class="comment">// __arm__</span></div>
+<div class="line"><span class="lineno">   15</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="memoryUsage_8h.html#ad193a2cc121e0d4614a1c21eb463fb56">__brkval</a> ? &amp;top - <a class="code hl_variable" href="memoryUsage_8h.html#ad193a2cc121e0d4614a1c21eb463fb56">__brkval</a> : &amp;top - __malloc_heap_start;</div>
+<div class="line"><span class="lineno">   16</span><span class="preprocessor">#endif  </span><span class="comment">// __arm__</span></div>
+<div class="line"><span class="lineno">   17</span>}</div>
+<div class="ttc" id="amemoryUsage_8h_html_ad193a2cc121e0d4614a1c21eb463fb56"><div class="ttname"><a href="memoryUsage_8h.html#ad193a2cc121e0d4614a1c21eb463fb56">__brkval</a></div><div class="ttdeci">char * __brkval</div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="memoryUsage_8h.html#ad193a2cc121e0d4614a1c21eb463fb56">__brkval</a>.</p>
 
 </div>
 </div>

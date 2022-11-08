@@ -17,13 +17,14 @@ var searchData=
   ['setup_14',['SETUP',['../types_8h.html#afd9beadc839522108991021ca8bffe57addbb81a9e3aab6cfa19ad8eb2389efd4',1,'types.h']]],
   ['setup_15',['setup',['../classTelemetry.html#aceeab415d45e727ecb15c590c95cf980',1,'Telemetry::setup()'],['../classLSM9DS1__API.html#a89694cfb4789cb6bb03f0185413dbf18',1,'LSM9DS1_API::setup()'],['../classIMU.html#a4eeb2097a6cca8c43b171df4c0c0376e',1,'IMU::setup()'],['../classAdafruit__GPS__API.html#ad9a441804bb008a3d472182b8366c180',1,'Adafruit_GPS_API::setup()'],['../classAltimeter.html#a14d64fc43f86c3796a2d5ba7a9bc81be',1,'Altimeter::setup()'],['../classBackupDeployer.html#a025af98af910f7173bb70fdc9dbdad78',1,'BackupDeployer::setup()'],['../classBMP280__API.html#abc6172b2b4b669692d3ff7fbd161de36',1,'BMP280_API::setup()'],['../classBMP3XX__API.html#ae22fc2ab62a8c065ee5e24bdf3284727',1,'BMP3XX_API::setup()'],['../classBNO055__API.html#a076e869794db03b885078bd589cb9a4e',1,'BNO055_API::setup()'],['../classGPSReceiver.html#a9031c3119747695a131d972aedf38cb1',1,'GPSReceiver::setup()'],['../classIgniter.html#a6cbd407af3973ce72fd9771d822922cb',1,'Igniter::setup()'],['../classMosfetIgniter.html#a4a3a1da39cb6c200c52a1a99b6fec585',1,'MosfetIgniter::setup()']]],
   ['setup_5fcomplete_16',['SETUP_COMPLETE',['../types_8h.html#aa8664b29ec1a591ea72c1802708358d9a968dea5031085f96e6f21041122bd2de',1,'types.h']]],
-  ['src_5fstate_17',['src_state',['../classTransition.html#a91f8897a9e21b72506bbf446d27990b6',1,'Transition']]],
-  ['start_5fbackup_5fcountdown_18',['START_BACKUP_COUNTDOWN',['../types_8h.html#aa8664b29ec1a591ea72c1802708358d9aa335c50888cdd82a895f26a677565de4',1,'types.h']]],
-  ['startarmcountdown_19',['startArmCountdown',['../classBackupDeployer.html#a87d52215b567d08ac39fa0582a6dd69c',1,'BackupDeployer']]],
-  ['state_20',['state',['../structTelemetryMessage.html#a25d9d3957c4e29924625d505efbe7ac3',1,'TelemetryMessage::state()'],['../classFSM.html#ab3605de833cee9e26a0d9da4b3a2043b',1,'FSM::state()']]],
-  ['state_21',['STATE',['../types_8h.html#afd9beadc839522108991021ca8bffe57',1,'types.h']]],
-  ['state_5fto_5fstr_22',['state_to_str',['../types_8cpp.html#ad28a3f7cc43250e0e46ec0ea2b02020e',1,'state_to_str(STATE state):&#160;types.cpp'],['../types_8h.html#ad28a3f7cc43250e0e46ec0ea2b02020e',1,'state_to_str(STATE state):&#160;types.cpp']]],
-  ['state_5ftransitions_23',['state_transitions',['../classFSM.html#a634495827e6738c6ebb969a32d8a5ea8',1,'FSM']]],
-  ['statenames_24',['StateNames',['../types_8cpp.html#a78d617311716a18545899dd4a6b4571d',1,'types.cpp']]],
-  ['stringifytelemetrymessage_25',['stringifyTelemetryMessage',['../types_8cpp.html#a5a47959c5a37406ed68bbb77f99d9a5a',1,'stringifyTelemetryMessage(TelemetryMessage message):&#160;types.cpp'],['../types_8h.html#a5a47959c5a37406ed68bbb77f99d9a5a',1,'stringifyTelemetryMessage(TelemetryMessage message):&#160;types.cpp']]]
+  ['spin_20space_20innovation_20flight_20computer_17',['SPIN Space Innovation flight computer',['../index.html',1,'']]],
+  ['src_5fstate_18',['src_state',['../classTransition.html#a91f8897a9e21b72506bbf446d27990b6',1,'Transition']]],
+  ['start_5fbackup_5fcountdown_19',['START_BACKUP_COUNTDOWN',['../types_8h.html#aa8664b29ec1a591ea72c1802708358d9aa335c50888cdd82a895f26a677565de4',1,'types.h']]],
+  ['startarmcountdown_20',['startArmCountdown',['../classBackupDeployer.html#a87d52215b567d08ac39fa0582a6dd69c',1,'BackupDeployer']]],
+  ['state_21',['state',['../structTelemetryMessage.html#a25d9d3957c4e29924625d505efbe7ac3',1,'TelemetryMessage::state()'],['../classFSM.html#ab3605de833cee9e26a0d9da4b3a2043b',1,'FSM::state()']]],
+  ['state_22',['STATE',['../types_8h.html#afd9beadc839522108991021ca8bffe57',1,'types.h']]],
+  ['state_5fto_5fstr_23',['state_to_str',['../types_8cpp.html#ad28a3f7cc43250e0e46ec0ea2b02020e',1,'state_to_str(STATE state):&#160;types.cpp'],['../types_8h.html#ad28a3f7cc43250e0e46ec0ea2b02020e',1,'state_to_str(STATE state):&#160;types.cpp']]],
+  ['state_5ftransitions_24',['state_transitions',['../classFSM.html#a634495827e6738c6ebb969a32d8a5ea8',1,'FSM']]],
+  ['statenames_25',['StateNames',['../types_8cpp.html#a78d617311716a18545899dd4a6b4571d',1,'types.cpp']]],
+  ['stringifytelemetrymessage_26',['stringifyTelemetryMessage',['../types_8cpp.html#a5a47959c5a37406ed68bbb77f99d9a5a',1,'stringifyTelemetryMessage(TelemetryMessage message):&#160;types.cpp'],['../types_8h.html#a5a47959c5a37406ed68bbb77f99d9a5a',1,'stringifyTelemetryMessage(TelemetryMessage message):&#160;types.cpp']]]
 ];
