@@ -1,10 +1,10 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include "adafruit_gps_api.h"
 
 #define GPSSerial Serial1
 
-extern SPIN::Log::CFormattedLogger<1024> logger logger;
+extern SPIN::Log::CFormattedLogger<1024> logger;
 
 Adafruit_GPS_API::Adafruit_GPS_API() {};
 
@@ -16,7 +16,7 @@ Adafruit_GPS_API& Adafruit_GPS_API::getInstance() {
 }
 
 void Adafruit_GPS_API::setup() {
-  logger->Verbose("GPS: Setup: Init");
+  logger.Verbose("GPS: Setup: Init");
   last_read = 0;
 
   receiver.begin(9600);
@@ -29,14 +29,16 @@ void Adafruit_GPS_API::setup() {
   
   // Possition fix update every 1Hz.
   receiver.sendCommand(PMTK_API_SET_FIX_CTL_1HZ);
-  logger->Verbose("GPS: Setup: Finished");
+  logger.Verbose("GPS: Setup: Finished");
 }
 
 void Adafruit_GPS_API::readData() {
-  logger->Verbose("GPS: Update: Init");
+  unsigned long startTime = millis();
+  logger.Verbose("GPS: Update: Init");
+  
   // Wait for 100ms between meassurments.
   if (millis() - last_read < 100) {
-    logger->Verbose("GPS: Update: Failed: Not enough time between updates");
+    logger.Verbose("GPS: Update: Failed: Not enough time between updates");
     return;
   }
 
@@ -50,7 +52,8 @@ void Adafruit_GPS_API::readData() {
     receiver.parse(receiver.lastNMEA());
   }
 
-  logger->Verbose("GPS: Update: Finished");
+  unsigned long endTime = millis();
+  logger.Verbose("GPS: Update: Finished: %lu ms", endTime - startTime);
 }
 
 bool Adafruit_GPS_API::fix() {

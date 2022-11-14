@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include "definitions.h"
 #include "telemetry.h"
@@ -33,7 +33,7 @@ void Telemetry::send(TelemetryMessage message) {
   }
   String stringifiedMessage = stringifyTelemetryMessage(message);
 
-  logger->Information("%s", stringifyTelemetryMessage);
+  logger.Information("%s", stringifiedMessage.c_str());
 
   if (millis() - last_radio_message_time > radio_throttle_ms) {
     rf95.send(stream, message_size);

@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include "Wire.h"
 #include "Arduino.h"

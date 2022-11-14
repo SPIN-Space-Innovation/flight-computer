@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
@@ -19,10 +19,12 @@ BNO055_API& BNO055_API::getInstance() {
 }
 
 void BNO055_API::readSensorData() {
-  logger->Verbose("BNO055: Update: Init");
+  unsigned long startTime = millis();
+  logger.Verbose("BNO055: Update: Init");
+
   // TODO: fix units
   if (millis() - last_read < READ_INTERVAL) {
-    logger->Verbose("BNO055: Update: Failed: Not enough time between updates");
+    logger.Verbose("BNO055: Update: Failed: Not enough time between updates");
     return;
   }
 
@@ -32,7 +34,9 @@ void BNO055_API::readSensorData() {
   mag = sensor.getVector(Adafruit_BNO055::VECTOR_MAGNETOMETER);
 
   last_read = millis();
-  logger->Verbose("BNO055: Update: Finished");
+  
+  unsigned long endTime = millis();
+  logger.Verbose("BNO055: Update: Finished: %lu ms", endTime - startTime);
 }
 
 float BNO055_API::pitch() {
@@ -103,7 +107,9 @@ void BNO055_API::calibrate() {
 }
 
 void BNO055_API::setup() {
-  logger->Verbose("BNO055: Setup: Init");
+  unsigned long startTime = millis();
+  logger.Verbose("BNO055: Setup: Init");
+
   // Relative heading -- no magnetometer
   if(!sensor.begin(Adafruit_BNO055::OPERATION_MODE_ACCGYRO)) {
     while(1);
@@ -115,7 +121,8 @@ void BNO055_API::setup() {
   // TODO: do we need this?
   sensor.setExtCrystalUse(true);
 
-  logger->Verbose("BNO055: Setup: Finished");
+  unsigned long endTime = millis();
+  logger.Verbose("BNO055: Setup: Finished: %lu ms", endTime - startTime);
 }
 
 BNO055_API::BNO055_API() {}

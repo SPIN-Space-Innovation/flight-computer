@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include "fsm.h"
 #include "definitions.h"
@@ -104,6 +104,8 @@ void FSM::onLaunched() {
 }
 
 void FSM::onSetup() {
+  unsigned long startTime = millis();
+
   telemetry->setup();
   telemetry->send("Hello!");
 
@@ -129,6 +131,9 @@ void FSM::onSetup() {
   telemetry->send("Setting up Backup Deployer..");
   BackupDeployer::setup();
   telemetry->send("Backup Deployer setup complete.");
+
+  unsigned long endTime = millis();
+  telemetry->send(String("FSM: Setup: Finished: ") + String(endTime - startTime) + String(" ms"));
 
   process_event(EVENT::SETUP_COMPLETE);
 }

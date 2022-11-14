@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include "bmp280_api.h"
 
@@ -37,11 +37,15 @@ int32_t BMP280_API::getGroundLevelCM() {
 }
 
 void BMP280_API::setup() {
-  logger->Verbose("BMP280: Setup: Init");
+  unsigned long startTime = millis();
+  logger.Verbose("BMP280: Setup: Init");
+
   if (!sensor.begin()) {
     while(1); //Freeze
   }
-  logger->Verbose("BMP280: Setup: Finished");
+  
+  unsigned long endTime = millis();
+  logger.Verbose("BMP280: Setup: Finished: %lu ms", endTime - startTime);
 }
 
 void BMP280_API::calibrate() {

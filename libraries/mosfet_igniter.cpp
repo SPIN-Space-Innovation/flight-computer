@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include "mosfet_igniter.h"
 #include "Arduino.h"

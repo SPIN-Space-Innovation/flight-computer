@@ -1,4 +1,4 @@
-#include <Logger.h>
+#include <SPIN-Logger.hpp>
 
 #include <Adafruit_Sensor.h>
 #include <Adafruit_LSM9DS1.h>
