@@ -20,8 +20,6 @@ static auto fileSink = SPIN::Log::Sinks::Factory::FileSinkFactory()
         .Build();
 
 SPIN::Log::CFormattedLogger<1024> logger = SPIN::Log::Factory::CFormattedLoggerFactory()
-        .AddSink(&serialSink)
-        .AddSink(&fileSink)
         .Build<1024>();
 
 
@@ -38,20 +36,19 @@ bool sound = false;
 uint8_t loop_frequency = 10; // Hz
 
 void setup() {
-  SPIN::Log::SimpleLoggerFactory loggerFactory;
+  auto loggerFactory = SPIN::Log::Factory::CFormattedLoggerFactory();
+
 #if SERIAL_DEBUG
   Serial.begin(115200);
-  loggerFactory.AddSink(SPIN::Log::Sinks::SerialSink(SPIN::Log::Sinks::SerialSinkConfigurations()
-    .SetStream(&Serial)
-    .SetColoured(true)));
+  loggerFactory.AddSink(&serialSink);
 #endif
 
 #if SD_LOGS
   SD.begin(SD_CS);
-  loggerFactory.AddSink(SPIN::Log::Sinks::FileSink(SPIN::Log::Sinks::FileSinkConfigurations()
-    .SetFileNameFormatter("log-%" PRIu32 ".log")));
+  loggerFactory.AddSink(&fileSink);
 #endif
-  logger = loggerFactory.Build();
+
+  logger = loggerFactory.Build<1024>();
 
 #if BUZZER
   pinMode(buzzer, OUTPUT);
@@ -100,4 +97,6 @@ void loop() {
   int delayTime = (1000/loop_frequency) - (millis() - timerStart);
 
   delay(max(0, delayTime));
+  
+  logger.Flush();
 }
