@@ -5,8 +5,6 @@
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
-#define SD_CS 10
-#define SD_OFFLOAD_INTERVAL 1000 // ms
 
 extern SPIN::Log::CFormattedLogger<1024> logger;
 

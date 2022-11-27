@@ -36,6 +36,13 @@ bool sound = false;
 uint8_t loop_frequency = 10; // Hz
 
 void setup() {
+  pinMode(SD_CS, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, INPUT);
+
+  delay(2000);
+  
   auto loggerFactory = SPIN::Log::Factory::CFormattedLoggerFactory();
 
 #if SERIAL_DEBUG
@@ -44,7 +51,11 @@ void setup() {
 #endif
 
 #if SD_LOGS
-  SD.begin(SD_CS);
+  if (!SD.begin(SD_CS))
+  {
+    Serial.println("SD did not initialize");
+  }
+
   loggerFactory.AddSink(&fileSink);
 #endif
 
