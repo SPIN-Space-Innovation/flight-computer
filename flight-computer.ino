@@ -33,7 +33,7 @@ void setup() {
 void loop() {
   int timerStart = millis();
 
-  if (telemetry.messageAvailable()) {
+  if (telemetry->messageAvailable()) {
     String message = telemetry->receiveMessage();
     if (message.substring(0, 5).equals("SPCMD")) {
       int event;
@@ -120,6 +120,6 @@ bool SetupSensorsAndCommunication()
   }
   *gps = Adafruit_GPS_API::getInstance();
 
-  fsm = new FSM(telemetry, imu_sensor, altimeter, gps, igniter, loop_frequency);
+  fsm = new FSM(telemetry, imu_sensor, altimeter, gps, igniter, &loop_frequency);
   return fsm != nullptr;
 }
