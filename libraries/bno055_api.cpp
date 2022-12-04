@@ -1,4 +1,4 @@
-#include <Adafruit_sensor.ßh>
+#include <Adafruit_sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 #include "bno055_api.h"
