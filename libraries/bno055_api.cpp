@@ -1,4 +1,4 @@
-#include <Adafruit_Sensor.h>
+#include <Adafruit_sensor.ßh>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
 #include "bno055_api.h"
@@ -7,11 +7,18 @@
 
 #define READ_INTERVAL (10)
 
-Adafruit_BNO055 BNO055_API::sensor(55, 0x28);
+static BNO055_API* instance = nullptr;
+static Adafruit_BNO055* sensor = nullptr;
+static unsigned long last_read = 0;
+static imu::Vector<3> euler, acc, gyro, mag;
 
 BNO055_API& BNO055_API::getInstance() {
-  static BNO055_API instance;
-  return instance;
+  if (instance == nullptr)
+  {
+    instance = new BNO055_API();
+    sensor = new Adafruit_BNO055(55, 0x28);
+  }
+  return *instance;
 }
 
 void BNO055_API::readSensorData() {
@@ -20,10 +27,10 @@ void BNO055_API::readSensorData() {
     return;
   }
 
-  euler = sensor.getVector(Adafruit_BNO055::VECTOR_EULER);
-  acc = sensor.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
-  gyro = sensor.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
-  mag = sensor.getVector(Adafruit_BNO055::VECTOR_MAGNETOMETER);
+  euler = sensor->getVector(Adafruit_BNO055::VECTOR_EULER);
+  acc = sensor->getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+  gyro = sensor->getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+  mag = sensor->getVector(Adafruit_BNO055::VECTOR_MAGNETOMETER);
 
   last_read = millis();
 }
@@ -92,20 +99,20 @@ void BNO055_API::calibrate() {
   uint8_t system, gyro, accel, mag;
   system = gyro = accel = mag = 0;
 
-  while (sensor.isFullyCalibrated()) {}
+  while (sensor->isFullyCalibrated()) {}
 }
 
 void BNO055_API::setup() {
   // Relative heading -- no magnetometer
-  if(!sensor.begin(Adafruit_BNO055::OPERATION_MODE_ACCGYRO)) {
+  if(!sensor->begin(Adafruit_BNO055::OPERATION_MODE_ACCGYRO)) {
     while(1);
   }
 
   // 2G = 0, 4G = 1, 8G = 2, 16G = 3
-  sensor.setAccelRange(3);
+  sensor->setAccelRange(3);
 
   // TODO: do we need this?
-  sensor.setExtCrystalUse(true);
+  sensor->setExtCrystalUse(true);
 }
 
 BNO055_API::BNO055_API() {}
