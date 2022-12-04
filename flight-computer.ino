@@ -4,6 +4,7 @@
 #include "mosfet_igniter.h"
 #include "adafruit_gps_api.h"
 #include "definitions.h"
+#include "SD.h"
 
 static LSM9DS1_API* imu_sensor = nullptr;
 static BMP3XX_API* altimeter = nullptr;
@@ -19,7 +20,7 @@ uint8_t loop_frequency = 10; // Hz
 bool SetupSensorsAndCommunication();
 
 void setup() {
-  if SetupSensorsAndCommunication()
+  if (SetupSensorsAndCommunication())
   {
     Serial.println("Did not initialize sensors");
   }
@@ -33,7 +34,7 @@ void loop() {
   int timerStart = millis();
 
   if (telemetry.messageAvailable()) {
-    String message = telemetry.receiveMessage();
+    String message = telemetry->receiveMessage();
     if (message.substring(0, 5).equals("SPCMD")) {
       int event;
       if (sscanf(message.c_str(), "SPCMD:%i--", &event) == 1) {
@@ -66,7 +67,7 @@ void loop() {
   delay(max(0, delayTime));
 }
 
-bool SetupSensors()
+bool SetupSensorsAndCommunication()
 {
 #if SERIAL_DEBUG
   Serial.begin(115200);
