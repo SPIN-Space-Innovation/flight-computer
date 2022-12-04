@@ -4,11 +4,19 @@
 
 #define IMU_REFRESH_RATE 100 // Hz
 
-Adafruit_LSM9DS1 LSM9DS1_API::sensor;
+static LSM9DS1_API* instance = nullptr;
+static Adafruit_LSM9DS1* sensor = nullptr;
+static bool broken_connection = false;
+static unsigned long last_read = 0;
+static sensors_event_t acc, mag, gyro, temp;
 
 LSM9DS1_API& LSM9DS1_API::getInstance() {
-  static LSM9DS1_API instance;
-  return instance;
+  if (instance == nullptr)
+  {
+    instance = new LSM9DS1_API();
+    sensor = new Adafruit_LSM9DS1();
+  }
+  return *instance;
 }
 
 void LSM9DS1_API::readSensorData() {
@@ -24,8 +32,8 @@ void LSM9DS1_API::readSensorData() {
     return;
   }
 
-  sensor.read();
-  sensor.getEvent(&acc, &mag, &gyro, &temp);
+  sensor->read();
+  sensor->getEvent(&acc, &mag, &gyro, &temp);
 
   last_read = millis();
 }
@@ -93,13 +101,13 @@ void LSM9DS1_API::calibrate() {
 
 void LSM9DS1_API::setup() {
   // Relative heading -- no magnetometer
-  if (!sensor.begin()) {
+  if (!sensor->begin()) {
     while(1);
   }
 
-  sensor.setupAccel(sensor.LSM9DS1_ACCELRANGE_16G, sensor.LSM9DS1_ACCELDATARATE_119HZ);
-  sensor.setupMag(sensor.LSM9DS1_MAGGAIN_4GAUSS);
-  sensor.setupGyro(sensor.LSM9DS1_GYROSCALE_500DPS);
+  sensor->setupAccel(sensor->LSM9DS1_ACCELRANGE_16G, sensor->LSM9DS1_ACCELDATARATE_119HZ);
+  sensor->setupMag(sensor->LSM9DS1_MAGGAIN_4GAUSS);
+  sensor->setupGyro(sensor->LSM9DS1_GYROSCALE_500DPS);
 }
 
 LSM9DS1_API::LSM9DS1_API() {}
