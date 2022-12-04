@@ -1,10 +1,6 @@
 #include "altimeter.h"
-#include "Adafruit_BMP3XX.h"
-
 
 class BMP3XX_API: public Altimeter {
-  static Adafruit_BMP3XX sensor;
-
   public:
     static BMP3XX_API& getInstance();
 
@@ -120,26 +116,6 @@ class BMP3XX_API: public Altimeter {
      * @author themicp
      */
     BMP3XX_API();
-
-    /**
-     * @brief <h1>Last read data time.</h1>
-     * 
-     * Ensure data is read every (1000/BMP_REFRESH_RATE)s.
-     */
-    unsigned long last_sensor_read = 0;
-
-
-    int32_t cached_altitude_cm;
-    
-    /**
-     * @brief <h1>Reference ground level.</h1>
-     */
-    int32_t ground_level = 0;
-    
-    /**
-     * @brief <h1>Checks if communication protocol failed.</h1>
-     */
-    bool broken_connection;
 
     void setGroundLevel();
 
