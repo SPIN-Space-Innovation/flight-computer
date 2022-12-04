@@ -15,10 +15,10 @@ static Telemetry* instance = nullptr;
 // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on
 static RH_RF95* rf95 = nullptr;
 static RHReliableDatagram* rf_manager = nullptr;
-static bool init = false;
+static bool rfInit = false;
 static uint32_t message_count;
 static String logs_filename = "flight.log";
-static File log_file;
+static File logs_file;
 static unsigned long last_sd_sync = 0;
 static unsigned long last_radio_message_time = 0;
 static uint16_t radio_throttle_ms = 0;
@@ -78,7 +78,7 @@ void Telemetry::send(TelemetryMessage message) {
 }
 
 void Telemetry::send(String debug_message) {
-  if (!init) {
+  if (!rfInit) {
     return;
   }
   TelemetryMessage message;
@@ -111,7 +111,7 @@ void Telemetry::setup() {
 #endif
 
   message_count = 0;
-  init = true;
+  rfInit = true;
 }
 
 bool Telemetry::messageAvailable() {
