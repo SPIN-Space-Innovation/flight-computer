@@ -7,13 +7,18 @@ struct IgniterOptions {
   int led_pin;
 };
 
-IgniterOptions igniters[2] = {
-  {5, 16}, {6, 15}
+static IgniterOptions igniters[2] = {
+  {5, 16},
+  {6, 15}
 };
+static MosfetIgniter* instance = nullptr;
 
 MosfetIgniter& MosfetIgniter::getInstance() {
-  static MosfetIgniter instance;
-  return instance;
+  if (instance == nullptr)
+  {
+    instance = new MosfetIgniter();
+  }
+  return *instance;
 }
 
 void MosfetIgniter::setup() {
