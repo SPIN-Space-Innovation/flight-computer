@@ -4,7 +4,7 @@
 #define GPSSerial Serial1
 
 static Adafruit_GPS_API* instance = nullptr;
-static Adafruit_GPS receiver = nullptr;
+static Adafruit_GPS* receiver = nullptr;
 static unsigned long last_read = 0;
 
 Adafruit_GPS_API::Adafruit_GPS_API() {};
