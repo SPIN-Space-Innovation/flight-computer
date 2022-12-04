@@ -8,7 +8,7 @@
 #include "telemetry.h"
 
 #define CLIENT_ADDRESS 1
-#define SERVER_ADDRESS 
+#define SERVER_ADDRESS 2
 #define SD_OFFLOAD_INTERVAL 1000 // ms
 
 static Telemetry* instance = nullptr;
