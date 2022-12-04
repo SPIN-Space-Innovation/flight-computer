@@ -5,28 +5,24 @@
 #include "adafruit_gps_api.h"
 #include "definitions.h"
 
-LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
-BMP3XX_API altimeter = BMP3XX_API::getInstance();
-Telemetry telemetry = Telemetry::getInstance();
-MosfetIgniter igniter = MosfetIgniter::getInstance();
-Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
-FSM *fsm;
+static LSM9DS1_API* imu_sensor = nullptr;
+static BMP3XX_API* altimeter = nullptr;
+static Telemetry* telemetry = nullptr;
+static MosfetIgniter* igniter = nullptr;
+static Adafruit_GPS_API* gps = nullptr;
+static FSM* fsm = nullptr;
 // TODO: improve buzzer code
 const int buzzer = 17;
 bool sound = false;
 uint8_t loop_frequency = 10; // Hz
 
+bool SetupSensorsAndCommunication();
+
 void setup() {
-#if SERIAL_DEBUG
-  Serial.begin(115200);
-#endif
-
-#if BUZZER
-  pinMode(buzzer, OUTPUT);
-  tone(buzzer, 500);
-#endif
-
-  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
+  if SetupSensorsAndCommunication()
+  {
+    Serial.println("Did not initialize sensors");
+  }
 
 #if BUZZER
   noTone(buzzer);
@@ -68,4 +64,61 @@ void loop() {
   int delayTime = (1000/loop_frequency) - (millis() - timerStart);
 
   delay(max(0, delayTime));
+}
+
+bool SetupSensors()
+{
+#if SERIAL_DEBUG
+  Serial.begin(115200);
+#endif
+
+#if SD_LOGS
+  while(!SD.begin(SD_CS))
+  {
+    Serial.println("SD did not initialize");
+  }
+#endif
+
+#if BUZZER
+  pinMode(buzzer, OUTPUT);
+  tone(buzzer, 500);
+#endif
+
+  imu_sensor = static_cast<LSM9DS1_API*>(malloc(sizeof(LSM9DS1_API)));
+  if (imu_sensor == nullptr)
+  {
+    return false;
+  }
+  *imu_sensor = LSM9DS1_API::getInstance();
+
+  altimeter = static_cast<BMP3XX_API*>(malloc(sizeof(BMP3XX_API)));
+  if (altimeter == nullptr)
+  {
+    return false;
+  }
+  *altimeter = BMP3XX_API::getInstance();
+
+  telemetry = static_cast<Telemetry*>(malloc(sizeof(Telemetry)));
+  if (telemetry == nullptr)
+  {
+    return false;
+  }
+  *telemetry = Telemetry::getInstance();
+
+  igniter = static_cast<MosfetIgniter*>(malloc(sizeof(MosfetIgniter)));
+  if (igniter == nullptr)
+  {
+    return false;
+  }
+  *igniter = MosfetIgniter::getInstance();
+
+  gps = static_cast<Adafruit_GPS_API*>(malloc(sizeof(Adafruit_GPS_API)));
+  if (gps == nullptr)
+  {
+    return false;
+  }
+  *gps = Adafruit_GPS_API::getInstance();
+
+  fsm = new FSM(telemetry, imu_sensor, altimeter, gps, igniter, loop_frequency);
+  return fsm != nullptr;
 }
