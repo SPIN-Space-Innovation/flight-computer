@@ -473,7 +473,7 @@ Static Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   33</span>    <span class="comment">// Ignore reading if difference is extreme. Probably problem with the sensor.</span></div>
 <div class="line"><span class="lineno">   34</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">   35</span>  }</div>
-<div class="line"><span class="lineno">   36</span>  <a class="code hl_variable" href="classBMP3XX__API.html#a70b271cf09fb38d6ad0c08decd660ccf">cached_altitude_cm</a> = <a class="code hl_variable" href="classBMP3XX__API.html#ac31b52ded6dda970338ad834ad0951bd">sensor</a>.readAltitude(<a class="code hl_define" href="bmp3xx__api_8cpp.html#a3fd1be5675628ccdd1cd809ee995b2e7">SEALEVELPRESSURE_HPA</a>) * 100;</div>
+<div class="line"><span class="lineno">   36</span>  <a class="code hl_variable" href="classBMP3XX__API.html#a70b271cf09fb38d6ad0c08decd660ccf">cached_altitude_cm</a> = reading;</div>
 <div class="line"><span class="lineno">   37</span>  <a class="code hl_variable" href="classBMP3XX__API.html#ad4b05b21a6886c3076de3f6b4deda645">last_sensor_read</a> = millis();</div>
 <div class="line"><span class="lineno">   38</span>}</div>
 <div class="ttc" id="abmp3xx__api_8cpp_html_a12423c5b10e79b6dae4ef6a6a19dd573"><div class="ttname"><a href="bmp3xx__api_8cpp.html#a12423c5b10e79b6dae4ef6a6a19dd573">MAX_ALTITUDE_STEP</a></div><div class="ttdeci">#define MAX_ALTITUDE_STEP</div><div class="ttdef"><b>Definition:</b> bmp3xx_api.cpp:9</div></div>
