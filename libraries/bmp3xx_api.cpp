@@ -43,7 +43,7 @@ void BMP3XX_API::readSensorData() {
     // Ignore reading if difference is extreme. Probably problem with the sensor.
     return;
   }
-  cached_altitude_cm = sensor->readAltitude(SEALEVELPRESSURE_HPA) * 100;
+  cached_altitude_cm = reading;
   last_sensor_read = millis();
 }
 
