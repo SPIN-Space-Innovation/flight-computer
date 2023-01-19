@@ -6,7 +6,7 @@ class Telemetry {
     void send(TelemetryMessage message);
     void send(String data);
     void setup();
-    void setRadioThrottle(uint16_t radio_throttle_ms);
+    void setRadioThrottle(uint16_t new_radio_throttle_ms);
     bool messageAvailable();
     String receiveMessage();
 

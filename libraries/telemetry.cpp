@@ -126,8 +126,8 @@ String Telemetry::receiveMessage() {
   return String((char*)buf);
 }
 
-void Telemetry::setRadioThrottle(uint16_t radio_throttle_ms) {
-  radio_throttle_ms = radio_throttle_ms;
+void Telemetry::setRadioThrottle(uint16_t new_radio_throttle_ms) {
+  radio_throttle_ms = new_radio_throttle_ms;
 }
 
 Telemetry::Telemetry() {}
