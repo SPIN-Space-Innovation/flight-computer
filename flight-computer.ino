@@ -73,7 +73,9 @@ bool SetupSensorsAndCommunication() {
 
 #if SD_LOGS
   while(!SD.begin(SD_CS)) {
+#if SERIAL_DEBUG
     Serial.println("SD did not initialize");
+#endif
   }
 #endif
 
