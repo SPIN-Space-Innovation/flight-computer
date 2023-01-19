@@ -35,7 +35,7 @@ Telemetry& Telemetry::getInstance() {
 void Telemetry::send(TelemetryMessage message) {
   ++message_count;
   message.count = message_count;
-  if (!init) {
+  if (!rfInit) {
     return;
   }
 
