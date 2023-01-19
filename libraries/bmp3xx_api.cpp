@@ -17,8 +17,7 @@ static int32_t ground_level = 0;
 static bool broken_connection;
 
 BMP3XX_API& BMP3XX_API::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new BMP3XX_API();
     sensor = new Adafruit_BMP3XX();
   }

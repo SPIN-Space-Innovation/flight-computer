@@ -11,8 +11,7 @@ static Adafruit_BMP280* sensor = nullptr;
 static int32_t ground_level = 0;
 
 BMP280_API& BMP280_API::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new BMP280_API();
     sensor = new Adafruit_BMP280();
   }

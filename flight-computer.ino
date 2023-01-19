@@ -20,8 +20,7 @@ uint8_t loop_frequency = 10; // Hz
 bool SetupSensorsAndCommunication();
 
 void setup() {
-  if (SetupSensorsAndCommunication())
-  {
+  if (SetupSensorsAndCommunication()) {
     Serial.println("Did not initialize sensors");
   }
 
@@ -67,15 +66,13 @@ void loop() {
   delay(max(0, delayTime));
 }
 
-bool SetupSensorsAndCommunication()
-{
+bool SetupSensorsAndCommunication() {
 #if SERIAL_DEBUG
   Serial.begin(115200);
 #endif
 
 #if SD_LOGS
-  while(!SD.begin(SD_CS))
-  {
+  while(!SD.begin(SD_CS)) {
     Serial.println("SD did not initialize");
   }
 #endif
@@ -86,36 +83,31 @@ bool SetupSensorsAndCommunication()
 #endif
 
   imu_sensor = static_cast<LSM9DS1_API*>(malloc(sizeof(LSM9DS1_API)));
-  if (imu_sensor == nullptr)
-  {
+  if (imu_sensor == nullptr) {
     return false;
   }
   *imu_sensor = LSM9DS1_API::getInstance();
 
   altimeter = static_cast<BMP3XX_API*>(malloc(sizeof(BMP3XX_API)));
-  if (altimeter == nullptr)
-  {
+  if (altimeter == nullptr) {
     return false;
   }
   *altimeter = BMP3XX_API::getInstance();
 
   telemetry = static_cast<Telemetry*>(malloc(sizeof(Telemetry)));
-  if (telemetry == nullptr)
-  {
+  if (telemetry == nullptr) {
     return false;
   }
   *telemetry = Telemetry::getInstance();
 
   igniter = static_cast<MosfetIgniter*>(malloc(sizeof(MosfetIgniter)));
-  if (igniter == nullptr)
-  {
+  if (igniter == nullptr) {
     return false;
   }
   *igniter = MosfetIgniter::getInstance();
 
   gps = static_cast<Adafruit_GPS_API*>(malloc(sizeof(Adafruit_GPS_API)));
-  if (gps == nullptr)
-  {
+  if (gps == nullptr) {
     return false;
   }
   *gps = Adafruit_GPS_API::getInstance();

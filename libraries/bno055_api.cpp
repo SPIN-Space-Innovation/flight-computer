@@ -13,8 +13,7 @@ static unsigned long last_read = 0;
 static imu::Vector<3> euler, acc, gyro, mag;
 
 BNO055_API& BNO055_API::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new BNO055_API();
     sensor = new Adafruit_BNO055(55, 0x28);
   }

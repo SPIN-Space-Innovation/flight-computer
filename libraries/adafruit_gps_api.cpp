@@ -10,8 +10,7 @@ static unsigned long last_read = 0;
 Adafruit_GPS_API::Adafruit_GPS_API() {};
 
 Adafruit_GPS_API& Adafruit_GPS_API::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new Adafruit_GPS_API();
     receiver = new Adafruit_GPS(&GPSSerial);
   }

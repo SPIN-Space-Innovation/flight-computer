@@ -14,8 +14,7 @@ static IgniterOptions igniters[2] = {
 static MosfetIgniter* instance = nullptr;
 
 MosfetIgniter& MosfetIgniter::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new MosfetIgniter();
   }
   return *instance;

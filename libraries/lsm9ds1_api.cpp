@@ -11,8 +11,7 @@ static unsigned long last_read = 0;
 static sensors_event_t acc, mag, gyro, temp;
 
 LSM9DS1_API& LSM9DS1_API::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new LSM9DS1_API();
     sensor = new Adafruit_LSM9DS1();
   }

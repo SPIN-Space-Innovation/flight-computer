@@ -24,8 +24,7 @@ static unsigned long last_radio_message_time = 0;
 static uint16_t radio_throttle_ms = 0;
 
 Telemetry& Telemetry::getInstance() {
-  if (instance == nullptr)
-  {
+  if (instance == nullptr) {
     instance = new Telemetry();
     rf95 = new RH_RF95(8, 3);
     rf_manager = new RHReliableDatagram(*rf95, SERVER_ADDRESS);
