@@ -1,6 +1,5 @@
 #include "mock_altimeter.h"
 
-#define DESKTOP
 
 #ifdef DESKTOP
 #include <iostream>
@@ -25,11 +24,10 @@
 
 #ifdef DESKTOP
 std::string MOCK_ALTIMETER::data_filename = std::string("data.csv");
-std::fstream data_file;
-#else
+std::ifstream MOCK_ALTIMETER::data_file; 
+#else 
 File data_file;
 #endif
-unsigned int MOCK_ALTIMETER::current_line = 0;
 int32_t MOCK_ALTIMETER::agl;
 int32_t MOCK_ALTIMETER::press;
 int16_t MOCK_ALTIMETER::temp;
@@ -68,20 +66,12 @@ void MOCK_ALTIMETER::readSensorData() {
     cached_altitude_cm = reading;
     // last_sensor_read = now;
 }
-
-
 #else
 void MOCK_ALTIMETER::readSensorData() {
   if (millis() - last_sensor_read < 1000/BMP_REFRESH_RATE || broken_connection) {
     return;
   }
 
-  Wire.begin();
-  Wire.beginTransmission(BMP3XX_DEFAULT_ADDRESS);
-  if (Wire.endTransmission() != 0) {
-       broken_connection = true;
-       return;
-  }
   // int32_t reading = sensor.readAltitude(SEALEVELPRESSURE_HPA) * 100; <-- change this
   updateValues();
   int32_t reading = aglCM + ground_level;
@@ -97,38 +87,40 @@ void MOCK_ALTIMETER::readSensorData() {
 }
 #endif
 
+
 int32_t MOCK_ALTIMETER::altitude_cm() {
   readSensorData();
   return cached_altitude_cm;
 }
 
+
 int32_t MOCK_ALTIMETER::pressure() {
   return press;
 }
+
 
 int16_t MOCK_ALTIMETER::temperature() {
   // not sure if multiplication is needed...
   return temp; // original: temperature * 100
 }
 
+
 int32_t MOCK_ALTIMETER::aglCM() {
   return altitude_cm() - ground_level;
 }
 
+
 void MOCK_ALTIMETER::setGroundLevel() {
   ground_level = altitude_cm();
 }
+
 
 int32_t MOCK_ALTIMETER::getGroundLevelCM() {
   return ground_level;
 }
 
 
-
 void MOCK_ALTIMETER::setup() {
-  // if (!sensor.begin()) {
-  //   while(1); //Freeze
-  // }
   #ifdef DESKTOP
   std::cout << "SETUP READY" << std::endl;
   #else
@@ -141,21 +133,18 @@ void MOCK_ALTIMETER::calibrate() {
   #ifdef DESKTOP
   std::cout << "CALIBRATION READY" << std::endl;
   #else
-  Serial.println("SETUP READY");
+  Serial.println("CALIBRATION READY");
   #endif
 }
 
-
-MOCK_ALTIMETER::MOCK_ALTIMETER() {}
-
 #ifdef DESKTOP
 void MOCK_ALTIMETER::openFile() {
-    // std::fstream data_file(data_filename);
-    // if (!data_file) {
-    //     // error message if file is not found
-    //     std::cerr << "Mock Data not found: " << data_filename << std::endl;
-    //     return;
-    // }
+    if (!data_file.is_open()) {
+        data_file.open(data_filename);
+    }
+    std::cout << "opened file" << std::endl;
+    // skip first line (columns names)
+    readLine();
 }
 #else
 void MOCK_ALTIMETER::openFile() {
@@ -169,25 +158,28 @@ void MOCK_ALTIMETER::openFile() {
         Serial.print("Mock Data not found: ");
         return;
     }
+    // skip first line (columns names)
+    readLine();
 }
 #endif
 
 void MOCK_ALTIMETER::closeFile() {
-  // data_file.close();
+    data_file.close();
 }
 
 
 #ifdef DESKTOP
 std::string MOCK_ALTIMETER::readLine() {
-    // if (!data_file) {
-    //     openFile();
-    // }
+    if (!data_file.is_open()){
+      openFile();
+    }
     std::string line;
-    // if (data_file.good()) {
-    //     std::getline(data_file, line);
-    // } else {
-    //     return "";
-    // }
+    if (MOCK_ALTIMETER::data_file.good()) {
+        std::getline(data_file, line);
+    } else {
+        std::cout << "not good" << std::endl;
+        return std::string("");
+    }
     return line;
 }
 #else
@@ -246,3 +238,4 @@ void MOCK_ALTIMETER::updateValues() {
 }
 #endif
 
+MOCK_ALTIMETER::MOCK_ALTIMETER() {}
