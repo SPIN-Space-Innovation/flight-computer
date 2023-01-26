@@ -20,8 +20,13 @@ uint8_t loop_frequency = 10; // Hz
 bool SetupSensorsAndCommunication();
 
 void setup() {
-  if (SetupSensorsAndCommunication()) {
+  #if SERIAL_DEBUG
+    Serial.begin(115200);
+  #endif
+
+  if (!SetupSensorsAndCommunication()) {
     Serial.println("Did not initialize sensors");
+    while(1);
   }
 
 #if BUZZER
@@ -67,10 +72,6 @@ void loop() {
 }
 
 bool SetupSensorsAndCommunication() {
-#if SERIAL_DEBUG
-  Serial.begin(115200);
-#endif
-
 #if SD_LOGS
   while(!SD.begin(SD_CS)) {
 #if SERIAL_DEBUG
