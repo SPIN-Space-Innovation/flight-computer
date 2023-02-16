@@ -30,10 +30,6 @@ FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceive
     Transition(STATE::READY, EVENT::INIT_CALIBRATION, STATE::CALIBRATION),
     Transition(STATE::READY, EVENT::SET_EJECTION_TEST, STATE::EJECTION_TEST_READY),
     Transition(STATE::CALIBRATION, EVENT::CALIBRATION_COMPLETE, STATE::READY),
-    Transition(STATE::READY, EVENT::START_BACKUP_COUNTDOWN, STATE::ARM_BACKUP_DEPLOYER),
-    Transition(STATE::READY, EVENT::RESET_BACKUP_COUNTDOWN, STATE::RESET_BACKUP_DEPLOYER),
-    Transition(STATE::ARM_BACKUP_DEPLOYER, EVENT::BACKUP_COUNTDOWN_STARTED, STATE::READY),
-    Transition(STATE::RESET_BACKUP_DEPLOYER, EVENT::BACKUP_COUNTDOWN_RESETTED, STATE::READY),
     Transition(STATE::READY, EVENT::LAUNCHED, STATE::ASCENDING),
     Transition(STATE::READY, EVENT::GO_IDLE, STATE::IDLE),
 
@@ -122,10 +118,6 @@ void FSM::onSetup() {
   igniter->setup();
   telemetry->send("Igniter setup complete.");
 
-  telemetry->send("Setting up Backup Deployer..");
-  BackupDeployer::setup();
-  telemetry->send("Backup Deployer setup complete.");
-
   process_event(EVENT::SETUP_COMPLETE);
 }
 
@@ -148,16 +140,6 @@ void FSM::onReady() {
       (imu_sensor->accelerationX() / GRAVITY) * -1 > LAUNCH_ACCELERATION_THRESHOLD) {
     process_event(EVENT::LAUNCHED);
   }
-}
-
-void FSM::onArmBackupDeployer() {
-  BackupDeployer::startArmCountdown();
-  process_event(EVENT::BACKUP_COUNTDOWN_STARTED);
-}
-
-void FSM::onResetBackupDeployer() {
-  BackupDeployer::resetCountdown();
-  process_event(EVENT::BACKUP_COUNTDOWN_RESETTED);
 }
 
 void FSM::onEjectionTestReady() {}
@@ -261,12 +243,6 @@ void FSM::runCurrentState() {
       break;
     case STATE::READY:
       onReady();
-      break;
-    case STATE::ARM_BACKUP_DEPLOYER:
-      onArmBackupDeployer();
-      break;
-    case STATE::RESET_BACKUP_DEPLOYER:
-      onResetBackupDeployer();
       break;
     case STATE::EJECTION_TEST_READY:
       onEjectionTestReady();
