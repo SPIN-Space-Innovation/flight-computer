@@ -4,7 +4,6 @@
 #include "altimeter.h"
 #include "gps_receiver.h"
 #include "igniter.h"
-#include "backup_deployer.h"
 
 class Transition {
   public:
@@ -49,8 +48,6 @@ class FSM {
     void onCalibration();
     void onReady();
     void onLaunched();
-    void onArmBackupDeployer();
-    void onResetBackupDeployer();
     void onEjectionTestReady();
     void onEjectionTestEject();
     void onEjectionTestComplete();

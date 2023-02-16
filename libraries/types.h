@@ -16,8 +16,6 @@ enum class STATE : uint8_t {
   IDLE, /*!< Program is idling. */
   CALIBRATION, /*!< Program is still calibrating. */
   READY, /*!< Program is ready to run normally. */
-  ARM_BACKUP_DEPLOYER, /*!< */
-  RESET_BACKUP_DEPLOYER,  /*!< */
   EJECTION_TEST_READY, /*!< */
   EJECTION_TEST_EJECT, /*!< */
   EJECTION_TEST_COMPLETE, /*!< */
@@ -32,10 +30,6 @@ enum class EVENT : uint8_t {
   SETUP_COMPLETE, /*!< */
   INIT_CALIBRATION, /*!< */
   CALIBRATION_COMPLETE, /*!< */
-  START_BACKUP_COUNTDOWN, /*!< */
-  BACKUP_COUNTDOWN_STARTED, /*!< */
-  RESET_BACKUP_COUNTDOWN, /*!< */
-  BACKUP_COUNTDOWN_RESETTED, /*!< */
   SET_EJECTION_TEST, /*!< */
   LAUNCHED, /*!< */
   APOGEE_TIMER_TIMEOUT, /*!< */
