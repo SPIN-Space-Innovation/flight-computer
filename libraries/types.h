@@ -126,7 +126,6 @@ struct TelemetryMessage {
   uint16_t battery_voltage_mv; /*!< Voltage of the battery. Usefull in determining battery percentage. */
   STATE state; /*!< State of the microcontroller and the rocket in general. */
   bool sd_logs_enabled; /*!< True if the logging output will be saved to the SD as well. */
-  uint8_t selected_igniter; /*!< */
   TelemetryMessagePayload payload; /*!< Data returned from the sensors. */
   char debug_message[80]; /*!< Debug message c style string. */
 };
