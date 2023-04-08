@@ -22,6 +22,8 @@ enum class STATE : uint8_t {
   ASCENDING, /*!< The rocket has detected that it is ascending. */
   APOGEE_TIMEOUT, /*!< */
   DEPLOYING_DROGUE, /*!< */
+  WAITING_FOR_MAIN, /*!< */
+  DEPLOYING_MAIN, /*!< */
   RECOVERING, /*!< The recovery process of the rocket has began. */
   Count /*!< */
 };
@@ -35,7 +37,10 @@ enum class EVENT : uint8_t {
   APOGEE_TIMER_TIMEOUT, /*!< */
   APOGEE_DETECTED, /*!< */
   TRIGGER_FTS, /*!< */
-  DROGUE_EJECTED, /*!< */
+  DROGUE_DEPLOYED, /*!< */
+  MAIN_CHUTE_TIMER_TIMEOUT, /*!< */
+  REACHED_MAIN_CHUTE_ALTITUDE, /*!< */
+  MAIN_DEPLOYED, /*!< */
   GO_IDLE, /*!< */
   Count /*!< */
 };
