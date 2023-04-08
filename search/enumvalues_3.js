@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['debug_0',['DEBUG',['../types_8h.html#a9b5a0b76eb0e090179107cdfc25e8593adc30ec20708ef7b0f641ef78b7880a15',1,'types.h']]],
-  ['deploying_5fchute_1',['DEPLOYING_CHUTE',['../types_8h.html#afd9beadc839522108991021ca8bffe57a82345b484428cc683b38864211a56e41',1,'types.h']]]
+  ['ejection_5ftest_5fcomplete_0',['EJECTION_TEST_COMPLETE',['../types_8h.html#afd9beadc839522108991021ca8bffe57a3307aa0a054b2c965d779f92330856c5',1,'types.h']]],
+  ['ejection_5ftest_5feject_1',['EJECTION_TEST_EJECT',['../types_8h.html#afd9beadc839522108991021ca8bffe57a738a9b4c7709bb8c868bb4bf9dc4504a',1,'types.h']]],
+  ['ejection_5ftest_5fready_2',['EJECTION_TEST_READY',['../types_8h.html#afd9beadc839522108991021ca8bffe57aaeae4670bf9a322d05771f7d6f4352fb',1,'types.h']]]
 ];
