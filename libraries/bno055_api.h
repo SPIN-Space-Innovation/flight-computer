@@ -1,9 +1,6 @@
-#include <Adafruit_BNO055.h>
 #include "imu.h"
 
 class BNO055_API: public IMU {
-  static Adafruit_BNO055 sensor;
-
   public:
     static BNO055_API& getInstance();
     float pitch();
@@ -28,7 +25,5 @@ class BNO055_API: public IMU {
 
   private:
     BNO055_API();
-    unsigned long last_read = 0;
     void readSensorData();
-    imu::Vector<3> euler, acc, gyro, mag;
 };

@@ -1,24 +1,41 @@
+#include "Arduino.h"
+#include "SPI.h"
+#include "RH_RF95.h"
+#include "RHReliableDatagram.h"
+#include "SD.h"
+
 #include "definitions.h"
 #include "telemetry.h"
 
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
-#define SD_CS 10
 #define SD_OFFLOAD_INTERVAL 1000 // ms
 
+static Telemetry* instance = nullptr;
 // Defaults after init are 434.0MHz, 13dBm, Bw = 125 kHz, Cr = 4/5, Sf = 128chips/symbol, CRC on
-RH_RF95 Telemetry::rf95(8, 3);
-RHReliableDatagram Telemetry::rf_manager(Telemetry::rf95, SERVER_ADDRESS);
+static RH_RF95* rf95 = nullptr;
+static RHReliableDatagram* rf_manager = nullptr;
+static bool rfInit = false;
+static uint32_t message_count;
+static String logs_filename = "flight.log";
+static File logs_file;
+static unsigned long last_sd_sync = 0;
+static unsigned long last_radio_message_time = 0;
+static uint16_t radio_throttle_ms = 0;
 
 Telemetry& Telemetry::getInstance() {
-  static Telemetry instance;
-  return instance;
+  if (instance == nullptr) {
+    instance = new Telemetry();
+    rf95 = new RH_RF95(8, 3);
+    rf_manager = new RHReliableDatagram(*rf95, SERVER_ADDRESS);
+  }
+  return *instance;
 }
 
 void Telemetry::send(TelemetryMessage message) {
   ++message_count;
   message.count = message_count;
-  if (!init) {
+  if (!rfInit) {
     return;
   }
 
@@ -52,15 +69,15 @@ void Telemetry::send(TelemetryMessage message) {
 #endif
 
   if (millis() - last_radio_message_time > radio_throttle_ms) {
-    rf95.send(stream, message_size);
-    rf95.waitPacketSent();
-    rf95.setModeRx(); // continue listening
+    rf95->send(stream, message_size);
+    rf95->waitPacketSent();
+    rf95->setModeRx(); // continue listening
     last_radio_message_time = millis();
   }
 }
 
 void Telemetry::send(String debug_message) {
-  if (!init) {
+  if (!rfInit) {
     return;
   }
   TelemetryMessage message;
@@ -70,14 +87,14 @@ void Telemetry::send(String debug_message) {
 }
 
 void Telemetry::setup() {
-  if (!rf_manager.init()) {
+  if (!rf_manager->init()) {
     while(1);
   }
 
-  rf95.setFrequency(432.25);
-  rf95.setSignalBandwidth(500000);
-  rf95.setSpreadingFactor(8);
-  rf95.setTxPower(18);
+  rf95->setFrequency(432.25);
+  rf95->setSignalBandwidth(500000);
+  rf95->setSpreadingFactor(8);
+  rf95->setTxPower(18);
 
 #if SD_LOGS
   if (!SD.begin(SD_CS)) {
@@ -93,11 +110,11 @@ void Telemetry::setup() {
 #endif
 
   message_count = 0;
-  init = true;
+  rfInit = true;
 }
 
 bool Telemetry::messageAvailable() {
-  return rf_manager.available();
+  return rf_manager->available();
 }
 
 String Telemetry::receiveMessage() {
@@ -105,12 +122,12 @@ String Telemetry::receiveMessage() {
   uint8_t len = sizeof(buf);
   uint8_t from;
 
-  rf_manager.recvfromAck(buf, &len, &from);
+  rf_manager->recvfromAck(buf, &len, &from);
   return String((char*)buf);
 }
 
-void Telemetry::setRadioThrottle(uint16_t radio_throttle_ms) {
-  this->radio_throttle_ms = radio_throttle_ms;
+void Telemetry::setRadioThrottle(uint16_t new_radio_throttle_ms) {
+  radio_throttle_ms = new_radio_throttle_ms;
 }
 
 Telemetry::Telemetry() {}

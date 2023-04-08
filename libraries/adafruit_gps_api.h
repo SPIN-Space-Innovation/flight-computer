@@ -1,4 +1,3 @@
-#include <Adafruit_GPS.h>
 #include "gps_receiver.h"
 
 class Adafruit_GPS_API: public GPSReceiver {
@@ -86,15 +85,6 @@ class Adafruit_GPS_API: public GPSReceiver {
      * @author themicp
      */
     Adafruit_GPS_API();
-
-    static Adafruit_GPS receiver;
-    
-    /**
-     * @brief <h1>Last read data time.</h1>
-     * 
-     * Ensure data is read every 100ms.
-     */
-    unsigned long last_read;
 
     /**
      * @brief <h1>Reads the latest data from the serial.</h1>
