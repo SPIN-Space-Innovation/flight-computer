@@ -15,13 +15,14 @@
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
 
-FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
+FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency, BuzzerService* buzzerService)
   : telemetry(telemetry)
   , imu_sensor(imu_sensor)
   , altimeter(altimeter)
   , gps(gps)
   , igniter(igniter)
   , loop_frequency(loop_frequency)
+  , buzzerService(buzzerService)
 {
   Transition flight_state_transitions[] = {
     // Ground
@@ -88,6 +89,9 @@ void FSM::process_event(EVENT event) {
 }
 
 void FSM::onLaunched() {
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+
   // TODO: not the best place to do that
   launch_time = millis();
 
@@ -96,6 +100,9 @@ void FSM::onLaunched() {
 }
 
 void FSM::onSetup() {
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+
   telemetry->setup();
   telemetry->send("Hello!");
 
@@ -121,9 +128,16 @@ void FSM::onSetup() {
   process_event(EVENT::SETUP_COMPLETE);
 }
 
-void FSM::onIDLE() {}
+void FSM::onIDLE()
+{
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+}
 
 void FSM::onCalibration() {
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+
   telemetry->send("Altimeter: calibrating..");
   altimeter->calibrate();
   telemetry->send("Altimeter: ground level set to " + String((float)altimeter->getGroundLevelCM() / 100) + "m");
@@ -136,26 +150,41 @@ void FSM::onCalibration() {
 }
 
 void FSM::onReady() {
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+
   if (altimeter->agl() > LAUNCH_AGL_THRESHOLD or
       (imu_sensor->accelerationX() / GRAVITY) * -1 > LAUNCH_ACCELERATION_THRESHOLD) {
     process_event(EVENT::LAUNCHED);
   }
 }
 
-void FSM::onEjectionTestReady() {}
+void FSM::onEjectionTestReady()
+{
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+}
 
 void FSM::onEjectionTestEject() {
+  buzzerService->CanTurnOn();
+  buzzerService->Unlock();
+
   telemetry->setRadioThrottle(1000);
   *loop_frequency = 100;
   onDeployingChute();
 }
 
 void FSM::onEjectionTestComplete() {
+  buzzerService->CannotTurnOn();
+  buzzerService->Lock();
+
   telemetry->setRadioThrottle(0);
   *loop_frequency = 10;
 }
 
 void FSM::onAscending() {
+  buzzerService->CannotTurnOn();
+
   float agl = altimeter->agl();
   if (agl > max_agl) {
     max_agl = agl;
@@ -175,6 +204,9 @@ void FSM::onApogeeTimeout() {
 }
 
 void FSM::onDeployingChute() {
+  buzzerService->CanTurnOn();
+  buzzerService->TurnOn();
+
   igniter->enable();
   if (millis() - ejection_start > EJECTION_TIMEOUT) {
     igniter->disable();
@@ -185,6 +217,10 @@ void FSM::onDeployingChute() {
 }
 
 void FSM::onRecovering() {
+  buzzerService->CanTurnOn();
+  buzzerService->TurnOn();
+  buzzerService->Lock();
+
   // TODO: celebrate
 }
 

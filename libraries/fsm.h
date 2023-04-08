@@ -4,6 +4,7 @@
 #include "altimeter.h"
 #include "gps_receiver.h"
 #include "igniter.h"
+#include "BuzzerService.h"
 
 class Transition {
   public:
@@ -26,7 +27,7 @@ class FSM {
     void process_event(EVENT event);
     void runCurrentState();
 
-    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency);
+    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency, BuzzerService* buzzerService);
 
   private:
     STATE state = STATE::SETUP;
@@ -37,6 +38,7 @@ class FSM {
     Altimeter* altimeter;
     GPSReceiver* gps;
     Igniter* igniter;
+    BuzzerService* buzzerService;
     uint8_t* loop_frequency;
 
     unsigned long launch_time;
