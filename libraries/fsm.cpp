@@ -157,6 +157,9 @@ void FSM::onCalibration() {
 }
 
 void FSM::onReady() {
+  telemetry->setRadioThrottle(0);
+  *loop_frequency = 10;
+
   if (altimeter->agl() > LAUNCH_AGL_THRESHOLD or
       (imu_sensor->accelerationX() / GRAVITY) * -1 > LAUNCH_ACCELERATION_THRESHOLD) {
     process_event(EVENT::LAUNCHED);
