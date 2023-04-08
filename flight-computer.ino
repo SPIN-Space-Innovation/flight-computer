@@ -4,15 +4,17 @@
 #include "mosfet_igniter.h"
 #include "adafruit_gps_api.h"
 #include "definitions.h"
+#include "BuzzerService.h"
 
 LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
 BMP3XX_API altimeter = BMP3XX_API::getInstance();
 Telemetry telemetry = Telemetry::getInstance();
 MosfetIgniter igniter = MosfetIgniter::getInstance();
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
+BuzzerService& buzzerService = BuzzerService::GetInstance();
 FSM *fsm;
+
 // TODO: improve buzzer code
-const int buzzer = 17;
 bool sound = false;
 uint8_t loop_frequency = 10; // Hz
 
@@ -21,16 +23,7 @@ void setup() {
   Serial.begin(115200);
 #endif
 
-#if BUZZER
-  pinMode(buzzer, OUTPUT);
-  tone(buzzer, 500);
-#endif
-
-  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
-
-#if BUZZER
-  noTone(buzzer);
-#endif
+  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency, &buzzerService);
 }
 
 void loop() {
@@ -38,6 +31,15 @@ void loop() {
 
   if (telemetry.messageAvailable()) {
     String message = telemetry.receiveMessage();
+    if (message.substring(0, 5).equals("BUZZR")) {
+      if (message.equals("BUZZR:ON-")) {
+        buzzerService.TurnOn();
+      }
+      else if (message.equals("BUZZR:OFF"))
+      {
+        buzzerService.TurnOff();
+      }
+    }
     if (message.substring(0, 5).equals("SPCMD")) {
       int event;
       if (sscanf(message.c_str(), "SPCMD:%i--", &event) == 1) {
@@ -50,16 +52,6 @@ void loop() {
   if (Serial.available()) {
     int a = Serial.parseInt();
     fsm->process_event((EVENT)a);
-  }
-#endif
-
-#if BUZZER
-  if (sound) {
-    sound = false;
-    noTone(buzzer);
-  } else {
-    sound = true;
-    tone(buzzer, 500);
   }
 #endif
 
