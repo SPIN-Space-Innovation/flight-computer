@@ -26,7 +26,7 @@ class FSM {
     void process_event(EVENT event);
     void runCurrentState();
 
-    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency);
+    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* drogueIgniter, Igniter* mainIgniter, uint8_t* loop_frequency);
 
   private:
     STATE state = STATE::SETUP;
@@ -36,7 +36,8 @@ class FSM {
     IMU* imu_sensor;
     Altimeter* altimeter;
     GPSReceiver* gps;
-    Igniter* igniter;
+    Igniter* drogueIgniter;
+    Igniter* mainIgniter;
     uint8_t* loop_frequency;
 
     unsigned long launch_time;

@@ -15,12 +15,20 @@
 #define VBATPIN A7
 #define EJECTION_TIMEOUT 4000 // ms
 
-FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
+FSM::FSM(
+  Telemetry* telemetry,
+  IMU* imu_sensor,
+  Altimeter* altimeter,
+  GPSReceiver* gps,
+  Igniter* drogueIgniter,
+  Igniter* mainIgniter,
+  uint8_t* loop_frequency)
   : telemetry(telemetry)
   , imu_sensor(imu_sensor)
   , altimeter(altimeter)
   , gps(gps)
-  , igniter(igniter)
+  , drogueIgniter(drogueIgniter)
+  , mainIgniter(mainIgniter)
   , loop_frequency(loop_frequency)
 {
   Transition flight_state_transitions[] = {
@@ -117,9 +125,13 @@ void FSM::onSetup() {
   gps->setup();
   telemetry->send("GPS setup complete.");
 
-  telemetry->send("Setting up Igniter..");
-  igniter->setup();
-  telemetry->send("Igniter setup complete.");
+  telemetry->send("Setting up Drogue Igniter..");
+  drogueIgniter->setup();
+  telemetry->send("Drogue Igniter setup complete.");
+
+  telemetry->send("Setting up Main Igniter..");
+  mainIgniter->setup();
+  telemetry->send("Main Igniter setup complete.");
 
   process_event(EVENT::SETUP_COMPLETE);
 }

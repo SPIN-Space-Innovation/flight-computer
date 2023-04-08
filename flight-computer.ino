@@ -8,7 +8,8 @@
 LSM9DS1_API imu_sensor = LSM9DS1_API::getInstance();
 BMP3XX_API altimeter = BMP3XX_API::getInstance();
 Telemetry telemetry = Telemetry::getInstance();
-MosfetIgniter igniter = MosfetIgniter::getInstance();
+MosfetIgniter drogueIgniter(1);
+MosfetIgniter mainIgniter(2);
 Adafruit_GPS_API gps = Adafruit_GPS_API::getInstance();
 FSM *fsm;
 // TODO: improve buzzer code
@@ -26,7 +27,7 @@ void setup() {
   tone(buzzer, 500);
 #endif
 
-  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
+  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &drogueIgniter, &mainIgniter, &loop_frequency);
 
 #if BUZZER
   noTone(buzzer);
