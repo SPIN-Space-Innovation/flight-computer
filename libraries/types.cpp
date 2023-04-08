@@ -17,7 +17,7 @@ static String StateNames[] = {
   "EJECTION_TEST_COMPLETE",
   "ASCENDING",
   "APOGEE_TIMEOUT",
-  "DEPLOYING_CHUTE",
+  "DEPLOYING_DROGUE",
   "RECOVERING"
 };
 
@@ -35,7 +35,7 @@ static String EventNames[] = {
   "APOGEE_TIMER_TIMEOUT",
   "APOGEE_DETECTED",
   "TRIGGER_FTS",
-  "CHUTE_EJECTED",
+  "DROGUE_EJECTED",
   "GO_IDLE"
 };
 

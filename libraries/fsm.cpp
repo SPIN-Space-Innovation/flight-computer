@@ -35,22 +35,22 @@ FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceive
 
     // Ejection Test
     Transition(STATE::EJECTION_TEST_READY, EVENT::TRIGGER_FTS, STATE::EJECTION_TEST_EJECT),
-    Transition(STATE::EJECTION_TEST_EJECT, EVENT::CHUTE_EJECTED, STATE::EJECTION_TEST_COMPLETE),
+    Transition(STATE::EJECTION_TEST_EJECT, EVENT::DROGUE_EJECTED, STATE::EJECTION_TEST_COMPLETE),
 
     // Flying
     Transition(STATE::ASCENDING, EVENT::APOGEE_TIMER_TIMEOUT, STATE::APOGEE_TIMEOUT),
     Transition(STATE::ASCENDING, EVENT::INIT_CALIBRATION, STATE::CALIBRATION),
-    Transition(STATE::ASCENDING, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::APOGEE_TIMEOUT, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::DEPLOYING_CHUTE, EVENT::CHUTE_EJECTED, STATE::RECOVERING),
+    Transition(STATE::ASCENDING, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::APOGEE_TIMEOUT, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::DEPLOYING_DROGUE, EVENT::DROGUE_EJECTED, STATE::RECOVERING),
 
     // FTS from all states except IDLE
-    Transition(STATE::SETUP, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::CALIBRATION, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::READY, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::ASCENDING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::APOGEE_TIMEOUT, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::RECOVERING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE)
+    Transition(STATE::SETUP, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::CALIBRATION, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::READY, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::ASCENDING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::APOGEE_TIMEOUT, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::RECOVERING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE)
   };
 
   register_state_transitions(flight_state_transitions);
@@ -75,7 +75,7 @@ void FSM::process_event(EVENT event) {
   if (state_transitions[(int)state][(int)event] != STATE::INVALID_STATE) {
     state = state_transitions[(int)state][(int)event];
 
-    if (state == STATE::DEPLOYING_CHUTE || state == STATE::EJECTION_TEST_EJECT) {
+    if (state == STATE::DEPLOYING_DROGUE || state == STATE::EJECTION_TEST_EJECT) {
       ejection_start = millis();
     }
 
@@ -147,7 +147,7 @@ void FSM::onEjectionTestReady() {}
 void FSM::onEjectionTestEject() {
   telemetry->setRadioThrottle(1000);
   *loop_frequency = 100;
-  onDeployingChute();
+  onDeployingDrogue();
 }
 
 void FSM::onEjectionTestComplete() {
@@ -174,11 +174,11 @@ void FSM::onApogeeTimeout() {
   process_event(EVENT::APOGEE_DETECTED);
 }
 
-void FSM::onDeployingChute() {
+void FSM::onDeployingDrogue() {
   igniter->enable();
   if (millis() - ejection_start > EJECTION_TIMEOUT) {
     igniter->disable();
-    process_event(EVENT::CHUTE_EJECTED);
+    process_event(EVENT::DROGUE_EJECTED);
     telemetry->setRadioThrottle(0);
     *loop_frequency = 10;
   }
@@ -259,8 +259,8 @@ void FSM::runCurrentState() {
     case STATE::APOGEE_TIMEOUT:
       onApogeeTimeout();
       break;
-    case STATE::DEPLOYING_CHUTE:
-      onDeployingChute();
+    case STATE::DEPLOYING_DROGUE:
+      onDeployingDrogue();
       break;
     case STATE::RECOVERING:
       onRecovering();

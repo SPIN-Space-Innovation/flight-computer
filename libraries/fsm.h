@@ -53,6 +53,6 @@ class FSM {
     void onEjectionTestComplete();
     void onAscending();
     void onApogeeTimeout();
-    void onDeployingChute();
+    void onDeployingDrogue();
     void onRecovering();
 };
