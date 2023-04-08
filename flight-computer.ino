@@ -32,10 +32,10 @@ void loop() {
   if (telemetry.messageAvailable()) {
     String message = telemetry.receiveMessage();
     if (message.substring(0, 5).equals("BUZZR")) {
-      if (message.equals("BUZZR:ON")) {
+      if (message.equals("BUZZR:ON-")) {
         buzzerService.TurnOn();
       }
-      else
+      else if (message.equals("BUZZR:OFF"))
       {
         buzzerService.TurnOff();
       }
