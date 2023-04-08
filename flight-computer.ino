@@ -15,7 +15,6 @@ BuzzerService& buzzerService = BuzzerService::GetInstance();
 FSM *fsm;
 
 // TODO: improve buzzer code
-const int buzzer = 17;
 bool sound = false;
 uint8_t loop_frequency = 10; // Hz
 
@@ -25,15 +24,6 @@ void setup() {
 #endif
 
   fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency, &buzzerService);
-  pinMode(buzzer, OUTPUT);
-  tone(buzzer, 500);
-#endif
-
-  fsm = new FSM(&telemetry, &imu_sensor, &altimeter, &gps, &igniter, &loop_frequency);
-
-#if BUZZER
-  noTone(buzzer);
-#endif
 }
 
 void loop() {
@@ -62,16 +52,6 @@ void loop() {
   if (Serial.available()) {
     int a = Serial.parseInt();
     fsm->process_event((EVENT)a);
-  }
-#endif
-
-#if BUZZER
-  if (sound) {
-    sound = false;
-    noTone(buzzer);
-  } else {
-    sound = true;
-    tone(buzzer, 500);
   }
 #endif
 
