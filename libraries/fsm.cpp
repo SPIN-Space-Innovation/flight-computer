@@ -12,8 +12,10 @@
 #define GRAVITY 372 // cm/s^2 -- Mars
 #define GRAVITY 162 // cm/s^2 -- Moon
 */
+#define MAIN_CHUTE_ALTITUDE 200 // meters
+#define MAIN_CHUTE_TIMEOUT 10 // seconds
 #define VBATPIN A7
-#define EJECTION_TIMEOUT 4000 // ms
+#define PYRO_TIMEOUT 4000 // ms
 
 FSM::FSM(
   Telemetry* telemetry,
@@ -88,6 +90,10 @@ void FSM::process_event(EVENT event) {
 
     if (state == STATE::DEPLOYING_DROGUE || state == STATE::EJECTION_TEST_EJECT) {
       ejection_start = millis();
+    }
+
+    if (state == STATE::DEPLOYING_MAIN) {
+      main_deployment_start = millis();
     }
 
     if (event == EVENT::LAUNCHED) {
@@ -190,10 +196,27 @@ void FSM::onApogeeTimeout() {
 }
 
 void FSM::onDeployingDrogue() {
-  igniter->enable();
-  if (millis() - ejection_start > EJECTION_TIMEOUT) {
-    igniter->disable();
-    process_event(EVENT::DROGUE_EJECTED);
+  drogueIgniter->enable();
+  if (millis() - ejection_start > PYRO_TIMEOUT) {
+    drogueIgniter->disable();
+    drogue_deployment_time = millis();
+    process_event(EVENT::DROGUE_DEPLOYED);
+    telemetry->setRadioThrottle(0);
+    *loop_frequency = 10;
+  }
+}
+
+void FSM::onWaitingForMain() {
+  if (millis() - drogue_deployment_time >= MAIN_CHUTE_TIMEOUT * 1000) {
+    process_event(EVENT::MAIN_CHUTE_TIMER_TIMEOUT);
+  }
+}
+
+void FSM::onDeployingMain() {
+  mainIgniter->enable();
+  if (millis() - main_deployment_start > PYRO_TIMEOUT) {
+    mainIgniter->disable();
+    process_event(EVENT::MAIN_DEPLOYED);
     telemetry->setRadioThrottle(0);
     *loop_frequency = 10;
   }
@@ -276,6 +299,12 @@ void FSM::runCurrentState() {
       break;
     case STATE::DEPLOYING_DROGUE:
       onDeployingDrogue();
+      break;
+    case STATE::WAITING_FOR_MAIN:
+      onWaitingForMain();
+      break;
+    case STATE::DEPLOYING_MAIN:
+      onDeployingMain();
       break;
     case STATE::RECOVERING:
       onRecovering();

@@ -42,6 +42,8 @@ class FSM {
 
     unsigned long launch_time;
     unsigned long ejection_start;
+    unsigned long main_deployment_start;
+    unsigned long drogue_deployment_time;
     float max_agl = 0;
 
     void onSetup();
@@ -55,5 +57,7 @@ class FSM {
     void onAscending();
     void onApogeeTimeout();
     void onDeployingDrogue();
+    void onWaitingForMain();
+    void onDeployingMain();
     void onRecovering();
 };
