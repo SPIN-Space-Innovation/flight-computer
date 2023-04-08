@@ -12,8 +12,8 @@
 #define GRAVITY 372 // cm/s^2 -- Mars
 #define GRAVITY 162 // cm/s^2 -- Moon
 */
-#define MAIN_CHUTE_ALTITUDE 200 // meters
-#define MAIN_CHUTE_TIMEOUT 10 // seconds
+#define MAIN_CHUTE_ALTITUDE 600 // meters
+#define MAIN_CHUTE_TIMEOUT 50 // seconds
 #define VBATPIN A7
 #define PYRO_TIMEOUT 4000 // ms
 
@@ -210,6 +210,12 @@ void FSM::onDeployingDrogue() {
 }
 
 void FSM::onWaitingForMain() {
+  float agl = altimeter->agl();
+  if (agl <= MAIN_CHUTE_ALTITUDE) {
+    process_event(EVENT::REACHED_MAIN_CHUTE_ALTITUDE);
+    return;
+  }
+
   if (millis() - drogue_deployment_time >= MAIN_CHUTE_TIMEOUT * 1000) {
     process_event(EVENT::MAIN_CHUTE_TIMER_TIMEOUT);
   }
