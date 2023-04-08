@@ -1,9 +1,15 @@
 #include "igniter.h"
 
 class MosfetIgniter: public Igniter {
+  private:
+    int igniterChannel;
   public:
-    static MosfetIgniter& getInstance();
+    MosfetIgniter(int channel);
     void setup();
     void enable();
     void disable();
 };
+
+inline MosfetIgniter::MosfetIgniter(int channel)
+  : igniterChannel(channel)
+{}
