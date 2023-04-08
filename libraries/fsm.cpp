@@ -12,15 +12,25 @@
 #define GRAVITY 372 // cm/s^2 -- Mars
 #define GRAVITY 162 // cm/s^2 -- Moon
 */
+#define MAIN_CHUTE_ALTITUDE 600 // meters
+#define MAIN_CHUTE_TIMEOUT 50 // seconds
 #define VBATPIN A7
-#define EJECTION_TIMEOUT 4000 // ms
+#define PYRO_TIMEOUT 4000 // ms
 
-FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency)
+FSM::FSM(
+  Telemetry* telemetry,
+  IMU* imu_sensor,
+  Altimeter* altimeter,
+  GPSReceiver* gps,
+  Igniter* drogueIgniter,
+  Igniter* mainIgniter,
+  uint8_t* loop_frequency)
   : telemetry(telemetry)
   , imu_sensor(imu_sensor)
   , altimeter(altimeter)
   , gps(gps)
-  , igniter(igniter)
+  , drogueIgniter(drogueIgniter)
+  , mainIgniter(mainIgniter)
   , loop_frequency(loop_frequency)
 {
   Transition flight_state_transitions[] = {
@@ -35,22 +45,25 @@ FSM::FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceive
 
     // Ejection Test
     Transition(STATE::EJECTION_TEST_READY, EVENT::TRIGGER_FTS, STATE::EJECTION_TEST_EJECT),
-    Transition(STATE::EJECTION_TEST_EJECT, EVENT::CHUTE_EJECTED, STATE::EJECTION_TEST_COMPLETE),
+    Transition(STATE::EJECTION_TEST_EJECT, EVENT::DROGUE_DEPLOYED, STATE::EJECTION_TEST_COMPLETE),
 
     // Flying
     Transition(STATE::ASCENDING, EVENT::APOGEE_TIMER_TIMEOUT, STATE::APOGEE_TIMEOUT),
     Transition(STATE::ASCENDING, EVENT::INIT_CALIBRATION, STATE::CALIBRATION),
-    Transition(STATE::ASCENDING, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::APOGEE_TIMEOUT, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::DEPLOYING_CHUTE, EVENT::CHUTE_EJECTED, STATE::RECOVERING),
+    Transition(STATE::ASCENDING, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::APOGEE_TIMEOUT, EVENT::APOGEE_DETECTED, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::DEPLOYING_DROGUE, EVENT::DROGUE_DEPLOYED, STATE::WAITING_FOR_MAIN),
+    Transition(STATE::WAITING_FOR_MAIN, EVENT::MAIN_CHUTE_TIMER_TIMEOUT, STATE::DEPLOYING_MAIN),
+    Transition(STATE::WAITING_FOR_MAIN, EVENT::REACHED_MAIN_CHUTE_ALTITUDE, STATE::DEPLOYING_MAIN),
+    Transition(STATE::DEPLOYING_MAIN, EVENT::MAIN_DEPLOYED, STATE::RECOVERING),
 
     // FTS from all states except IDLE
-    Transition(STATE::SETUP, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::CALIBRATION, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::READY, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::ASCENDING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::APOGEE_TIMEOUT, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE),
-    Transition(STATE::RECOVERING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_CHUTE)
+    Transition(STATE::SETUP, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::CALIBRATION, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::READY, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::ASCENDING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::APOGEE_TIMEOUT, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE),
+    Transition(STATE::RECOVERING, EVENT::TRIGGER_FTS, STATE::DEPLOYING_DROGUE)
   };
 
   register_state_transitions(flight_state_transitions);
@@ -75,8 +88,12 @@ void FSM::process_event(EVENT event) {
   if (state_transitions[(int)state][(int)event] != STATE::INVALID_STATE) {
     state = state_transitions[(int)state][(int)event];
 
-    if (state == STATE::DEPLOYING_CHUTE || state == STATE::EJECTION_TEST_EJECT) {
+    if (state == STATE::DEPLOYING_DROGUE || state == STATE::EJECTION_TEST_EJECT) {
       ejection_start = millis();
+    }
+
+    if (state == STATE::DEPLOYING_MAIN) {
+      main_deployment_start = millis();
     }
 
     if (event == EVENT::LAUNCHED) {
@@ -114,9 +131,13 @@ void FSM::onSetup() {
   gps->setup();
   telemetry->send("GPS setup complete.");
 
-  telemetry->send("Setting up Igniter..");
-  igniter->setup();
-  telemetry->send("Igniter setup complete.");
+  telemetry->send("Setting up Drogue Igniter..");
+  drogueIgniter->setup();
+  telemetry->send("Drogue Igniter setup complete.");
+
+  telemetry->send("Setting up Main Igniter..");
+  mainIgniter->setup();
+  telemetry->send("Main Igniter setup complete.");
 
   process_event(EVENT::SETUP_COMPLETE);
 }
@@ -136,6 +157,9 @@ void FSM::onCalibration() {
 }
 
 void FSM::onReady() {
+  telemetry->setRadioThrottle(0);
+  *loop_frequency = 10;
+
   if (altimeter->agl() > LAUNCH_AGL_THRESHOLD or
       (imu_sensor->accelerationX() / GRAVITY) * -1 > LAUNCH_ACCELERATION_THRESHOLD) {
     process_event(EVENT::LAUNCHED);
@@ -147,7 +171,7 @@ void FSM::onEjectionTestReady() {}
 void FSM::onEjectionTestEject() {
   telemetry->setRadioThrottle(1000);
   *loop_frequency = 100;
-  onDeployingChute();
+  onDeployingDrogue();
 }
 
 void FSM::onEjectionTestComplete() {
@@ -174,11 +198,34 @@ void FSM::onApogeeTimeout() {
   process_event(EVENT::APOGEE_DETECTED);
 }
 
-void FSM::onDeployingChute() {
-  igniter->enable();
-  if (millis() - ejection_start > EJECTION_TIMEOUT) {
-    igniter->disable();
-    process_event(EVENT::CHUTE_EJECTED);
+void FSM::onDeployingDrogue() {
+  drogueIgniter->enable();
+  if (millis() - ejection_start > PYRO_TIMEOUT) {
+    drogueIgniter->disable();
+    drogue_deployment_time = millis();
+    process_event(EVENT::DROGUE_DEPLOYED);
+    telemetry->setRadioThrottle(0);
+    *loop_frequency = 10;
+  }
+}
+
+void FSM::onWaitingForMain() {
+  float agl = altimeter->agl();
+  if (agl <= MAIN_CHUTE_ALTITUDE) {
+    process_event(EVENT::REACHED_MAIN_CHUTE_ALTITUDE);
+    return;
+  }
+
+  if (millis() - drogue_deployment_time >= MAIN_CHUTE_TIMEOUT * 1000) {
+    process_event(EVENT::MAIN_CHUTE_TIMER_TIMEOUT);
+  }
+}
+
+void FSM::onDeployingMain() {
+  mainIgniter->enable();
+  if (millis() - main_deployment_start > PYRO_TIMEOUT) {
+    mainIgniter->disable();
+    process_event(EVENT::MAIN_DEPLOYED);
     telemetry->setRadioThrottle(0);
     *loop_frequency = 10;
   }
@@ -209,7 +256,6 @@ void FSM::runCurrentState() {
 #else
   message.sd_logs_enabled = false;
 #endif
-  message.selected_igniter = IGNITER;
 
   if (state != STATE::SETUP and state != STATE::IDLE and state != STATE::CALIBRATION) {
     payload.agl_cm = altimeter->aglCM();
@@ -259,8 +305,14 @@ void FSM::runCurrentState() {
     case STATE::APOGEE_TIMEOUT:
       onApogeeTimeout();
       break;
-    case STATE::DEPLOYING_CHUTE:
-      onDeployingChute();
+    case STATE::DEPLOYING_DROGUE:
+      onDeployingDrogue();
+      break;
+    case STATE::WAITING_FOR_MAIN:
+      onWaitingForMain();
+      break;
+    case STATE::DEPLOYING_MAIN:
+      onDeployingMain();
       break;
     case STATE::RECOVERING:
       onRecovering();

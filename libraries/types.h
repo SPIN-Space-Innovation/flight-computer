@@ -21,7 +21,9 @@ enum class STATE : uint8_t {
   EJECTION_TEST_COMPLETE, /*!< */
   ASCENDING, /*!< The rocket has detected that it is ascending. */
   APOGEE_TIMEOUT, /*!< */
-  DEPLOYING_CHUTE, /*!< */
+  DEPLOYING_DROGUE, /*!< */
+  WAITING_FOR_MAIN, /*!< */
+  DEPLOYING_MAIN, /*!< */
   RECOVERING, /*!< The recovery process of the rocket has began. */
   Count /*!< */
 };
@@ -35,7 +37,10 @@ enum class EVENT : uint8_t {
   APOGEE_TIMER_TIMEOUT, /*!< */
   APOGEE_DETECTED, /*!< */
   TRIGGER_FTS, /*!< */
-  CHUTE_EJECTED, /*!< */
+  DROGUE_DEPLOYED, /*!< */
+  MAIN_CHUTE_TIMER_TIMEOUT, /*!< */
+  REACHED_MAIN_CHUTE_ALTITUDE, /*!< */
+  MAIN_DEPLOYED, /*!< */
   GO_IDLE, /*!< */
   Count /*!< */
 };
@@ -121,7 +126,6 @@ struct TelemetryMessage {
   uint16_t battery_voltage_mv; /*!< Voltage of the battery. Usefull in determining battery percentage. */
   STATE state; /*!< State of the microcontroller and the rocket in general. */
   bool sd_logs_enabled; /*!< True if the logging output will be saved to the SD as well. */
-  uint8_t selected_igniter; /*!< */
   TelemetryMessagePayload payload; /*!< Data returned from the sensors. */
   char debug_message[80]; /*!< Debug message c style string. */
 };

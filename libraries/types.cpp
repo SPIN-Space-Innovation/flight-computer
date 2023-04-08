@@ -17,7 +17,9 @@ static String StateNames[] = {
   "EJECTION_TEST_COMPLETE",
   "ASCENDING",
   "APOGEE_TIMEOUT",
-  "DEPLOYING_CHUTE",
+  "DEPLOYING_DROGUE",
+  "WAITING_FOR_MAIN",
+  "DEPLOYING_MAIN",
   "RECOVERING"
 };
 
@@ -35,7 +37,10 @@ static String EventNames[] = {
   "APOGEE_TIMER_TIMEOUT",
   "APOGEE_DETECTED",
   "TRIGGER_FTS",
-  "CHUTE_EJECTED",
+  "DROGUE_DEPLOYED",
+  "MAIN_CHUTE_TIMER_TIMEOUT",
+  "REACHED_MAIN_CHUTE_ALTITUDE",
+  "MAIN_DEPLOYED",
   "GO_IDLE"
 };
 
@@ -72,8 +77,7 @@ String stringifyTelemetryMessage(TelemetryMessage message) {
       String(message.free_memory_kb) + "," +
       String(message.battery_voltage_mv) + "," +
       String(state_to_str(message.state)) + "," +
-      String(message.sd_logs_enabled) + "," +
-      String(message.selected_igniter);
+      String(message.sd_logs_enabled);
 
     if (message.state != STATE::SETUP and message.state != STATE::IDLE and message.state != STATE::CALIBRATION) {
       message_str += "," +

@@ -26,7 +26,7 @@ class FSM {
     void process_event(EVENT event);
     void runCurrentState();
 
-    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* igniter, uint8_t* loop_frequency);
+    FSM(Telemetry* telemetry, IMU* imu_sensor, Altimeter* altimeter, GPSReceiver* gps, Igniter* drogueIgniter, Igniter* mainIgniter, uint8_t* loop_frequency);
 
   private:
     STATE state = STATE::SETUP;
@@ -36,11 +36,14 @@ class FSM {
     IMU* imu_sensor;
     Altimeter* altimeter;
     GPSReceiver* gps;
-    Igniter* igniter;
+    Igniter* drogueIgniter;
+    Igniter* mainIgniter;
     uint8_t* loop_frequency;
 
     unsigned long launch_time;
     unsigned long ejection_start;
+    unsigned long main_deployment_start;
+    unsigned long drogue_deployment_time;
     float max_agl = 0;
 
     void onSetup();
@@ -53,6 +56,8 @@ class FSM {
     void onEjectionTestComplete();
     void onAscending();
     void onApogeeTimeout();
-    void onDeployingChute();
+    void onDeployingDrogue();
+    void onWaitingForMain();
+    void onDeployingMain();
     void onRecovering();
 };
